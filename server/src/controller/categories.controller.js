@@ -30,6 +30,12 @@ const {
     }
     try {
       const result = await findCategoryByNameService(nameCategory);
+      if (result.length === 0){
+        return res.status(404).json({
+          message: "Not Found",
+          data: result,
+        });
+      }
       return res.status(200).json({
         success: "Success",
         data: result,
