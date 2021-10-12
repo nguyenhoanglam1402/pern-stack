@@ -37,7 +37,7 @@ const {
         });
       }
       return res.status(200).json({
-        success: "Success",
+        message: "Success",
         data: result,
       });
     } catch (error) {

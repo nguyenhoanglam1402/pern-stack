@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Trainee.belongsToMany(models.Class,{
+        through: models.ListTraineeClass,
+        foreignKey: "traineeID",
+        onDelete: "CASCADE"
+      })
     }
   }
   Trainee.init(
