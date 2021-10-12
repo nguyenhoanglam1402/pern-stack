@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       Account.hasOne(models.Trainee);
       Account.belongsTo(models.Role, {
         foreignKey: "rolesID",
-        targetKey: "id",
         onDelete: "CASCADE",
       });
     }

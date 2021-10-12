@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id",
         onDelete: "CASCADE",
       });
+      Trainee.belongsToMany(models.Class, {
+        through: models.ListTraineeClass,
+        foreignKey: "traineeID",
+        onDelete: "CASCADE",
+      });
     }
   }
   Trainee.init(
