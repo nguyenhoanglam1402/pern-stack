@@ -9,8 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Account.hasOne(models.Trainer);
-      Account.hasOne(models.Trainee);
+      Account.hasOne(models.Trainer, {
+        foreignKey: "id",
+      });
+      Account.hasOne(models.Trainee, {
+        foreignKey: "",
+      });
       Account.belongsTo(models.Role, {
         foreignKey: "rolesID",
         onDelete: "CASCADE",
