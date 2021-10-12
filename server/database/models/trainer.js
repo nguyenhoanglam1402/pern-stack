@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Trainer.belongsTo(models.Account, {
+        foreignKey: "id",
+        onDelete: "CASCADE",
+      });
     }
   }
   Trainer.init(
