@@ -10,7 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Class.belongsTo(models.Course,{
+        foreignKey: "courseID",
+        onDelete: "CASCADE"
+      })
+      Class.belongsToMany(models.Tranee,{
+        through: models.ListTraineeClass,
+        foreignKey: "classID",
+        onDelete: "CASCADE"
+      })
     }
   };
   Class.init({
