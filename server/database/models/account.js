@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Account.hasOne(models.Trainer);
+      Account.hasOne(models.Trainee);
+      Account.belongsTo(models.Role, {
+        foreignKey: "rolesID",
+        onDelete: "CASCADE",
+      });
     }
   }
   Account.init(
@@ -16,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       fullname: DataTypes.STRING,
+      rolesID: DataTypes.INTEGER,
     },
     {
       sequelize,
