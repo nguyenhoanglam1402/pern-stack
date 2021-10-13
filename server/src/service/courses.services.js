@@ -2,7 +2,8 @@ const database = require('../../database/models/index');
 const Course = database.db.Course;
 
 const getAllCoursesService = async () =>{
-    return await Course.findAll();
+    let allCourses = await Course.findAll();
+    return allCourses;
 };
 
 const createNewCourseService = async (body,page,limit) =>{
