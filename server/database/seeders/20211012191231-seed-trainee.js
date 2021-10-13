@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert("Trainees", [
       {
         id: 3,
-        year: "2.14.1998",
+        year: "09.09.1998",
         education: "College",
         createdAt: new Date(),
         updatedAt: new Date(),
