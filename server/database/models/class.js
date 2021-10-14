@@ -13,12 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       Class.belongsTo(models.Course,{
         foreignKey: "courseID",
         onDelete: "CASCADE"
-      })
+      });
       Class.belongsToMany(models.Trainee,{
         through: models.ListTraineeClass,
         foreignKey: "classID",
         onDelete: "CASCADE"
-      })
+      });
+      Class.hasMany(models.ListTraineeClass);
     }
   };
   Class.init({
