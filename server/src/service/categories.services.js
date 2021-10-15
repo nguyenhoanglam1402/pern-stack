@@ -26,8 +26,33 @@ const createNewCategoryService = async (body) => {
   return newCategory;
 };
 
+const updateCategoryService = async (id, data) => {
+  let dataUpdated = await Category.update(
+    {
+      name: data.name,
+      description: data.description,
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+  return dataUpdated;
+};
+
+const deleteCategoryService = async (name) => {
+  let deleted = await Category.destroy({
+    where: {
+      name: name,
+    },
+  });
+  return deleted;
+};
 module.exports = {
   createNewCategoryService,
   findAllCategoryService,
   findCategoryByNameService,
+  updateCategoryService,
+  deleteCategoryService,
 };
