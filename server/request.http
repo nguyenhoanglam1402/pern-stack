@@ -1,0 +1,21 @@
+GET http://localhost:5001/api/courses
+
+###
+POST  http://localhost:5001/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "nguyenhoanglam.emily@gmail.com",
+  "password": "donbesh"
+}
+
+###
+POST http://localhost:5001/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "vinhhn3@fpt.edu.vn",
+  "password": "ILoveMyWife",
+  "fullname": "Hoang Nhu Vinh",
+  "role": "Trainer"
+}

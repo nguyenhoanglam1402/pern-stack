@@ -6,24 +6,28 @@ module.exports = {
       {
         courseID: 1,
         trainerID: 2,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         courseID: 2,
         trainerID: 1,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         courseID: 2,
         trainerID: 1,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         courseID: 3,
         trainerID: 2,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getAllCourse,
   createNewCourse,
-  getAListCoursesByName
+  getAListCoursesByName,
 } = require("../controller/courses.controller.js");
 const {
   createNewCategory,
@@ -11,6 +11,11 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../controller/categories.controller.js");
+
+const {
+  loginController,
+  registryController,
+} = require("../controller/auth.controller.js");
 const router = express.Router();
 
 //Route for course
@@ -26,5 +31,9 @@ router.get("/categories/:name", findCategoryByName);
 router.post("/categories/create", createNewCategory);
 router.put("/categories/update/:id", updateCategory);
 router.delete("/categories/delete/:name", deleteCategory);
+
+//Route for account
+router.post("/auth/login", loginController);
+router.post("/auth/register", registryController);
 
 module.exports = router;
