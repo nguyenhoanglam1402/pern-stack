@@ -3,11 +3,12 @@ const {
   getAListCoursesByNameService,
   createNewCourseService,
 } = require("../service/courses.services.js");
+
 const getAllCourse = async (req, res) => {
   try {
     const find = await getAllCoursesService();
     return res.status(200).json({
-      success: "Success",
+      success: true,
       data: find,
     });
   } catch (error) {
@@ -22,6 +23,7 @@ const getAllCourse = async (req, res) => {
 const getAListCoursesByName = async (req, res) => {
   if (!req.params.name) {
     return res.status(400).json({
+      success: false,
       message: "Name of category cannot be empty",
     });
   } else {
@@ -42,6 +44,7 @@ const getAListCoursesByName = async (req, res) => {
     }
   }
 };
+
 const createNewCourse = async (req, res) => {
   if (!req.body.name) {
     return res.status(400).json({

@@ -108,6 +108,7 @@ const deleteCategory = async (req, res) => {
   const nameCategory = req.params.name;
   if (!nameCategory) {
     return res.status(400).json({
+      success: true,
       message: "Name of category cannot be empty",
     });
   } else {
