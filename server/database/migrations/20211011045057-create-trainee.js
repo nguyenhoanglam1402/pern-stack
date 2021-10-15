@@ -4,9 +4,8 @@ module.exports = {
     await queryInterface.createTable("Trainees", {
       id: {
         allowNull: false,
-        autoIncrement: false,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       year: {
         type: Sequelize.DATE,

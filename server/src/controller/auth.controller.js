@@ -17,17 +17,23 @@ const loginController = async (req, res) => {
         message: "User doesn't exist",
       });
     }
-    const passwordValid = argon.verify(user.password, password);
+    const passwordValid = await argon.verify(user.password, password);
     if (!passwordValid) {
       return res.status(401).json({
         success: false,
         message: "Password is not correct",
       });
     }
+
+    const token = jsonWebToken.sign(
+      { userId: user.id },
+      process.env.SECRET_TOKEN_KEY
+    );
     return res.status(200).json({
       success: true,
       message: "Login successfully",
       data: user,
+      token: token,
     });
   } catch (error) {
     return res.status(400).json({
@@ -58,7 +64,12 @@ const registryController = async (req, res) => {
         roleID: roleID,
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
 };
 
 module.exports = { loginController, registryController };

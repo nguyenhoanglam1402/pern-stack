@@ -1,4 +1,5 @@
 const database = require("../../database/models/index");
+const { generateUID } = require("./uid.services");
 const Account = database.db.Account;
 const Role = database.db.Role;
 
@@ -17,7 +18,7 @@ const loginAccountService = async (email) => {
     where: {
       email: email,
     },
-    // attributes: ["id", "fullname", "email"],
+    attributes: ["id", "password", "fullname", "email"],
     include: {
       model: Role,
       attributes: ["name"],
@@ -28,6 +29,7 @@ const loginAccountService = async (email) => {
 
 const registryAccountService = async (email, password, fullname, roles) => {
   const account = await Account.build({
+    id: generateUID(10),
     email: email,
     password: password,
     fullname: fullname,

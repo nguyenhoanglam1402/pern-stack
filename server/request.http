@@ -5,8 +5,8 @@ POST  http://localhost:5001/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "nguyenhoanglam.emily@gmail.com",
-  "password": "donbesh"
+  "email": "vinhhn3@fpt.edu.vn",
+  "password": "ILoveMyWife"
 }
 
 ###
@@ -19,3 +19,4 @@ Content-Type: application/json
   "fullname": "Hoang Nhu Vinh",
   "role": "Trainer"
 }
+
