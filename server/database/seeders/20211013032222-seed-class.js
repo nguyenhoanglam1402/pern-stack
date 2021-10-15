@@ -2,28 +2,32 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert("ListTraineeClasses", [
+    await queryInterface.bulkInsert("Classes", [
       {
-        classID: 1,
-        traineeID: 4,
+        courseID: 1,
+        trainerID: 2,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        classID: 1,
-        traineeID: 3,
+        courseID: 2,
+        trainerID: 1,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        classID: 2,
-        traineeID: 3,
+        courseID: 2,
+        trainerID: 1,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        classID: 2,
-        traineeID: 4,
+        courseID: 3,
+        trainerID: 2,
+        name: "GCD0803",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

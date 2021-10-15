@@ -16,7 +16,7 @@ module.exports = {
         },
       },
       trainerID: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         references: {
           model: "Trainers",
           key: "id",
