@@ -1,6 +1,7 @@
 const {
   getAllCoursesService,
   getAListCoursesByNameService,
+  createNewCourseService,
 } = require("../service/courses.services.js");
 const getAllCourse = async (req, res) => {
   try {
@@ -47,6 +48,21 @@ const createNewCourse = async (req, res) => {
     });
   } else {
     try {
+      const result = await createNewCourseService({
+        name: req.body.name,
+        categoryName: req.body.categoryName,
+        description: req.body.description,
+      });
+      if (result === null){
+        return res.status(400).json({
+          success: "Failed",
+          message: "Category is not exist",
+        })
+      }
+      return res.status(200).json({
+        success: "Success",
+        data: result,
+      });
     } catch (error) {
       res.status(400).send({
         msg: error,
