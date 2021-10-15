@@ -28,12 +28,13 @@ const getAListCoursesByName = async (req, res) => {
     try {
       const result = await getAListCoursesByNameService(req.params.name);
       return res.status(200).json({
-        success: "Success",
+        success: true,
         data: result,
       });
     } catch (error) {
       console.log(error);
       return res.status(500).json({
+        success: false,
         message: "Something went wrong",
         error: error,
         data: {},
@@ -44,6 +45,7 @@ const getAListCoursesByName = async (req, res) => {
 const createNewCourse = async (req, res) => {
   if (!req.body.name) {
     return res.status(400).json({
+      success: false,
       message: "Name of category cannot be empty",
     });
   } else {
@@ -53,18 +55,19 @@ const createNewCourse = async (req, res) => {
         categoryName: req.body.categoryName,
         description: req.body.description,
       });
-      if (result === null){
+      if (result === null) {
         return res.status(400).json({
-          success: "Failed",
+          success: false,
           message: "Category is not exist",
-        })
+        });
       }
       return res.status(200).json({
-        success: "Success",
+        success: true,
         data: result,
       });
     } catch (error) {
       res.status(400).send({
+        success: false,
         msg: error,
       });
     }
