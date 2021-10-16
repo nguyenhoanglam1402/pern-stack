@@ -3,6 +3,8 @@ const {
   getAllCourse,
   createNewCourse,
   getAListCoursesByName,
+  updateCourse,
+  deleteCourse,
 } = require("../controller/courses.controller.js");
 const {
   createNewCategory,
@@ -22,8 +24,8 @@ const router = express.Router();
 router.get("/courses", getAllCourse);
 router.get("/courses/:name", getAListCoursesByName);
 router.post("/courses/create", createNewCourse);
-router.put("/courses/update/:id", (req, res) => updateCourse);
-router.delete("/courses/delete/:id", (req, res) => deleteCourse);
+router.put("/courses/update/:id", updateCourse);
+router.delete("/courses/delete/:id", deleteCourse);
 
 //Route for course category
 router.get("/categories", findAllCategory);

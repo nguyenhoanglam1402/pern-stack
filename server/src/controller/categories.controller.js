@@ -115,7 +115,7 @@ const deleteCategory = async (req, res) => {
     try {
       const result = await deleteCategoryService(nameCategory);
       return res.status(200).json({
-        message: "Success",
+        message: true,
         data: result,
       });
     } catch (error) {

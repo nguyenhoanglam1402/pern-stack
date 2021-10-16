@@ -42,6 +42,7 @@ const updateCategoryService = async (id, data) => {
 };
 
 const deleteCategoryService = async (name) => {
+  console.log(name);
   let deleted = await Category.destroy({
     where: {
       name: name,
@@ -49,6 +50,7 @@ const deleteCategoryService = async (name) => {
   });
   return deleted;
 };
+
 module.exports = {
   createNewCategoryService,
   findAllCategoryService,

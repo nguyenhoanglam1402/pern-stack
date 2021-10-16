@@ -37,8 +37,37 @@ const getAListCoursesByNameService = async (nameToFind) => {
   return selectedCourse;
 };
 
+const updateCourseService = async (id, data) => {
+  const newCategoryName = data.categoryName;
+  const newCategoryId = await Category.findOne({
+    where: {
+      name: newCategoryName,
+    },
+  });
+  const result = await Course.update(
+    {
+      name: data.name,
+      categoryID: newCategoryId.id,
+      description: data.description,
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+  return result;
+};
+
+const deleteCourseService = async (id) => {
+  const result = await Course.destroy({ where: { id: id } });
+  return result;
+};
+
 module.exports = {
   getAllCoursesService,
   createNewCourseService,
   getAListCoursesByNameService,
+  updateCourseService,
+  deleteCourseService,
 };

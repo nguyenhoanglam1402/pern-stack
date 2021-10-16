@@ -2,6 +2,8 @@ const {
   getAllCoursesService,
   getAListCoursesByNameService,
   createNewCourseService,
+  updateCourseService,
+  deleteCourseService,
 } = require("../service/courses.services.js");
 
 const getAllCourse = async (req, res) => {
@@ -77,4 +79,54 @@ const createNewCourse = async (req, res) => {
   }
 };
 
-module.exports = { getAllCourse, createNewCourse, getAListCoursesByName };
+const updateCourse = async (req, res) => {
+  try {
+    const courseId = req.params.id;
+    if (courseId === null || req.body.categoryName === "") {
+      return res.status(400).json({
+        success: false,
+        message: "No needed id parameter/category name inside request",
+      });
+    }
+    const result = await updateCourseService(courseId, {
+      name: req.body.name,
+      categoryName: req.body.categoryName,
+      description: req.body.description,
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Updated successfully!",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const deleteCourse = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await deleteCourseService(id);
+    return res.status(200).json({
+      success: true,
+      message: "Update is successfully!",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+    });
+  }
+};
+
+module.exports = {
+  getAllCourse,
+  createNewCourse,
+  getAListCoursesByName,
+  updateCourse,
+  deleteCourse,
+};

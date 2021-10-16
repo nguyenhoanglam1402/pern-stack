@@ -5,7 +5,7 @@ POST  http://localhost:5001/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "tthanhh410@gmail.com",
+  "email": "vinhhn3@fpt.edu.vn",
   "password": "ILoveMyWife"
 }
 
@@ -33,8 +33,14 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5001/api/categories
+PUT http://localhost:5001/api/courses/update/3
+Content-Type: application/json
 
+{
+  "name": "Cloud Computing",
+  "description": "No description",
+  "categoryName": "IT"
+}
 
 ###
 
@@ -48,5 +54,5 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:5001/api/categories/update/:
+DELETE http://localhost:5001/api/courses/delete/2
 

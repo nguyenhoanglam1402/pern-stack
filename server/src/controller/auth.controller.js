@@ -26,7 +26,7 @@ const loginController = async (req, res) => {
     }
 
     const token = jsonWebToken.sign(
-      { userId: user.id },
+      { uid: user.id, role: user.Role.name },
       process.env.SECRET_TOKEN_KEY
     );
     return res.status(200).json({
