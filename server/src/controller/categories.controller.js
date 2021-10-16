@@ -108,13 +108,14 @@ const deleteCategory = async (req, res) => {
   const nameCategory = req.params.name;
   if (!nameCategory) {
     return res.status(400).json({
+      success: true,
       message: "Name of category cannot be empty",
     });
   } else {
     try {
       const result = await deleteCategoryService(nameCategory);
       return res.status(200).json({
-        message: "Success",
+        message: true,
         data: result,
       });
     } catch (error) {

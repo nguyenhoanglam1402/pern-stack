@@ -20,3 +20,39 @@ Content-Type: application/json
   "role": "Trainer"
 }
 
+
+###
+POST http://localhost:5001/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "tthanhh410@gmail.com",
+  "password": "dontbesad",
+  "fullname": "Vo Ngoc Thanh",
+  "role": "Trainee"
+}
+
+###
+PUT http://localhost:5001/api/courses/update/3
+Content-Type: application/json
+
+{
+  "name": "Cloud Computing",
+  "description": "No description",
+  "categoryName": "IT"
+}
+
+###
+
+POST http://localhost:5001/api/categories/create
+Content-Type: application/json
+
+{
+  "name": "Business",
+  "description": "This is subject for student who have passion with Business"
+}
+
+###
+
+DELETE http://localhost:5001/api/courses/delete/2
+
