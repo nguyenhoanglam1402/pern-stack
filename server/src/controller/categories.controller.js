@@ -62,6 +62,12 @@ const createNewCategory = async (req, res) => {
   } else {
     try {
       const result = await createNewCategoryService(req.body);
+      if(result === false){
+        return res.status(400).json({
+          message: "This category is existed",
+          success: false
+        });
+      }
       return res.status(200).json({
         message: "Created successfully",
         data: result,
@@ -89,6 +95,12 @@ const updateCategory = async (req, res) => {
         name: req.body.name,
         description: req.body.description,
       });
+      if (result===false){
+        return res.status(400).json({
+          message: "This category is existed",
+          success: false
+        });
+      }
       return res.status(200).json({
         message: "Success",
         data: result,
@@ -114,6 +126,12 @@ const deleteCategory = async (req, res) => {
   } else {
     try {
       const result = await deleteCategoryService(nameCategory);
+      if(result===false){
+        return res.status(400).json({
+          message: "This category is not existed",
+          success: false
+        });
+      }
       return res.status(200).json({
         message: true,
         data: result,
