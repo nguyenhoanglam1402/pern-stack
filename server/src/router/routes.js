@@ -38,4 +38,6 @@ router.delete("/categories/delete/:name", deleteCategory);
 router.post("/auth/login", loginController);
 router.post("/auth/register", registryController);
 
+//Route for class
+
 module.exports = router;

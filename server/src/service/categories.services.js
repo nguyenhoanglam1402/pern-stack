@@ -16,39 +16,62 @@ const findCategoryByNameService = async (nameToFind) => {
 };
 
 const createNewCategoryService = async (body) => {
-  let newCategory = await Category.create(
-    {
-      name: body.name,
-      description: body.description,
-    },
-    { fields: ["name", "description"] }
-  );
-  return newCategory;
+  const checkCategoryExisted = await Category.findOne({
+    where: { name: body.name },
+  });
+  if (checkCategoryExisted === null) {
+    let newCategory = await Category.create(
+      {
+        name: body.name,
+        description: body.description,
+      },
+      { fields: ["name", "description"] }
+    );
+    return newCategory;
+  } else {
+    return false;
+  }
 };
 
 const updateCategoryService = async (id, data) => {
-  let dataUpdated = await Category.update(
-    {
-      name: data.name,
-      description: data.description,
-    },
-    {
-      where: {
-        id: id,
+  const checkCategoryExisted = await Category.findOne({
+    where: { name: data.name },
+  });
+  if(checkCategoryExisted===null){
+    let dataUpdated = await Category.update(
+      {
+        name: data.name,
+        description: data.description,
       },
-    }
-  );
-  return dataUpdated;
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
+    return dataUpdated;
+  }
+  else{
+    return false;
+  }
+  
 };
 
 const deleteCategoryService = async (name) => {
-  console.log(name);
-  let deleted = await Category.destroy({
-    where: {
-      name: name,
-    },
+  const checkCategoryExisted = await Category.findOne({
+    where: { name: name },
   });
-  return deleted;
+  console.log("Here",checkCategoryExisted);
+  if (checkCategoryExisted === null) {
+    return false;
+  }else {
+    let deleted = await Category.destroy({
+      where: {
+        name: name,
+      },
+    });
+    return deleted;
+  }
 };
 
 module.exports = {
