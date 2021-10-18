@@ -7,7 +7,7 @@ const findAllCategoryService = async () => {
 };
 
 const findCategoryByNameService = async (nameToFind) => {
-  let category = await Category.findAll({
+  let category = await Category.findOne({
     where: {
       name: nameToFind,
     },
