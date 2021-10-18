@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id",
       });
       Account.hasOne(models.Trainee, {
-        foreignKey: "",
+        foreignKey: "id",
       });
       Account.belongsTo(models.Role, {
         foreignKey: "rolesID",
