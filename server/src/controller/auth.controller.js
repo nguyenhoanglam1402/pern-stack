@@ -6,6 +6,9 @@ const {
 const argon = require("argon2");
 const jsonWebToken = require("jsonwebtoken");
 const { findRoleServices } = require("../service/roles.services");
+const { createTrainerService } = require("../service/trainer.services");
+const { createTraineeService } = require("../service/trainee.services");
+const { deleteAccountService } = require("../service/account.services");
 
 const loginController = async (req, res) => {
   try {
@@ -44,6 +47,7 @@ const loginController = async (req, res) => {
 };
 
 const registryController = async (req, res) => {
+  let uid = "";
   try {
     const { email, password, fullname, role } = req.body;
     const existAccount = await checkExistAccountService(email);
@@ -55,7 +59,23 @@ const registryController = async (req, res) => {
     }
     const hashPassword = await argon.hash(password);
     const roleID = await findRoleServices(role);
-    await registryAccountService(email, hashPassword, fullname, roleID);
+    uid = await registryAccountService(email, hashPassword, fullname, roleID);
+
+    switch (role) {
+      case "Trainer": {
+        const { specialty } = req.body;
+        await createTrainerService(uid, specialty);
+        break;
+      }
+      case "Trainee": {
+        const { year, education } = req.body;
+        await createTraineeService(uid, year, education);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
     return res.status(200).json({
       success: true,
       message: "Register successfully!",
@@ -65,9 +85,13 @@ const registryController = async (req, res) => {
       },
     });
   } catch (error) {
+    if (uid !== null) {
+      await deleteAccountService(uid);
+    }
     return res.status(500).json({
       success: false,
       message: "Internal server error",
+      errorMessage: error.message,
     });
   }
 };
