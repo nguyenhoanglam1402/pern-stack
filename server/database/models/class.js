@@ -12,7 +12,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "classID",
         onDelete: "CASCADE",
       });
-      Class.hasMany(models.ListTraineeClass);
+      Class.hasMany(models.ListTraineeClass, {
+        foreignKey: "classID",
+      });
     }
   }
   Class.init(

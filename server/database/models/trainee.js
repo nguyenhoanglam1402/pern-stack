@@ -13,7 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "traineeID",
         onDelete: "CASCADE",
       });
-      Trainee.hasMany(models.ListTraineeClass);
+      Trainee.hasMany(models.ListTraineeClass, {
+        foreignKey: "traineeID",
+      });
     }
   }
   Trainee.init(

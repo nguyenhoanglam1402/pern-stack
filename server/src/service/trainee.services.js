@@ -7,8 +7,6 @@ const createTraineeService = async (uid, year, education) => {
     year: year,
     education: education,
   });
-
-  console.log(trainee);
 };
 
 module.exports = { createTraineeService };

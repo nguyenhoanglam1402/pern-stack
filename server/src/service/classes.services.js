@@ -9,7 +9,17 @@ const findCourseIDService = async (courseName) => {
     },
     attributes: ["id"],
   });
-  return courseName;
+  return courseID;
+};
+
+const findClassIDServices = async (className) => {
+  const result = await Class.findOne({
+    where: {
+      name: className,
+    },
+    attributes: ["id"],
+  });
+  return result.id;
 };
 
 const createClassService = async (courseName, name, trainerId) => {
@@ -55,4 +65,9 @@ const updateClassService = async (data) => {
   );
   return result;
 };
-module.exports = { createClassService, deleteClassService, updateClassService };
+module.exports = {
+  createClassService,
+  deleteClassService,
+  updateClassService,
+  findClassIDServices,
+};

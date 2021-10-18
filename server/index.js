@@ -31,7 +31,7 @@ app.use(cors());
 app.use(express.json());
 
 const api = require("./src/router/api.routes");
-app.use("/", api);
+app.use("/api", api);
 
 app.listen(port, () => {
   console.log(`Server on port: ${port}`);
