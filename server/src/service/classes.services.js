@@ -70,4 +70,5 @@ module.exports = {
   deleteClassService,
   updateClassService,
   findClassIDServices,
+  findCourseIDService,
 };

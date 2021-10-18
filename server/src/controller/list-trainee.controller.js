@@ -5,9 +5,8 @@ const {
 
 const getFriendTraineeController = async (req, res) => {
   try {
-    const classId = req.params.classid;
-    const result = await getAllFriendsService(classId);
-    console.log(result);
+    const courseName = req.params.courseName;
+    const result = await getAllFriendsService(courseName);
     return res.status(200).json({
       success: true,
       message: "Fetch friend successfully!",
