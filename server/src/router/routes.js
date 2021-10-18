@@ -18,9 +18,13 @@ const {
   loginController,
   registryController,
 } = require("../controller/auth.controller.js");
+
 const {
   createClassController,
 } = require("../controller/classes.controller.js");
+const {
+  assignTraineeClassController,
+} = require("../controller/list-trainee.controller.js");
 const router = express.Router();
 
 //Route for course
@@ -43,5 +47,6 @@ router.post("/auth/register", registryController);
 
 //Route for class
 router.post("/classes/create", createClassController);
+router.post("/classes/assign-trainee/", assignTraineeClassController);
 
 module.exports = router;
