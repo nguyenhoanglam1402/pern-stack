@@ -18,6 +18,9 @@ const {
   loginController,
   registryController,
 } = require("../controller/auth.controller.js");
+const {
+  createClassController,
+} = require("../controller/classes.controller.js");
 const router = express.Router();
 
 //Route for course
@@ -37,5 +40,8 @@ router.delete("/categories/delete/:name", deleteCategory);
 //Route for account
 router.post("/auth/login", loginController);
 router.post("/auth/register", registryController);
+
+//Route for class
+router.post("/classes/create", createClassController);
 
 module.exports = router;

@@ -28,16 +28,15 @@ const loginAccountService = async (email) => {
 };
 
 const registryAccountService = async (email, password, fullname, roles) => {
-  const account = await Account.build({
-    id: generateUID(10),
+  const uid = generateUID(10);
+  await Account.create({
+    id: uid,
     email: email,
     password: password,
     fullname: fullname,
     rolesID: roles,
   });
-  console.log(account);
-  await account.save();
-  console.log("Successfully to save account");
+  return uid;
 };
 
 module.exports = {
