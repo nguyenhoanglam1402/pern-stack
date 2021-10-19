@@ -47,6 +47,6 @@ router.post("/auth/register", registryController);
 
 //Route for class
 router.post("/classes/create", createClassController);
-router.post("/classes/assign-trainee/", assignTraineeClassController);
+router.post("/classes/trainee", assignTraineeClassController);
 
 module.exports = router;
