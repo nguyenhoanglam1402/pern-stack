@@ -5,5 +5,6 @@ const {
 const router = express.Router();
 
 router.get("/course/friends/:courseName", getFriendTraineeController);
+router.get("/course");
 
 module.exports = router;
