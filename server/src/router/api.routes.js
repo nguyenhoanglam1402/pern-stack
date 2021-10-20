@@ -3,7 +3,7 @@ const api = require("./routes");
 const traineeApi = require("./trainee.routes");
 const apiRoute = express();
 
-apiRoute.use("/api/v1/trainee", traineeApi);
-apiRoute.use("/api/v1/staff", api);
+apiRoute.use("/trainee", traineeApi);
+apiRoute.use("/staff", api);
 
 module.exports = apiRoute;

@@ -1,7 +1,7 @@
-GET http://localhost:5001/api/staff/courses
+GET http://localhost:5001/api/v1/staff/courses
 
 ###
-POST  http://localhost:5001/api/staff/auth/login
+POST  http://localhost:5001/api/v1/staff/auth/login
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5001/api/staff/auth/register
+POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
@@ -23,31 +23,31 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:5001/api/staff/auth/register
+POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "ngotantu12@gmail.com",
-  "password": "hehedontbeshilly",
-  "fullname": "Ngo Tan Tu",
+  "email": "thanhh410@gmail.com",
+  "password": "dontbesad",
+  "fullname": "Vo Ngoc Thanh",
   "role": "Trainee",
   "year": "1/1/2023",
   "education": "Bachelor"
 }
 
 ###
-POST http://localhost:5001/api/staff/courses/create
+POST http://localhost:5001/api/v1/staff/courses/create
 Content-Type: application/json
 
 {
-  "name": "Cloud Computing",
+  "name": "Application Development",
   "description": "No description",
   "categoryName": "IT"
 }
 
 ###
 
-POST http://localhost:5001/api/staff/categories/create
+POST http://localhost:5001/api/v1/staff/categories/create
 Content-Type: application/json
 
 {
@@ -57,19 +57,28 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:5001/api/staff/classes/delete/4
+DELETE http://localhost:5001/api/v1/staff/classes/delete/4
 
 ###
-POST http://localhost:5001/api/staff/classes/create
+POST http://localhost:5001/api/v1/staff/classes/create
 Content-Type: application/json
 
 {
-  "courseName": "Cloud Computing",
+  "courseName": "Application Development",
   "trainerID": "1b42d567dccd08d98bbe39924bceaff2",
-  "name": "GCD0807"
+  "name": "GCD0806"
 }
 
 
 ###
-GET http://localhost:5001/api/trainee/course/friends
+GET http://localhost:5001/api/v1/trainee/course/friends/Cloud%20Computing
+
+###
+POST http://localhost:5001/api/v1/staff/classes/trainee
+Content-Type: application/json
+
+{
+  "className": "GCD0806",
+  "traineeID": "0f5c996e24fdf9a033adb8e0dacf46bf"
+}
 
