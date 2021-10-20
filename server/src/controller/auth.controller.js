@@ -49,7 +49,8 @@ const loginController = async (req, res) => {
 const registryController = async (req, res) => {
   let uid = "";
   try {
-    const { email, password, fullname, role } = req.body;
+    const { email, password, fullname, role, age } = req.body;
+    console.log(age);
     const existAccount = await checkExistAccountService(email);
     if (existAccount) {
       return res.status(400).json({
@@ -59,7 +60,13 @@ const registryController = async (req, res) => {
     }
     const hashPassword = await argon.hash(password);
     const roleID = await findRoleServices(role);
-    uid = await registryAccountService(email, hashPassword, fullname, roleID);
+    uid = await registryAccountService(
+      email,
+      hashPassword,
+      fullname,
+      roleID,
+      age
+    );
 
     switch (role) {
       case "Trainer": {

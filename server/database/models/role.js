@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Role.hasMany(models.Account, {
         foreignKey: "rolesID",
-        as: "Accounts",
       });
     }
   }
