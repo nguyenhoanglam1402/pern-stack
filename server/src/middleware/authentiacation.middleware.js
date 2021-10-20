@@ -11,10 +11,25 @@ const authUser = (req,res,next) => {
     }
 }
 
+const authToken = (req,res,next) => {
+    const authHeader = req.headers(['authorization']);
+    const token = authHeader && authHeader.split(' ')[1];
+    if(token === null) {
+        return res.sendStatus(401).json({
+            message: "Access failed"
+        })
+    }
+    
+    jwt.verify(token, process.env.SECRET_TOKEN_KEY, (error,user) => {
+        if(error) return res.sendStatus(403);
+        req.user = user;
+        next();
+    })
+}
 const authRole = (role) => {
     return (req, res, next) => {
         if(req.user.role !== role){
-            return res.status(401).json({
+            return res.sendStatus(401).json({
                 message: "Access denied"
             })
         }
