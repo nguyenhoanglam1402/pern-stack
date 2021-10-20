@@ -14,15 +14,13 @@ const authToken = (req, res, next) => {
   const authHeader = req.headers(["authorization"]);
   const token = authHeader && authHeader.split(" ")[1];
   if (token === null) {
-    return res.sendStatus(401).json({
-      message: "Access was denied",
-    });
+    return res.sendStatus(401);
   }
-  const decode = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
-  req.uid = decode.uid;
-  req.role = decode.role;
-  console.log(req.body);
-  next();
+  jwt.verify(token, process.env.SECRET_TOKEN_KEY, (error, user) => {
+    if (error) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
 };
 
 const authRole = (role) => {

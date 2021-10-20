@@ -33,4 +33,25 @@ const searchTraineeService = async (name, age) => {
   return result;
 };
 
-module.exports = { createTraineeService, searchTraineeService };
+const updateTraineeInforService = async (oldData, newData) => {
+  const result = await Account.update(
+    {
+      fullname: newData.fullname,
+      age: newData.age,
+      email: newData.email,
+    },
+    {
+      where: {
+        fullname: oldData.fullname,
+        age: oldData.age,
+      },
+    }
+  );
+  return result;
+};
+
+module.exports = {
+  createTraineeService,
+  searchTraineeService,
+  updateTraineeInforService,
+};
