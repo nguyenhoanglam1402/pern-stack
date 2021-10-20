@@ -6,6 +6,7 @@ const {
 const getFriendTraineeController = async (req, res) => {
   try {
     const courseName = req.params.courseName;
+    console.log("Course name", courseName);
     const result = await getAllFriendsService(courseName);
     return res.status(200).json({
       success: true,

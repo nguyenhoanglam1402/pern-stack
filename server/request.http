@@ -1,7 +1,7 @@
-GET http://localhost:5001/api/staff/courses
+GET http://localhost:5001/api/v1/staff/courses
 
 ###
-POST  http://localhost:5001/api/staff/auth/login
+POST  http://localhost:5001/api/v1/staff/auth/login
 Content-Type: application/json
 
 {
@@ -10,44 +10,64 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5001/api/staff/auth/register
+POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "vinhhn3@fpt.edu.vn",
+  "email": "doanhuuan@fpt.edu.vn",
   "password": "ILoveMyWife",
-  "fullname": "Hoang Nhu Vinh",
+  "fullname": "Doan Huu An",
   "role": "Trainer",
   "specialty": "IT and Development"
 }
 
-
 ###
-POST http://localhost:5001/api/staff/auth/register
+POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "ngotantu12@gmail.com",
-  "password": "hehedontbeshilly",
-  "fullname": "Ngo Tan Tu",
+  "email": "dangtieubinh@fpt.edu.vn",
+  "password": "ILoveMyWife",
+  "fullname": "Dang Tieu Binh",
+  "role": "Trainer",
+  "specialty": "Economic PhD"
+}
+
+###
+POST http://localhost:5001/api/v1/staff/auth/register
+Content-Type: application/json
+
+{
+  "email": "tranthituyetmai@gmail.com",
+  "password": "dontbesad",
+  "fullname": "Tran Thi Tuyet Mai",
   "role": "Trainee",
   "year": "1/1/2023",
   "education": "Bachelor"
 }
 
 ###
-POST http://localhost:5001/api/staff/courses/create
+POST http://localhost:5001/api/v1/staff/courses/create
 Content-Type: application/json
 
 {
-  "name": "Cloud Computing",
+  "name": "Application Development",
   "description": "No description",
   "categoryName": "IT"
 }
 
 ###
+POST http://localhost:5001/api/v1/staff/courses/create
+Content-Type: application/json
 
-POST http://localhost:5001/api/staff/categories/create
+{
+  "name": "Economic Law",
+  "description": "No description",
+  "categoryName": "Business"
+}
+
+###
+POST http://localhost:5001/api/v1/staff/categories/create
 Content-Type: application/json
 
 {
@@ -56,20 +76,53 @@ Content-Type: application/json
 }
 
 ###
-
-DELETE http://localhost:5001/api/staff/classes/delete/4
-
-###
-POST http://localhost:5001/api/staff/classes/create
+POST http://localhost:5001/api/v1/staff/categories/create
 Content-Type: application/json
 
 {
-  "courseName": "Cloud Computing",
-  "trainerID": "1b42d567dccd08d98bbe39924bceaff2",
-  "name": "GCD0807"
+  "name": "Business",
+  "description": "This is subject for student who have passion with Biz"
+}
+
+###
+
+DELETE http://localhost:5001/api/v1/staff/classes/delete/4
+
+###
+POST http://localhost:5001/api/v1/staff/classes/create
+Content-Type: application/json
+
+{
+  "courseName": "Economic Law",
+  "trainerID": "ce037c467b523d7a50ef8ccb9892e82a",
+  "name": "GBD0805"
+}
+DELETE http://localhost:5001/api/v1/staff/classes/delete/13
+
+###
+POST http://localhost:5001/api/v1/staff/classes/create
+Content-Type: application/json
+
+{
+  "courseName": "Economic Law",
+  "trainerID": "a164cc40f3f8f93dc4bbce4d40a29943",
+  "name": "GCD0805"
 }
 
 
 ###
-GET http://localhost:5001/api/trainee/course/friends
+<<<<<<< HEAD
+GET http://localhost:5001/api/v1/trainee/course/friends/Economic%20Law
+=======
+GET http://localhost:5001/api/v1/trainee/course/friends/Cloud%20Computing
+>>>>>>> 0c8c95a (fix(class.service): Fixed cannot get student from class)
+
+###
+POST http://localhost:5001/api/v1/staff/classes/trainee
+Content-Type: application/json
+
+{
+  "className": "GCD0805",
+  "traineeID": "fd16fe3c25476348cfd78d6f3c954961"
+}
 

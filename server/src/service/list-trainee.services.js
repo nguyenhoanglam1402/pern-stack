@@ -1,8 +1,5 @@
 const database = require("../../database/models/index");
-const {
-  findClassIDServices,
-  findCourseIDService,
-} = require("./classes.services");
+const { findClassIDServices } = require("./classes.services");
 const ListTraineeClass = database.db.ListTraineeClass;
 const Trainee = database.db.Trainee;
 const Account = database.db.Account;
@@ -11,26 +8,27 @@ const Class = database.db.Class;
 
 const getAllFriendsService = async (courseName) => {
   console.log(courseName);
-  const result = await ListTraineeClass.findAll({
-    attributes: ["classID"],
+
+  const result = await Course.findAll({
+    where: {
+      name: courseName,
+    },
+    attributes: [["name", "Course"]],
     include: [
       {
-        model: Trainee,
-        attributes: ["id", "education"],
-        include: {
-          model: Account,
-          attributes: ["fullname", "email"],
-        },
-      },
-      {
         model: Class,
-        attributes: ["id", ["name", "className"]],
+        attributes: ["name"],
         include: {
-          model: Course,
-          where: {
-            name: courseName,
+          model: ListTraineeClass,
+          attributes: ["classID"],
+          include: {
+            model: Trainee,
+            attributes: ["id"],
+            include: {
+              model: Account,
+              attributes: ["fullname", "email"],
+            },
           },
-          attributes: [["name", "courseName"]],
         },
       },
     ],
