@@ -14,9 +14,10 @@ POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "doanhuuan@fpt.edu.vn",
+  "email": "phamtrungnam@fpt.edu.vn",
   "password": "ILoveMyWife",
-  "fullname": "Doan Huu An",
+  "fullname": "Pham Trung Nam",
+  "age": 26,
   "role": "Trainer",
   "specialty": "IT and Development"
 }
@@ -30,6 +31,7 @@ Content-Type: application/json
   "password": "ILoveMyWife",
   "fullname": "Dang Tieu Binh",
   "role": "Trainer",
+  "age": 32,
   "specialty": "Economic PhD"
 }
 
@@ -38,9 +40,10 @@ POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "tranthituyetmai@gmail.com",
+  "email": "nguyetthiminhbui@gmail.com",
   "password": "dontbesad",
-  "fullname": "Tran Thi Tuyet Mai",
+  "fullname": "Bui Thi Minh Nguyet",
+  "age": 21,
   "role": "Trainee",
   "year": "1/1/2023",
   "education": "Bachelor"
@@ -94,9 +97,11 @@ Content-Type: application/json
 
 {
   "courseName": "Economic Law",
-  "trainerID": "ce037c467b523d7a50ef8ccb9892e82a",
+  "trainerID": "8a89593a7d5cf903d72cd9c46e41f623",
   "name": "GBD0805"
 }
+
+###
 DELETE http://localhost:5001/api/v1/staff/classes/delete/13
 
 ###
@@ -104,25 +109,27 @@ POST http://localhost:5001/api/v1/staff/classes/create
 Content-Type: application/json
 
 {
-  "courseName": "Economic Law",
-  "trainerID": "a164cc40f3f8f93dc4bbce4d40a29943",
-  "name": "GCD0805"
+  "courseName": "Application Development",
+  "trainerID": "3678206b78358c55651e76a83aa2d704",
+  "name": "GCD0806"
 }
 
 
 ###
-<<<<<<< HEAD
 GET http://localhost:5001/api/v1/trainee/course/friends/Economic%20Law
-=======
-GET http://localhost:5001/api/v1/trainee/course/friends/Cloud%20Computing
->>>>>>> 0c8c95a (fix(class.service): Fixed cannot get student from class)
+
+###
+GET http://localhost:5001/api/v1/trainee/course/friends/Application%20Development
 
 ###
 POST http://localhost:5001/api/v1/staff/classes/trainee
 Content-Type: application/json
 
 {
-  "className": "GCD0805",
-  "traineeID": "fd16fe3c25476348cfd78d6f3c954961"
+  "className": "GBD0805",
+  "traineeID": "72e98023a5f700c413ce7c59d5e2f0b7"
 }
+
+###
+GET http://localhost:5001/api/v1/staff/trainee/search/?name=Nguyen%20Hoang%20Lam&age=21
 

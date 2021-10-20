@@ -27,6 +27,9 @@ const {
 const {
   assignTraineeClassController,
 } = require("../controller/list-trainee.controller.js");
+const {
+  searchTraineeController,
+} = require("../controller/trainee.controller.js");
 const router = express.Router();
 
 //Route for course
@@ -52,4 +55,8 @@ router.post("/classes/create", createClassController);
 router.post("/classes/trainee", assignTraineeClassController);
 router.put("/classes/update", updateClassController);
 router.delete("classes/delete/:id", deleteClassConotroller);
+
+//Route for search student
+router.get("/trainee/search", searchTraineeController);
+
 module.exports = router;

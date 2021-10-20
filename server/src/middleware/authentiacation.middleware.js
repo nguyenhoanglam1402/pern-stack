@@ -21,6 +21,8 @@ const authToken = (req, res, next) => {
   const decode = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
   req.uid = decode.uid;
   req.role = decode.role;
+  console.log(req.body);
+  next();
 };
 
 const authRole = (role) => {
