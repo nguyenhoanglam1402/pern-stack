@@ -15,15 +15,12 @@ const authToken = (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1];
   if (token === null) {
     return res.sendStatus(401).json({
-      message: "Access failed",
+      message: "Access was denied",
     });
   }
-
-  jwt.verify(token, process.env.SECRET_TOKEN_KEY, (error, user) => {
-    if (error) return res.sendStatus(403);
-    req.user = user;
-    next();
-  });
+  const decode = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
+  req.uid = decode.uid;
+  req.role = decode.role;
 };
 
 const authRole = (role) => {
@@ -38,4 +35,4 @@ const authRole = (role) => {
   };
 };
 
-module.exports = {};
+module.exports = { authToken };

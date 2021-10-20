@@ -11,26 +11,27 @@ const Class = database.db.Class;
 
 const getAllFriendsService = async (courseName) => {
   console.log(courseName);
-  const result = await ListTraineeClass.findAll({
-    attributes: ["classID"],
+
+  const result = await Course.findAll({
+    where: {
+      name: courseName,
+    },
+    attributes: [["name", "Course"]],
     include: [
       {
-        model: Trainee,
-        attributes: ["id", "education"],
-        include: {
-          model: Account,
-          attributes: ["fullname", "email"],
-        },
-      },
-      {
         model: Class,
-        attributes: ["id", ["name", "className"]],
+        attributes: ["name"],
         include: {
-          model: Course,
-          where: {
-            name: courseName,
+          model: ListTraineeClass,
+          attributes: ["classID"],
+          include: {
+            model: Trainee,
+            attributes: ["id"],
+            include: {
+              model: Account,
+              attributes: ["fullname", "email"],
+            },
           },
-          attributes: [["name", "courseName"]],
         },
       },
     ],

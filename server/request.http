@@ -14,22 +14,33 @@ POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "vinhhn3@fpt.edu.vn",
+  "email": "doanhuuan@fpt.edu.vn",
   "password": "ILoveMyWife",
-  "fullname": "Hoang Nhu Vinh",
+  "fullname": "Doan Huu An",
   "role": "Trainer",
   "specialty": "IT and Development"
 }
-
 
 ###
 POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "thanhh410@gmail.com",
+  "email": "dangtieubinh@fpt.edu.vn",
+  "password": "ILoveMyWife",
+  "fullname": "Dang Tieu Binh",
+  "role": "Trainer",
+  "specialty": "Economic PhD"
+}
+
+###
+POST http://localhost:5001/api/v1/staff/auth/register
+Content-Type: application/json
+
+{
+  "email": "tranthituyetmai@gmail.com",
   "password": "dontbesad",
-  "fullname": "Vo Ngoc Thanh",
+  "fullname": "Tran Thi Tuyet Mai",
   "role": "Trainee",
   "year": "1/1/2023",
   "education": "Bachelor"
@@ -46,13 +57,31 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:5001/api/v1/staff/courses/create
+Content-Type: application/json
 
+{
+  "name": "Economic Law",
+  "description": "No description",
+  "categoryName": "Business"
+}
+
+###
 POST http://localhost:5001/api/v1/staff/categories/create
 Content-Type: application/json
 
 {
   "name": "IT",
   "description": "This is subject for student who have passion with IT"
+}
+
+###
+POST http://localhost:5001/api/v1/staff/categories/create
+Content-Type: application/json
+
+{
+  "name": "Business",
+  "description": "This is subject for student who have passion with Biz"
 }
 
 ###
@@ -64,21 +93,31 @@ POST http://localhost:5001/api/v1/staff/classes/create
 Content-Type: application/json
 
 {
-  "courseName": "Application Development",
-  "trainerID": "1b42d567dccd08d98bbe39924bceaff2",
-  "name": "GCD0806"
+  "courseName": "Economic Law",
+  "trainerID": "ce037c467b523d7a50ef8ccb9892e82a",
+  "name": "GBD0805"
+}
+
+###
+POST http://localhost:5001/api/v1/staff/classes/create
+Content-Type: application/json
+
+{
+  "courseName": "Economic Law",
+  "trainerID": "a164cc40f3f8f93dc4bbce4d40a29943",
+  "name": "GCD0805"
 }
 
 
 ###
-GET http://localhost:5001/api/v1/trainee/course/friends/Cloud%20Computing
+GET http://localhost:5001/api/v1/trainee/course/friends/Economic%20Law
 
 ###
 POST http://localhost:5001/api/v1/staff/classes/trainee
 Content-Type: application/json
 
 {
-  "className": "GCD0806",
-  "traineeID": "0f5c996e24fdf9a033adb8e0dacf46bf"
+  "className": "GCD0805",
+  "traineeID": "fd16fe3c25476348cfd78d6f3c954961"
 }
 
