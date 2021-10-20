@@ -21,6 +21,7 @@ const {
 
 const {
   createClassController,
+  updateClassController,
 } = require("../controller/classes.controller.js");
 const {
   assignTraineeClassController,
@@ -48,5 +49,6 @@ router.post("/auth/register", registryController);
 //Route for class
 router.post("/classes/create", createClassController);
 router.post("/classes/trainee", assignTraineeClassController);
+router.put("/classes/update", updateClassController);
 
 module.exports = router;

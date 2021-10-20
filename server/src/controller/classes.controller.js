@@ -78,4 +78,8 @@ const updateClassController = async (req, res) => {
   }
 };
 
-module.exports = { createClassController, deleteClassConotroller };
+module.exports = {
+  createClassController,
+  deleteClassConotroller,
+  updateClassController,
+};

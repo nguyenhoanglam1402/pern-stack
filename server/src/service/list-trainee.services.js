@@ -1,8 +1,5 @@
 const database = require("../../database/models/index");
-const {
-  findClassIDServices,
-  findCourseIDService,
-} = require("./classes.services");
+const { findClassIDServices } = require("./classes.services");
 const ListTraineeClass = database.db.ListTraineeClass;
 const Trainee = database.db.Trainee;
 const Account = database.db.Account;
