@@ -29,6 +29,7 @@ const {
 } = require("../controller/list-trainee.controller.js");
 const {
   searchTraineeController,
+  updateTraineeInforController,
 } = require("../controller/trainee.controller.js");
 const router = express.Router();
 
@@ -56,7 +57,8 @@ router.post("/classes/trainee", assignTraineeClassController);
 router.put("/classes/update", updateClassController);
 router.delete("classes/delete/:id", deleteClassConotroller);
 
-//Route for search student
+//Route for student management
 router.get("/trainee/search", searchTraineeController);
+router.put("/trainee/update", updateTraineeInforController);
 
 module.exports = router;

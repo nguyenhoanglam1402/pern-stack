@@ -133,3 +133,19 @@ Content-Type: application/json
 ###
 GET http://localhost:5001/api/v1/staff/trainee/search/?name=Nguyen%20Hoang%20Lam&age=21
 
+###
+PUT http://localhost:5001/api/v1/staff/trainee/update
+Content-Type: application/json
+
+{
+  "oldData": {
+    "fullname": "Nguyen Hoang Lam",
+    "age": 21
+  },
+
+  "newData": {
+    "fullname": "Lam Emilie",
+    "age": 20,
+    "email": "nguyenhoanglam.emilie@gmail.com"
+  }
+}

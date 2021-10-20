@@ -1,5 +1,8 @@
 const database = require("../../database/models");
-const { searchTraineeService } = require("../service/trainee.services");
+const {
+  searchTraineeService,
+  updateTraineeInforService,
+} = require("../service/trainee.services");
 const Account = database.db.Account;
 
 const searchTraineeController = async (req, res) => {
@@ -25,4 +28,25 @@ const searchTraineeController = async (req, res) => {
   }
 };
 
-module.exports = { searchTraineeController };
+const updateTraineeInforController = async (req, res) => {
+  try {
+    const { oldData, newData } = req.body;
+    const result = await updateTraineeInforService(oldData, newData);
+    if (result === 0)
+      return res.status(404).json({
+        success: false,
+        message: "Nothing Updated",
+      });
+    return res.status(200).json({
+      success: true,
+      message: "Fetch successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+    });
+  }
+};
+module.exports = { searchTraineeController, updateTraineeInforController };
