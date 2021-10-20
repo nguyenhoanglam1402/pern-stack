@@ -97,6 +97,7 @@ Content-Type: application/json
   "trainerID": "ce037c467b523d7a50ef8ccb9892e82a",
   "name": "GBD0805"
 }
+DELETE http://localhost:5001/api/v1/staff/classes/delete/13
 
 ###
 POST http://localhost:5001/api/v1/staff/classes/create
@@ -110,7 +111,11 @@ Content-Type: application/json
 
 
 ###
+<<<<<<< HEAD
 GET http://localhost:5001/api/v1/trainee/course/friends/Economic%20Law
+=======
+GET http://localhost:5001/api/v1/trainee/course/friends/Cloud%20Computing
+>>>>>>> 0c8c95a (fix(class.service): Fixed cannot get student from class)
 
 ###
 POST http://localhost:5001/api/v1/staff/classes/trainee
