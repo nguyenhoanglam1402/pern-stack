@@ -50,8 +50,18 @@ const updateTraineeInforService = async (oldData, newData) => {
   return result;
 };
 
+const deleteTraineeService = async (traineeName, age) => {
+  await Account.destroy({
+    where: {
+      fullname: traineeName,
+      age: age,
+    },
+  });
+};
+
 module.exports = {
   createTraineeService,
   searchTraineeService,
   updateTraineeInforService,
+  deleteTraineeService,
 };

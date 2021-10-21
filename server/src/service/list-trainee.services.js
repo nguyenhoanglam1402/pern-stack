@@ -44,4 +44,30 @@ const assignTraineeService = async (traineeID, className) => {
   });
 };
 
-module.exports = { getAllFriendsService, assignTraineeService };
+const kickTraineeServices = async (name, age, className) => {
+  const traineeResult = await Account.findOne({
+    where: {
+      fullname: name,
+      age: age,
+      rolesID: 2,
+    },
+  });
+  const classResult = await Class.findOne({
+    where: {
+      name: className,
+    },
+  });
+  console.log("Trainee: ", traineeResult);
+  await ListTraineeClass.destroy({
+    where: {
+      traineeID: traineeResult.id,
+      classID: classResult.id,
+    },
+  });
+};
+
+module.exports = {
+  getAllFriendsService,
+  assignTraineeService,
+  kickTraineeServices,
+};

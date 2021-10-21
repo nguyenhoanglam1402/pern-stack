@@ -1,6 +1,7 @@
 const {
   getAllFriendsService,
   assignTraineeService,
+  kickTraineeServices,
 } = require("../service/list-trainee.services");
 
 const getFriendTraineeController = async (req, res) => {
@@ -39,4 +40,22 @@ const assignTraineeClassController = async (req, res) => {
   }
 };
 
-module.exports = { getFriendTraineeController, assignTraineeClassController };
+const kickTraineeController = async (req, res) => {
+  try {
+    const { name, age, className } = req.body;
+    console.log(`Name: ${name}, Age: ${age}, Class ${className}`);
+    await kickTraineeServices(name, age, className);
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      errorMessage: error.message,
+    });
+  }
+};
+
+module.exports = {
+  getFriendTraineeController,
+  assignTraineeClassController,
+  kickTraineeController,
+};
