@@ -52,12 +52,12 @@ const deleteClassConotroller = async (req, res) => {
 
 const updateClassController = async (req, res) => {
   try {
-    const { id, name, trainerID, courseID } = req.body;
+    const { id, name, trainerID, courseName } = req.body;
     const data = {
       id: id,
       name: name,
       trainerID: trainerID,
-      courseID: courseID,
+      courseName: courseName,
     };
     const result = await updateClassService(data);
     if (result === 0) {
@@ -74,9 +74,12 @@ const updateClassController = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
+      error: error.message
     });
   }
 };
+
+
 
 module.exports = {
   createClassController,

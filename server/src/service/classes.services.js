@@ -1,13 +1,17 @@
 const database = require("../../database/models/index");
+const { Op } = require("sequelize");
 const Class = database.db.Class;
 const Course = database.db.Course;
+const ListTrainee = database.db.ListTraineeClass;
+const Trainee = database.db.Trainee;
+const Account = database.db.Account;
 
 const findCourseIDService = async (courseName) => {
   const courseID = await Course.findOne({
+    attributes: ["id"],
     where: {
       name: courseName,
     },
-    attributes: ["id"],
   });
   return courseID;
 };
@@ -54,22 +58,67 @@ const updateClassService = async (data) => {
   const result = await Class.update(
     {
       name: data.name,
-      courseID: courseID,
+      courseID: courseID.dataValues.id,
       trainerID: data.trainerId,
     },
     {
       where: {
-        id: id,
+        id: data.id,
       },
     }
   );
   return result;
 };
 
+const getTrainerCoursesService = async (idTrainer) => {
+  const result = await Class.findAll({
+    attributes: ["courseID"],
+    where: {
+      trainerID: idTrainer,
+    },
+    include: [
+      {
+        model: Course,
+        attributes: ["name", "description"],
+      },
+    ],
+  });
+  return result;
+};
+
+const getListTraineesInClassService = async (idTrainer, className) => {
+  const result = await Class.findOne({
+    attributes: ["name"],
+    where: {
+      [Op.and]: [{ trainerID: idTrainer }, { name: className }],
+    },
+    include: [
+      {
+        model: ListTrainee,
+        attributes: ['classID'],
+        include: [
+          {
+            model: Trainee,
+            attributes: ["education", "year"],
+            include: [
+              {
+                model: Account,
+                attributes: ["fullname"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+  return result;
+};
 module.exports = {
   createClassService,
   deleteClassService,
   updateClassService,
   findClassIDServices,
   findCourseIDService,
+  getTrainerCoursesService,
+  getListTraineesInClassService,
 };
