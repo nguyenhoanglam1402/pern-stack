@@ -8,10 +8,10 @@ const Account = database.db.Account;
 
 const findCourseIDService = async (courseName) => {
   const courseID = await Course.findOne({
+    attributes: ["id"],
     where: {
       name: courseName,
     },
-    attributes: ["id"],
   });
   return courseID;
 };
@@ -58,12 +58,12 @@ const updateClassService = async (data) => {
   const result = await Class.update(
     {
       name: data.name,
-      courseID: courseID,
+      courseID: courseID.dataValues.id,
       trainerID: data.trainerId,
     },
     {
       where: {
-        id: id,
+        id: data.id,
       },
     }
   );

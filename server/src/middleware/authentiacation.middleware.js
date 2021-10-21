@@ -35,24 +35,20 @@ const authRole = (role) => {
   };
 };
 
-const authToken = (role) => {
-  return (req, res, next) => {
-    const authHeader = req.headers(["authorization"]);
-    const token = authHeader && authHeader.split(" ")[1];
-    if (token === null) {
-      res.sendStatus(401).json({
-        success: false,
-        message: "Token is not exist!",
-      });
+
+const authToken = (req, res, next) => {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (token === null) {
+    res.sendStatus(401);
+  }
+  jwt.verify(token, process.env.SECRET_TOKEN_KEY, async (error, user) => {
+    if (error){
+      console.log("Error",error.message);
+      await res.sendStatus(403);
     }
-    jwt.verify(token, process.env.SECRET_TOKEN_KEY, (error, user) => {
-      if (error) res.sendStatus(403).json({
-        success: false,
-        message: "Token is not valid!",
-      });
-      req.user = user;
-      next();
-    });
-  };
+    req.user = await user;
+    await next();
+  });
 };
-module.exports = { authToken };
+module.exports = { authToken, authRole };
