@@ -40,9 +40,9 @@ POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
 {
-  "email": "nguyetthiminhbui@gmail.com",
+  "email": "nguyenhoanglam.emily@gmail.com",
   "password": "dontbesad",
-  "fullname": "Bui Thi Minh Nguyet",
+  "fullname": "Nguyen Hoang Lam",
   "age": 21,
   "role": "Trainee",
   "year": "1/1/2023",
@@ -139,13 +139,23 @@ Content-Type: application/json
 
 {
   "oldData": {
-    "fullname": "Nguyen Hoang Lam",
-    "age": 21
+    "fullname": "Lam Emilie",
+    "age": 20
   },
 
   "newData": {
-    "fullname": "Lam Emilie",
-    "age": 20,
+    "fullname": "Nguyen Hoang Lam",
+    "age": 21,
     "email": "nguyenhoanglam.emilie@gmail.com"
   }
+}
+###
+
+DELETE http://localhost:5001/api/v1/staff/classes/trainee/delete
+Content-Type: application/json
+
+{
+  "name": "Nguyen Hoang Lam",
+  "age": 21,
+  "className": "GCD0806"
 }

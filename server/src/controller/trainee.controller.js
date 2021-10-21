@@ -2,8 +2,8 @@ const database = require("../../database/models");
 const {
   searchTraineeService,
   updateTraineeInforService,
+  deleteTraineeService,
 } = require("../service/trainee.services");
-const Account = database.db.Account;
 
 const searchTraineeController = async (req, res) => {
   try {
@@ -49,4 +49,25 @@ const updateTraineeInforController = async (req, res) => {
     });
   }
 };
-module.exports = { searchTraineeController, updateTraineeInforController };
+
+const deleteTraineeController = async (req, res) => {
+  try {
+    const { name, age } = req.body;
+    await deleteTraineeService(name, age);
+    return res.status(200).json({
+      success: true,
+      message: "Deleted successully!",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      errorMessage: error.message,
+    });
+  }
+};
+module.exports = {
+  searchTraineeController,
+  updateTraineeInforController,
+  deleteTraineeController,
+};
