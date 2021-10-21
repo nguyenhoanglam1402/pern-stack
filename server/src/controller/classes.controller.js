@@ -78,6 +78,8 @@ const updateClassController = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   createClassController,
   deleteClassConotroller,
