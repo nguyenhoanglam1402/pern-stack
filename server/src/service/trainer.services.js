@@ -8,4 +8,5 @@ const createTrainerService = async (uid, specialty) => {
   });
 };
 
+
 module.exports = { createTrainerService };
