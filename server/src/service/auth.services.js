@@ -27,7 +27,13 @@ const loginAccountService = async (email) => {
   return account;
 };
 
-const registryAccountService = async (email, password, fullname, roles) => {
+const registryAccountService = async (
+  email,
+  password,
+  fullname,
+  roles,
+  age
+) => {
   const uid = generateUID(10);
   await Account.create({
     id: uid,
@@ -35,6 +41,7 @@ const registryAccountService = async (email, password, fullname, roles) => {
     password: password,
     fullname: fullname,
     rolesID: roles,
+    age: age,
   });
   return uid;
 };

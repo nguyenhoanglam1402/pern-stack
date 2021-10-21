@@ -65,6 +65,7 @@ const updateClassService = async (data) => {
   );
   return result;
 };
+
 module.exports = {
   createClassService,
   deleteClassService,

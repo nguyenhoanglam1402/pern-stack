@@ -26,7 +26,13 @@ const {
 } = require("../controller/classes.controller.js");
 const {
   assignTraineeClassController,
+  kickTraineeController,
 } = require("../controller/list-trainee.controller.js");
+const {
+  searchTraineeController,
+  updateTraineeInforController,
+  deleteTraineeController,
+} = require("../controller/trainee.controller.js");
 const router = express.Router();
 
 //Route for course
@@ -51,5 +57,12 @@ router.post("/auth/register", registryController);
 router.post("/classes/create", createClassController);
 router.post("/classes/trainee", assignTraineeClassController);
 router.put("/classes/update", updateClassController);
-router.delete("classes/delete/:id", deleteClassConotroller);
+router.delete("/classes/delete/:id", deleteClassConotroller);
+router.delete("/classes/trainee/delete", kickTraineeController);
+
+//Route for student management
+router.get("/trainee/search", searchTraineeController);
+router.put("/trainee/update", updateTraineeInforController);
+router.delete("/trainee/delete", deleteTraineeController);
+
 module.exports = router;
