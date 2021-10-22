@@ -34,7 +34,6 @@ const {
   deleteTraineeController,
 } = require("../controller/trainee.controller.js");
 
-
 const router = express.Router();
 
 //Route for course

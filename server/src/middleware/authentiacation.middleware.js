@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const express = require("express");
 const authUser = (req, res, next) => {
   if (req.user === null) {
     return res.status(403).json({
@@ -9,19 +8,6 @@ const authUser = (req, res, next) => {
     next();
   }
 };
-
-// const authToken = (req, res, next) => {
-//   const authHeader = req.headers(["authorization"]);
-//   const token = authHeader && authHeader.split(" ")[1];
-//   if (token === null) {
-//     res.sendStatus(401);
-//   }
-//   jwt.verify(token, process.env.SECRET_TOKEN_KEY, (error, user) => {
-//     if (error) res.sendStatus(403);
-//     req.user = user;
-//     next();
-//   });
-// };
 
 const authRole = (role) => {
   return (req, res, next) => {
@@ -35,7 +21,6 @@ const authRole = (role) => {
   };
 };
 
-
 const authToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -43,12 +28,22 @@ const authToken = (req, res, next) => {
     res.sendStatus(401);
   }
   jwt.verify(token, process.env.SECRET_TOKEN_KEY, async (error, user) => {
-    if (error){
-      console.log("Error",error.message);
+    if (error) {
+      console.log("Error", error.message);
       await res.sendStatus(403);
     }
     req.user = await user;
     await next();
   });
 };
-module.exports = { authToken, authRole };
+
+const permission = (req, res, next) => {
+  const { uid } = req.user;
+  const idForSearch = req.params.id;
+  if (uid === idForSearch) {
+    next();
+  } else {
+    res.sendStatus(403);
+  }
+};
+module.exports = { authToken, authRole, permission };
