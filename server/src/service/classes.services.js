@@ -59,7 +59,7 @@ const updateClassService = async (data) => {
     {
       name: data.name,
       courseID: courseID.dataValues.id,
-      trainerID: data.trainerId,
+      trainerID: data.trainerID,
     },
     {
       where: {

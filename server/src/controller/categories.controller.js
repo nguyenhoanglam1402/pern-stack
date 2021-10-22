@@ -97,7 +97,7 @@ const updateCategory = async (req, res) => {
       });
       if (result===false){
         return res.status(400).json({
-          message: "This category is existed",
+          message: "This category is not exist",
           success: false
         });
       }
