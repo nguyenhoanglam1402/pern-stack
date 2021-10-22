@@ -1,0 +1,86 @@
+.login-container {
+  flex: 0 0 25%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 30px 50px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-general);
+  position: relative;
+}
+
+.field {
+  padding: 10px 0px;
+  border: none;
+  border-bottom: 2px solid rgb(182, 182, 182);
+  font-size: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-label {
+  text-align: start;
+  font-weight: 500;
+  color: rgb(182, 182, 182);
+}
+
+.button-login {
+  padding: 10px;
+  font-weight: 600;
+  font-size: 18px;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #acb6e5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #86fde8,
+    #acb6e5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #86fde8,
+    #acb6e5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.title-box {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 30px;
+  padding: 5px 0px;
+  position: relative;
+}
+
+.input-icons .field-icon {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  background-color: white;
+  color: rgb(182, 182, 182);
+}
+
+.icon {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.copyright-text {
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 30px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgb(182, 182, 182);
+}
