@@ -5,7 +5,7 @@ POST  http://localhost:5001/api/v1/staff/auth/login
 Content-Type: application/json
 
 {
-  "email": "vinhhn3@fpt.edu.vn",
+  "email": "phamtrungnam@fpt.edu.vn",
   "password": "ILoveMyWife"
 }
 
