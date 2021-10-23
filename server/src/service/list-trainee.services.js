@@ -66,8 +66,30 @@ const kickTraineeServices = async (name, age, className) => {
   });
 };
 
+const getCoursesOfTraineeService = async (idTrainee) => {
+  const result = await ListTraineeClass.findAll({
+    attributes: ["classID"],
+    where: {
+      traineeID: idTrainee,
+    },
+    include: [
+      {
+        model: Class,
+        attributes: ["courseID"],
+        include: [
+          {
+            model: Course,
+            attributes: ["name", "description"],
+          },
+        ],
+      },
+    ],
+  });
+  return result;
+};
 module.exports = {
   getAllFriendsService,
   assignTraineeService,
   kickTraineeServices,
+  getCoursesOfTraineeService,
 };

@@ -1,10 +1,16 @@
 const express = require("express");
 const {
   getFriendTraineeController,
+  getCoursesOfTrainee,
 } = require("../controller/list-trainee.controller");
-const {authToken, authRole} =require("../middleware/authentiacation.middleware");
+const { permission } = require("../middleware/authentiacation.middleware");
 const router = express.Router();
 
-router.get("/course/friends/:courseName",authToken, authRole("Trainee"), getFriendTraineeController);
+router.get(
+  "/courses/friends/:courseName",
+  permission,
+  getFriendTraineeController
+);
+router.get("/courses/:id", permission, getCoursesOfTrainee);
 
 module.exports = router;

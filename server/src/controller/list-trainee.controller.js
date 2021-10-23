@@ -2,6 +2,7 @@ const {
   getAllFriendsService,
   assignTraineeService,
   kickTraineeServices,
+  getCoursesOfTraineeService
 } = require("../service/list-trainee.services");
 
 const getFriendTraineeController = async (req, res) => {
@@ -54,8 +55,32 @@ const kickTraineeController = async (req, res) => {
   }
 };
 
+const getCoursesOfTrainee = async (req, res) => {
+  const idTrainee = req.params.id;
+  if (!idTrainee) {
+    return res.status(400).json({
+      success: false,
+      message: "The id trainer cannot empty",
+    });
+  } else {
+    try {
+      const result = await getCoursesOfTraineeService(idTrainee);
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        error: error,
+        message: "Internal server error",
+      });
+    }
+  }
+};
 module.exports = {
   getFriendTraineeController,
   assignTraineeClassController,
   kickTraineeController,
+  getCoursesOfTrainee
 };
