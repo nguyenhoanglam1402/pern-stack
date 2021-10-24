@@ -15,7 +15,6 @@ const {
 } = require("../controller/categories.controller.js");
 
 const {
-  loginController,
   registryController,
 } = require("../controller/auth.controller.js");
 
@@ -51,7 +50,6 @@ router.put("/categories/update/:id", updateCategory);
 router.delete("/categories/delete/:name", deleteCategory);
 
 //Route for account
-router.post("/auth/login", loginController);
 router.post("/auth/register", registryController);
 
 //Route for class

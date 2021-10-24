@@ -6,11 +6,7 @@ const {
 const { permission } = require("../middleware/authentiacation.middleware");
 const router = express.Router();
 
-router.get(
-  "/courses/friends/:courseName",
-  permission,
-  getFriendTraineeController
-);
+router.get("/courses/friends/:courseName", permission, getFriendTraineeController);
 router.get("/courses/:id", permission, getCoursesOfTrainee);
 
 module.exports = router;
