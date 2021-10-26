@@ -1,13 +1,21 @@
 import "./App.css";
 import React, { Suspense } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Container from "components/common/Container";
+import ProtectRoute from "router";
 
-const LoginPage = React.lazy(() => import("./pages/Home"));
+const AuthPage = React.lazy(() => import("./pages/Auth"));
 
 function App() {
   return (
     <div className="App">
       <Suspense fallback={<div>Loading App...</div>}>
-        <LoginPage />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={AuthPage} />
+            <ProtectRoute path="/staff" component={Container} isAuth={false} />
+          </Switch>
+        </Router>
       </Suspense>
     </div>
   );

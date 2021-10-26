@@ -3,31 +3,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import "./styles.css";
 import { useForm } from "react-hook-form";
-import { userAuthenticate } from "../../../api/index.test";
+import { userAuthenticate } from "api/index.test";
 import { loginAction } from "actions/auth.action";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const LoginComponent = () => {
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
   const authDispatch = useDispatch();
   const store = useSelector((state) => state);
+
   const onLogin = (data) => {
     userAuthenticate(data)
       .then((respond) => {
-        const authData = {
-          uid: respond.data.data.uid,
-          fullname: respond.data.data.fullname,
-          email: respond.data.data.email,
-          token: respond.data.token,
-        };
-        const authAction = loginAction(authData);
-        authDispatch(authAction);
-        console.log("Respond: ", respond.data);
-        console.log("Redux Store: ", store);
+        if (respond.data.success) {
+          const authData = {
+            uid: respond.data.data.uid,
+            fullname: respond.data.data.fullname,
+            email: respond.data.data.email,
+            token: respond.data.token,
+            isAuthenticated: respond.data.success,
+          };
+          const authAction = loginAction(authData);
+          authDispatch(authAction);
+          console.log("Redux Store: ", store);
+          history.push("/admin/dashboad");
+        }
       })
       .catch((error) => console.error(error.message));
   };
+
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit(onLogin)} className="login-form">

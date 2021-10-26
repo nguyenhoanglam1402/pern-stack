@@ -9,6 +9,7 @@ const authReducer = (state = initializedState, action) => {
         email: action.payload.email,
         uid: action.payload.uid,
         token: action.payload.token,
+        isAuthenticated: action.payload.isAuthenticated,
       };
     }
     case "LOGOUT": {
@@ -18,6 +19,7 @@ const authReducer = (state = initializedState, action) => {
         email: "",
         uid: "",
         token: "",
+        isAuthenticated: false,
       };
     }
     default: {
