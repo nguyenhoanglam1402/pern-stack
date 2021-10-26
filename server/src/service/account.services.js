@@ -43,4 +43,21 @@ const getAcountService = async (uid) => {
   }
   return result;
 }
-module.exports = { deleteAccountService,getAcountService };
+
+const getTrainerIdService = async (emailTrainer) => {
+  const result = await Account.findOne({
+    attributes: ["id"],
+    where: {
+      email: emailTrainer,
+    },
+    include: [{
+      model: Role,
+      attributes: ["name"],
+    }]
+  });
+  if(result.dataValues.Role.name !== "Trainer"){
+    return false;
+  }
+  return result.dataValues.id;
+}
+module.exports = { deleteAccountService,getAcountService,getTrainerIdService };

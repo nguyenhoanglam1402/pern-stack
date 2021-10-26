@@ -67,7 +67,8 @@ const deleteTraineeController = async (req, res) => {
       errorMessage: error.message,
     });
   }
-};
+}
+
 const getTraineeProfile = async (req,res) => {
   const idTrainee = req.params.id;
   if (!idTrainee) {
@@ -90,6 +91,7 @@ const getTraineeProfile = async (req,res) => {
     }
   }
 }
+
 module.exports = {
   searchTraineeController,
   updateTraineeInforController,

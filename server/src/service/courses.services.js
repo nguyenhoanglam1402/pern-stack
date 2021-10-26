@@ -79,10 +79,21 @@ const deleteCourseService = async (id) => {
   return result;
 };
 
+const findCourseIDService = async (courseName) => {
+  const courseID = await Course.findOne({
+    attributes: ["id"],
+    where: {
+      name: courseName,
+    },
+  });
+  return courseID;
+};
+
 module.exports = {
   getAllCoursesService,
   createNewCourseService,
   getAListCoursesByNameService,
   updateCourseService,
   deleteCourseService,
+  findCourseIDService
 };

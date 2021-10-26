@@ -4,7 +4,9 @@ const ListTraineeClass = database.db.ListTraineeClass;
 const Trainee = database.db.Trainee;
 const Account = database.db.Account;
 const Course = database.db.Course;
+const Role = database.db.Role;
 const Class = database.db.Class;
+const { Op } = require("sequelize");
 
 const getAllFriendsService = async (courseName) => {
   console.log(courseName);
@@ -36,12 +38,40 @@ const getAllFriendsService = async (courseName) => {
   return result;
 };
 
-const assignTraineeService = async (traineeID, className) => {
-  const classID = await findClassIDServices(className);
-  await ListTraineeClass.create({
-    classID: classID,
-    traineeID: traineeID,
-  });
+const assignTraineeService = async (emailTrainee, className) => {
+  const traineeID = await Account.findOne({
+    attributes: ["id"],
+    where: {
+      email: emailTrainee
+    },
+    include: [{
+      model: Role,
+      attributes: ["name"]
+    }],
+  })
+  if(traineeID === null){
+    return null;
+  }
+  else{
+    if(traineeID.dataValues.Role.name !== "Trainee"){
+      return false;
+    }
+    const classID = await findClassIDServices(className);
+    const checkexist = await ListTraineeClass.findOne({
+      attributes: ["classID","traineeID"],
+      where: {
+        [Op.and]: [{ traineeID: traineeID.id }, { classID: classID }],
+      }
+    })
+    if(checkexist !== null){
+      return "existed";
+    }
+    const result = await ListTraineeClass.create({
+      classID: classID,
+      traineeID: traineeID.id,
+    });
+    return result;
+  }
 };
 
 const kickTraineeServices = async (name, age, className) => {
