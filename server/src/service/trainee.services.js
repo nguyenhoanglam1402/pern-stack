@@ -58,10 +58,9 @@ const deleteTraineeService = async (traineeName, age) => {
     },
   });
 };
-
 module.exports = {
   createTraineeService,
   searchTraineeService,
   updateTraineeInforService,
-  deleteTraineeService,
+  deleteTraineeService,  
 };

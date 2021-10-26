@@ -30,7 +30,7 @@ const loginController = async (req, res) => {
 
     const token = jsonWebToken.sign(
       { uid: user.id, role: user.Role.name },
-      process.env.SECRET_TOKEN_KEY
+      process.env.SECRET_TOKEN_KEY,{expiresIn : '7200s'}
     );
     return res.status(200).json({
       success: true,

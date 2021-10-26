@@ -4,7 +4,9 @@ const {
   updateTraineeInforService,
   deleteTraineeService,
 } = require("../service/trainee.services");
-
+const {
+  getAcountService
+} = require("../service/account.services");
 const searchTraineeController = async (req, res) => {
   try {
     const { name, age } = req.query;
@@ -66,8 +68,31 @@ const deleteTraineeController = async (req, res) => {
     });
   }
 };
+const getTraineeProfile = async (req,res) => {
+  const idTrainee = req.params.id;
+  if (!idTrainee) {
+    return res.status(400).json({
+      success: false,
+      message: "The id trainer cannot empty",
+    });
+  } else {
+    try {
+      const result = await getAcountService(idTrainee);
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message,
+        message: "Internal server error",
+      });
+    }
+  }
+}
 module.exports = {
   searchTraineeController,
   updateTraineeInforController,
   deleteTraineeController,
+  getTraineeProfile
 };
