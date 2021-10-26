@@ -5,17 +5,8 @@ const Course = database.db.Course;
 const ListTrainee = database.db.ListTraineeClass;
 const Trainee = database.db.Trainee;
 const Account = database.db.Account;
-
-const findCourseIDService = async (courseName) => {
-  const courseID = await Course.findOne({
-    attributes: ["id"],
-    where: {
-      name: courseName,
-    },
-  });
-  return courseID;
-};
-
+const { findCourseIDService } = require("./courses.services");
+const { getTrainerIdService } =require("./account.services")
 const findClassIDServices = async (className) => {
   const result = await Class.findOne({
     where: {
@@ -55,11 +46,15 @@ const deleteClassService = async (className, trainerID, courseName) => {
 
 const updateClassService = async (data) => {
   const courseID = await findCourseIDService(data.courseName);
+  const trainerID = await getTrainerIdService(data.trainerEmail);
+  if(trainerID === false){
+    return false;
+  }
   const result = await Class.update(
     {
       name: data.name,
       courseID: courseID.dataValues.id,
-      trainerID: data.trainerID,
+      trainerID: trainerID,
     },
     {
       where: {
@@ -95,7 +90,7 @@ const getListTraineesInClassService = async (idTrainer, className) => {
     include: [
       {
         model: ListTrainee,
-        attributes: ['classID'],
+        attributes: ["classID"],
         include: [
           {
             model: Trainee,
@@ -118,7 +113,6 @@ module.exports = {
   deleteClassService,
   updateClassService,
   findClassIDServices,
-  findCourseIDService,
   getTrainerCoursesService,
   getListTraineesInClassService,
 };

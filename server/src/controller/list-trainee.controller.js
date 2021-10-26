@@ -26,11 +26,29 @@ const getFriendTraineeController = async (req, res) => {
 
 const assignTraineeClassController = async (req, res) => {
   try {
-    const { className, traineeID } = req.body;
-    await assignTraineeService(traineeID, className);
+    const { className, emailTrainee } = req.body;
+    const result = await assignTraineeService(emailTrainee, className);
+    if(result === null){
+      return res.status(400).json({
+        success: false,
+        message: "The trainee is not exist"
+      });
+    }
+    if(result === false){
+      return res.status(400).json({
+        success: false,
+        message: "The trainee is unvalid, please check user's email again"
+      });
+    }
+    if(result === "existed"){
+      return res.status(400).json({
+        success: false,
+        message: "This trainee has already been assigned to this class"
+      });
+    }
     return res.status(200).json({
       success: true,
-      message: `Assigned student ${traineeID} successfully!`,
+      message: `Assigned student ${emailTrainee} successfully!`,
     });
   } catch (error) {
     return res.status(500).json({

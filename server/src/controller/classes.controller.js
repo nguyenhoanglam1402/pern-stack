@@ -52,14 +52,20 @@ const deleteClassConotroller = async (req, res) => {
 
 const updateClassController = async (req, res) => {
   try {
-    const { id, name, trainerID, courseName } = req.body;
+    const { id, name, trainerEmail  , courseName } = req.body;
     const data = {
       id: id,
       name: name,
-      trainerID: trainerID,
+      trainerEmail: trainerEmail,
       courseName: courseName,
     };
     const result = await updateClassService(data);
+    if(result === false){
+      return res.status(400).json({
+        success: false,
+        message: "This user is not a trainer",
+      });
+    }
     if (result === 0) {
       return res.status(404).json({
         success: false,
