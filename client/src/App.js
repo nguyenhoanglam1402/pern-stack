@@ -13,7 +13,8 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={AuthPage} />
-            <ProtectRoute path="/staff" component={Container} isAuth={false} />
+            <ProtectRoute path="/admin" component={Container} />
+            <ProtectRoute path="/staff" component={Container} />
           </Switch>
         </Router>
       </Suspense>
