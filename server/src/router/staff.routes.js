@@ -68,6 +68,6 @@ router.get("/trainer/view",getAllTrainer)
 router.get("/trainee/view",getAllTrainee);
 router.get("/trainee/search", searchTraineeController);
 router.put("/trainee/update", updateTraineeInforController);
-router.delete("/trainee/delete", deleteTraineeController);
-router.patch("/trainee/password/:id",changePasswordTrainee)
+router.delete("/trainee/delete/:id", deleteTraineeController);
+router.patch("/trainee/password/:id",changePasswordTrainee);
 module.exports = router;

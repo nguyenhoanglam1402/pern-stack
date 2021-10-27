@@ -50,11 +50,10 @@ const updateTraineeInforService = async (oldData, newData) => {
   return result;
 };
 
-const deleteTraineeService = async (traineeName, age) => {
+const deleteTraineeService = async (idTrainee) => {
   await Account.destroy({
     where: {
-      fullname: traineeName,
-      age: age,
+      id: idTrainee
     },
   });
 };

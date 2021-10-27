@@ -59,8 +59,8 @@ const updateTraineeInforController = async (req, res) => {
 
 const deleteTraineeController = async (req, res) => {
   try {
-    const { name, age } = req.body;
-    await deleteTraineeService(name, age);
+    const idTrainee = req.params.id;
+    await deleteTraineeService(idTrainee);
     return res.status(200).json({
       success: true,
       message: "Deleted successully!",
