@@ -32,8 +32,10 @@ const {
   searchTraineeController,
   updateTraineeInforController,
   deleteTraineeController,
+  changePasswordTrainee,
+  getAllTrainee
 } = require("../controller/trainee.controller.js");
-
+const {getAllTrainer} = require("../controller/trainer.controllers")
 const router = express.Router();
 
 //Route for course
@@ -60,10 +62,12 @@ router.put("/classes/update", updateClassController);
 router.delete("/classes/delete/:id", deleteClassConotroller);
 router.delete("/classes/trainee/delete", kickTraineeController);
 router.get("/classes/:courseName",getDetailClassesOfCourse);
-
-//Route for student management
+//Route for trainer
+router.get("/trainer/view",getAllTrainer)
+//Route for student management.
+router.get("/trainee/view",getAllTrainee);
 router.get("/trainee/search", searchTraineeController);
 router.put("/trainee/update", updateTraineeInforController);
 router.delete("/trainee/delete", deleteTraineeController);
-router.patch("/trainee/password/:email")
+router.patch("/trainee/password/:id",changePasswordTrainee)
 module.exports = router;
