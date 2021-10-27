@@ -90,8 +90,7 @@ const kickTraineeServices = async (name, age, className) => {
   console.log("Trainee: ", traineeResult);
   await ListTraineeClass.destroy({
     where: {
-      traineeID: traineeResult.id,
-      classID: classResult.id,
+      [Op.and]: [{traineeID: traineeResult.id},{classID: classResult.id,}]
     },
   });
 };
