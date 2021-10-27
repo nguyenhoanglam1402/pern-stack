@@ -4,9 +4,12 @@ const Class = database.db.Class;
 const Course = database.db.Course;
 const ListTrainee = database.db.ListTraineeClass;
 const Trainee = database.db.Trainee;
+const Trainer = database.db.Trainer;
 const Account = database.db.Account;
+const Role = database.db.Role;
 const { findCourseIDService } = require("./courses.services");
-const { getTrainerIdService } =require("./account.services")
+const { getTrainerIdService } = require("./account.services");
+
 const findClassIDServices = async (className) => {
   const result = await Class.findOne({
     where: {
@@ -47,7 +50,7 @@ const deleteClassService = async (className, trainerID, courseName) => {
 const updateClassService = async (data) => {
   const courseID = await findCourseIDService(data.courseName);
   const trainerID = await getTrainerIdService(data.trainerEmail);
-  if(trainerID === false){
+  if (trainerID === false) {
     return false;
   }
   const result = await Class.update(
@@ -108,6 +111,48 @@ const getListTraineesInClassService = async (idTrainer, className) => {
   });
   return result;
 };
+
+const findClassesByCourseService = async (courseId) => {
+  const result = await Class.findAll({
+    attributes: [["name","ClassName"], ["id","ClassID"]],
+    where: {
+      courseID: courseId,
+    },
+    include: [
+      {
+        model: Trainer,
+        attributes: ["specialty"],
+        include: [
+          {
+            model: Account,
+            attributes: ["id", "email", "fullname", "age"],
+          },
+        ],
+      },
+      {
+        model: Course,
+        attributes: ["name"],
+      },
+      {
+        model: ListTrainee,
+        attributes: ["classID"],
+        include: [
+          {
+            model: Trainee,
+            attributes: ["education", "year"],
+            include: [
+              {
+                model: Account,
+                attributes: ["fullname"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+  return result;
+};
 module.exports = {
   createClassService,
   deleteClassService,
@@ -115,4 +160,5 @@ module.exports = {
   findClassIDServices,
   getTrainerCoursesService,
   getListTraineesInClassService,
+  findClassesByCourseService,
 };

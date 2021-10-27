@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getAllCourse,
   createNewCourse,
-  getAListCoursesByName,
+  getACourseByName,
   updateCourse,
   deleteCourse,
 } = require("../controller/courses.controller.js");
@@ -22,6 +22,7 @@ const {
   createClassController,
   updateClassController,
   deleteClassConotroller,
+  getDetailClassesOfCourse
 } = require("../controller/classes.controller.js");
 const {
   assignTraineeClassController,
@@ -37,7 +38,7 @@ const router = express.Router();
 
 //Route for course
 router.get("/courses", getAllCourse);
-router.get("/courses/:name", getAListCoursesByName);
+router.get("/courses/:name", getACourseByName);
 router.post("/courses/create", createNewCourse);
 router.put("/courses/update/:id", updateCourse);
 router.delete("/courses/delete/:id", deleteCourse);
@@ -58,10 +59,11 @@ router.post("/classes/trainee", assignTraineeClassController);
 router.put("/classes/update", updateClassController);
 router.delete("/classes/delete/:id", deleteClassConotroller);
 router.delete("/classes/trainee/delete", kickTraineeController);
+router.get("/classes/:courseName",getDetailClassesOfCourse);
 
 //Route for student management
 router.get("/trainee/search", searchTraineeController);
 router.put("/trainee/update", updateTraineeInforController);
 router.delete("/trainee/delete", deleteTraineeController);
-
+router.patch("/trainee/password")
 module.exports = router;

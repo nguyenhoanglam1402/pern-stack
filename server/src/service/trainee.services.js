@@ -9,6 +9,7 @@ const createTraineeService = async (uid, year, education) => {
     year: year,
     education: education,
   });
+
 };
 
 const searchTraineeService = async (name, age) => {

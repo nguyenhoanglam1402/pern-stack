@@ -2,7 +2,9 @@ const {
   createClassService,
   deleteClassService,
   updateClassService,
+  findClassesByCourseService,
 } = require("../service/classes.services");
+const { findCourseIDService } = require("../service/courses.services");
 
 const createClassController = async (req, res) => {
   try {
@@ -52,7 +54,7 @@ const deleteClassConotroller = async (req, res) => {
 
 const updateClassController = async (req, res) => {
   try {
-    const { id, name, trainerEmail  , courseName } = req.body;
+    const { id, name, trainerEmail, courseName } = req.body;
     const data = {
       id: id,
       name: name,
@@ -60,7 +62,7 @@ const updateClassController = async (req, res) => {
       courseName: courseName,
     };
     const result = await updateClassService(data);
-    if(result === false){
+    if (result === false) {
       return res.status(400).json({
         success: false,
         message: "This user is not a trainer",
@@ -80,15 +82,45 @@ const updateClassController = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
-      error: error.message
+      error: error.message,
     });
   }
 };
 
-
+const getDetailClassesOfCourse = async (req, res) => {
+  const courseName = req.params.courseName;
+  if (!courseName) {
+    return res.status(400).json({
+      success: false,
+      message: "Name of course cannot be empty",
+    });
+  }
+  try {
+    const courseID = await findCourseIDService(courseName);
+    const result = await findClassesByCourseService(courseID.dataValues.id);
+    if (result === null) {
+      return res.status(400).json({
+        success: false,
+        message: "This course don't have any classes",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      error: error.message,
+    });
+  }
+};
 
 module.exports = {
   createClassController,
   deleteClassConotroller,
   updateClassController,
+  getDetailClassesOfCourse,
 };
