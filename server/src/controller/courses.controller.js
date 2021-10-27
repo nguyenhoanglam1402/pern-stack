@@ -1,6 +1,6 @@
 const {
   getAllCoursesService,
-  getAListCoursesByNameService,
+  getACourseByNameService,
   createNewCourseService,
   updateCourseService,
   deleteCourseService,
@@ -22,7 +22,7 @@ const getAllCourse = async (req, res) => {
   }
 };
 
-const getAListCoursesByName = async (req, res) => {
+const getACourseByName = async (req, res) => {
   if (!req.params.name) {
     return res.status(400).json({
       success: false,
@@ -30,7 +30,7 @@ const getAListCoursesByName = async (req, res) => {
     });
   } else {
     try {
-      const result = await getAListCoursesByNameService(req.params.name);
+      const result = await getACourseByNameService(req.params.name);
       return res.status(200).json({
         success: true,
         data: result,
@@ -127,7 +127,7 @@ const deleteCourse = async (req, res) => {
 module.exports = {
   getAllCourse,
   createNewCourse,
-  getAListCoursesByName,
+  getACourseByName,
   updateCourse,
   deleteCourse
 };

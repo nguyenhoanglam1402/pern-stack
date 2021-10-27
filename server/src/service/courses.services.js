@@ -36,8 +36,8 @@ const createNewCourseService = async (body) => {
   }
 };
 
-const getAListCoursesByNameService = async (nameToFind) => {
-  let selectedCourse = await Course.findAll({
+const getACourseByNameService = async (nameToFind) => {
+  let selectedCourse = await Course.findOne({
     where: {
       name: nameToFind,
     },
@@ -92,7 +92,7 @@ const findCourseIDService = async (courseName) => {
 module.exports = {
   getAllCoursesService,
   createNewCourseService,
-  getAListCoursesByNameService,
+  getACourseByNameService,
   updateCourseService,
   deleteCourseService,
   findCourseIDService

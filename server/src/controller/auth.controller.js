@@ -38,6 +38,7 @@ const loginController = async (req, res) => {
       data: {
         fullname: user.fullname,
         email: user.email,
+        role: user.role,
         uid: user.id,
       },
       token: token,
@@ -45,7 +46,8 @@ const loginController = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: error.message,
+      message: "Internal server error",
+      error: error.message,
     });
   }
 };

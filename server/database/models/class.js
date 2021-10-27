@@ -15,12 +15,16 @@ module.exports = (sequelize, DataTypes) => {
       Class.hasMany(models.ListTraineeClass, {
         foreignKey: "classID",
       });
+      Class.belongsTo(models.Trainer,{
+        foreignKey: "trainerID",
+        onDelete: "CASCADE",
+      })
     }
   }
   Class.init(
     {
       courseID: DataTypes.INTEGER,
-      trainerID: DataTypes.INTEGER,
+      trainerID: DataTypes.STRING,
       name: DataTypes.STRING,
     },
     {
