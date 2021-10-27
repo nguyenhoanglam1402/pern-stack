@@ -65,5 +65,5 @@ router.get("/classes/:courseName",getDetailClassesOfCourse);
 router.get("/trainee/search", searchTraineeController);
 router.put("/trainee/update", updateTraineeInforController);
 router.delete("/trainee/delete", deleteTraineeController);
-router.patch("/trainee/password")
+router.patch("/trainee/password/:email")
 module.exports = router;
