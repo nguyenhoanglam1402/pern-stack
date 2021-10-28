@@ -30,7 +30,7 @@ const loginController = async (req, res) => {
 
     const token = jsonWebToken.sign(
       { uid: user.id, role: user.Role.name },
-      process.env.SECRET_TOKEN_KEY
+      process.env.SECRET_TOKEN_KEY,{expiresIn : '7200s'}
     );
     return res.status(200).json({
       success: true,
@@ -38,6 +38,7 @@ const loginController = async (req, res) => {
       data: {
         fullname: user.fullname,
         email: user.email,
+        role: user.role,
         uid: user.id,
         role: user.Role.name,
       },
@@ -46,7 +47,8 @@ const loginController = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: error.message,
+      message: "Internal server error",
+      error: error.message,
     });
   }
 };

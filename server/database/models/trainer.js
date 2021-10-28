@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id",
         onDelete: "CASCADE",
       });
+      Trainer.hasOne(models.Class,{
+        foreignKey: "trainerID",
+      })
     }
   }
   Trainer.init(

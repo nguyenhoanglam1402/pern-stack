@@ -4,17 +4,11 @@ const Class = database.db.Class;
 const Course = database.db.Course;
 const ListTrainee = database.db.ListTraineeClass;
 const Trainee = database.db.Trainee;
+const Trainer = database.db.Trainer;
 const Account = database.db.Account;
-
-const findCourseIDService = async (courseName) => {
-  const courseID = await Course.findOne({
-    attributes: ["id"],
-    where: {
-      name: courseName,
-    },
-  });
-  return courseID;
-};
+const Role = database.db.Role;
+const { findCourseIDService } = require("./courses.services");
+const { getTrainerIdService } = require("./account.services");
 
 const findClassIDServices = async (className) => {
   const result = await Class.findOne({
@@ -55,11 +49,15 @@ const deleteClassService = async (className, trainerID, courseName) => {
 
 const updateClassService = async (data) => {
   const courseID = await findCourseIDService(data.courseName);
+  const trainerID = await getTrainerIdService(data.trainerEmail);
+  if (trainerID === false) {
+    return false;
+  }
   const result = await Class.update(
     {
       name: data.name,
       courseID: courseID.dataValues.id,
-      trainerID: data.trainerID,
+      trainerID: trainerID,
     },
     {
       where: {
@@ -95,7 +93,49 @@ const getListTraineesInClassService = async (idTrainer, className) => {
     include: [
       {
         model: ListTrainee,
-        attributes: ['classID'],
+        attributes: ["classID"],
+        include: [
+          {
+            model: Trainee,
+            attributes: ["education", "year"],
+            include: [
+              {
+                model: Account,
+                attributes: ["fullname"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+  return result;
+};
+
+const findClassesByCourseService = async (courseId) => {
+  const result = await Class.findAll({
+    attributes: [["name","ClassName"], ["id","ClassID"]],
+    where: {
+      courseID: courseId,
+    },
+    include: [
+      {
+        model: Trainer,
+        attributes: ["specialty"],
+        include: [
+          {
+            model: Account,
+            attributes: ["id", "email", "fullname", "age"],
+          },
+        ],
+      },
+      {
+        model: Course,
+        attributes: ["name"],
+      },
+      {
+        model: ListTrainee,
+        attributes: ["classID"],
         include: [
           {
             model: Trainee,
@@ -118,7 +158,7 @@ module.exports = {
   deleteClassService,
   updateClassService,
   findClassIDServices,
-  findCourseIDService,
   getTrainerCoursesService,
   getListTraineesInClassService,
+  findClassesByCourseService,
 };
