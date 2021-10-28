@@ -1,8 +1,9 @@
+const { assignTrainerClassService } = require("../service/classes.services");
 const {
   getAllFriendsService,
   assignTraineeService,
   kickTraineeServices,
-  getCoursesOfTraineeService
+  getCoursesOfTraineeService,
 } = require("../service/list-trainee.services");
 
 const getFriendTraineeController = async (req, res) => {
@@ -24,32 +25,52 @@ const getFriendTraineeController = async (req, res) => {
   }
 };
 
+const assignTrainerClassController = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { className } = req.body;
+    console.log("Server recieved: ", id, " and className: ", className);
+    const result = await assignTrainerClassService(id, className);
+    return res.status(200).json({
+      success: true,
+      message: "Resquest OK!",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      errorMessage: error.message,
+    });
+  }
+};
+
 const assignTraineeClassController = async (req, res) => {
   try {
     const { className, emailTrainee } = req.body;
     const result = await assignTraineeService(emailTrainee, className);
-    if(result === null){
+    if (result === null) {
       return res.status(400).json({
         success: false,
-        message: "The trainee is not exist"
+        message: "The trainee is not exist",
       });
     }
-    if(result === false){
+    if (result === false) {
       return res.status(400).json({
         success: false,
-        message: "The trainee is unvalid, please check user's email again"
+        message: "The trainee is unvalid, please check user's email again",
       });
     }
-    if(result === "existed"){
+    if (result === "existed") {
       return res.status(400).json({
         success: false,
-        message: "This trainee has already been assigned to this class"
+        message: "This trainee has already been assigned to this class",
       });
     }
     return res.status(200).json({
       success: true,
       message: `Assigned student ${emailTrainee} successfully!`,
-      data: result
+      data: result,
     });
   } catch (error) {
     return res.status(500).json({
@@ -99,7 +120,8 @@ const getCoursesOfTrainee = async (req, res) => {
 };
 module.exports = {
   getFriendTraineeController,
+  assignTrainerClassController,
   assignTraineeClassController,
   kickTraineeController,
-  getCoursesOfTrainee
+  getCoursesOfTrainee,
 };

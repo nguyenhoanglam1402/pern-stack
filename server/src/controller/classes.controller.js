@@ -3,8 +3,27 @@ const {
   deleteClassService,
   updateClassService,
   findClassesByCourseService,
+  getAllClassServices,
+  assignTrainerClassService,
 } = require("../service/classes.services");
 const { findCourseIDService } = require("../service/courses.services");
+
+const getAllClassesController = async (req, res) => {
+  try {
+    const result = await getAllClassServices();
+    return res.status(200).json({
+      success: true,
+      message: "Fetch successfully",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error!",
+      errorMessage: error.message,
+    });
+  }
+};
 
 const createClassController = async (req, res) => {
   try {
@@ -47,6 +66,26 @@ const deleteClassConotroller = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
+      errorMessage: error.message,
+    });
+  }
+};
+
+const assignTrainerClassController = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { className } = req.body;
+    console.log("Server recieved: ", id, " and className: ", className);
+    const result = await assignTrainerClassService(id, className);
+    return res.status(200).json({
+      success: true,
+      message: "Resquest OK!",
+      data: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
       errorMessage: error.message,
     });
   }
@@ -119,8 +158,10 @@ const getDetailClassesOfCourse = async (req, res) => {
 };
 
 module.exports = {
+  getAllClassesController,
   createClassController,
   deleteClassConotroller,
   updateClassController,
   getDetailClassesOfCourse,
+  assignTrainerClassController,
 };

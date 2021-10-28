@@ -10,6 +10,10 @@ Content-Type: application/json
 }
 
 ###
+
+GET http://localhost:5001/api/v1/staff/trainer/view
+
+###
 POST http://localhost:5001/api/v1/staff/auth/register
 Content-Type: application/json
 
@@ -159,3 +163,9 @@ Content-Type: application/json
   "age": 21,
   "className": "GCD0806"
 }
+
+###
+GET http://localhost:5001/api/v1/staff/classes
+
+###
+PUT http://localhost:5001/api/v1/staff/classes/trainer/assign/da25fa19467b04b06927973e7abeb673/GCD0806

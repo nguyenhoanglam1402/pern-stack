@@ -1,8 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { UserOutlined } from "@ant-design/icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
 import "./styles.css";
 import NavLink from "./nav-link";
 import imageLogo from "assets/icons/fpt-logo.png";

@@ -1,6 +1,5 @@
 import React from "react";
-import { Table, Space, Button } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Table } from "antd";
 
 const CustomizeTable = ({ title, dataSourse, columns }) => {
   return (

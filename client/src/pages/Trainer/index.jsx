@@ -1,72 +1,30 @@
 import CustomizeTable from "components/landing/Table";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Space, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { fetchTrainerList } from "api/index.test";
+import TrainerAssignDialog from "components/landing/StaffTrainerDialog";
 
 const TrainerComponent = () => {
-  const dataSource = [
-    {
-      name: "Bùi Xuân Huấn",
-      age: 25,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Thành Võ",
-      age: 21,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Bùi Thị Minh Nguyệt",
-      age: 20,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Phạm Trung Nam",
-      age: 25,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Thành Võ",
-      age: 21,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Bùi Thị Minh Nguyệt",
-      age: 20,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Phạm Trung Nam",
-      age: 25,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Thành Võ",
-      age: 21,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Bùi Thị Minh Nguyệt",
-      age: 20,
-      specialty: "Tiến sĩ",
-    },
-    {
-      name: "Phạm Trung Nam",
-      age: 25,
-      specialty: "Tiến sĩ",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [popUp, setPopUp] = useState(false);
+  const [trainerInfor, setTrainerInfor] = useState({});
   const columns = [
     {
       title: "Fullname",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "fullname",
+      key: "fullname",
       render: (content) => (
         <Space size="middle">
           <UserOutlined style={{ fontSize: "20px" }} />
           {content}
         </Space>
       ),
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
       title: "Age",
@@ -81,19 +39,51 @@ const TrainerComponent = () => {
     {
       title: "Actions",
       key: "action",
-      render: () => (
-        <Space size="middle">
-          <Button type="primary">Assign for course</Button>
-        </Space>
-      ),
+      render: (record) => {
+        return (
+          <Space size="middle" key={record.key}>
+            <Button type="primary" onClick={(e) => onAssignDialog(record)}>
+              Assign for course
+            </Button>
+          </Space>
+        );
+      },
     },
   ];
+
+  const onAssignDialog = (record) => {
+    setTrainerInfor(record);
+    setPopUp(true);
+  };
+
+  useEffect(() => {
+    fetchTrainerList()
+      .then((data) => {
+        const dataTable = data.map((item, index) => {
+          return {
+            ...item,
+            specialty: item.Trainer.specialty,
+            key: index,
+          };
+        });
+        console.log(dataTable);
+        setData(dataTable);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  console.log(data);
   return (
     <div className="container">
       <CustomizeTable
         title="Trainer List"
-        dataSourse={dataSource}
+        dataSourse={data}
         columns={columns}
+      />
+      <TrainerAssignDialog
+        trigger={popUp}
+        setTrigger={setPopUp}
+        trainerInfor={trainerInfor}
       />
     </div>
   );

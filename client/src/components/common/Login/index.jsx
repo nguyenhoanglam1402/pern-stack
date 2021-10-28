@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles.css";
-import { useForm } from "react-hook-form";
 import { Form, Input } from "antd";
 import { userAuthenticate } from "api/index.test";
 import { loginAction } from "actions/auth.action";
@@ -10,7 +9,6 @@ import { useHistory } from "react-router-dom";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const LoginComponent = () => {
-  const { register, handleSubmit } = useForm();
   const history = useHistory();
   const authDispatch = useDispatch();
   const store = useSelector((state) => state);

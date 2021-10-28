@@ -14,15 +14,15 @@ const {
   deleteCategory,
 } = require("../controller/categories.controller.js");
 
-const {
-  registryController,
-} = require("../controller/auth.controller.js");
+const { registryController } = require("../controller/auth.controller.js");
 
 const {
   createClassController,
   updateClassController,
   deleteClassConotroller,
-  getDetailClassesOfCourse
+  getDetailClassesOfCourse,
+  getAllClassesController,
+  assignTrainerClassController,
 } = require("../controller/classes.controller.js");
 const {
   assignTraineeClassController,
@@ -33,9 +33,9 @@ const {
   updateTraineeInforController,
   deleteTraineeController,
   changePasswordTrainee,
-  getAllTrainee
+  getAllTrainee,
 } = require("../controller/trainee.controller.js");
-const {getAllTrainer} = require("../controller/trainer.controllers")
+const { getAllTrainer } = require("../controller/trainer.controllers");
 const router = express.Router();
 
 //Route for course
@@ -56,18 +56,20 @@ router.delete("/categories/delete/:name", deleteCategory);
 router.post("/auth/register", registryController);
 
 //Route for class
+router.get("/classes", getAllClassesController);
 router.post("/classes/create", createClassController);
 router.post("/classes/trainee", assignTraineeClassController);
+router.put("/classes/trainer/assign/:id", assignTrainerClassController);
 router.put("/classes/update", updateClassController);
 router.delete("/classes/delete/:id", deleteClassConotroller);
 router.delete("/classes/trainee/delete", kickTraineeController);
-router.get("/classes/:courseName",getDetailClassesOfCourse);
+router.get("/classes/:courseName", getDetailClassesOfCourse);
 //Route for trainer
-router.get("/trainer/view",getAllTrainer)
+router.get("/trainer/view", getAllTrainer);
 //Route for student management.
-router.get("/trainee/view",getAllTrainee);
+router.get("/trainee/view", getAllTrainee);
 router.get("/trainee/search", searchTraineeController);
 router.put("/trainee/update", updateTraineeInforController);
 router.delete("/trainee/delete/:id", deleteTraineeController);
-router.patch("/trainee/password/:id",changePasswordTrainee);
+router.patch("/trainee/password/:id", changePasswordTrainee);
 module.exports = router;
