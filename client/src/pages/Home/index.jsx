@@ -1,12 +1,7 @@
-import Navigator from "components/common/Navigator";
 import React from "react";
 
 const HomePage = () => {
-  return (
-    <div>
-      <Navigator />
-    </div>
-  );
+  return <div className="container"></div>;
 };
 
 export default HomePage;
