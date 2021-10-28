@@ -9,6 +9,7 @@ const authReducer = (state = initializedState, action) => {
         email: action.payload.email,
         uid: action.payload.uid,
         token: action.payload.token,
+        role: action.payload.role,
         isAuthenticated: action.payload.isAuthenticated,
       };
     }
@@ -19,6 +20,7 @@ const authReducer = (state = initializedState, action) => {
         email: "",
         uid: "",
         token: "",
+        role: "",
         isAuthenticated: false,
       };
     }

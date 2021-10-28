@@ -40,6 +40,7 @@ const loginController = async (req, res) => {
         email: user.email,
         role: user.role,
         uid: user.id,
+        role: user.Role.name,
       },
       token: token,
     });

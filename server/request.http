@@ -1,13 +1,17 @@
 GET http://localhost:5001/api/v1/staff/courses
 
 ###
-POST  http://localhost:5001/api/v1/staff/auth/login
+POST  http://localhost:5001/api/v1/auth/login
 Content-Type: application/json
 
 {
   "email": "phamtrungnam@fpt.edu.vn",
   "password": "ILoveMyWife"
 }
+
+###
+
+GET http://localhost:5001/api/v1/staff/trainer/view
 
 ###
 POST http://localhost:5001/api/v1/staff/auth/register
@@ -159,3 +163,9 @@ Content-Type: application/json
   "age": 21,
   "className": "GCD0806"
 }
+
+###
+GET http://localhost:5001/api/v1/staff/classes
+
+###
+PUT http://localhost:5001/api/v1/staff/classes/trainer/assign/da25fa19467b04b06927973e7abeb673/GCD0806

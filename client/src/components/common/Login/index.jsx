@@ -1,21 +1,40 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import "./styles.css";
-import { useForm } from "react-hook-form";
+import { Form, Input } from "antd";
 import { userAuthenticate } from "api/index.test";
 import { loginAction } from "actions/auth.action";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const LoginComponent = () => {
-  const { register, handleSubmit } = useForm();
   const history = useHistory();
   const authDispatch = useDispatch();
   const store = useSelector((state) => state);
 
+  const redirect = (role) => {
+    switch (role) {
+      case "Admin": {
+        history.push("/admin/home");
+        break;
+      }
+      case "Trainer": {
+        history.push("/admin/home");
+        break;
+      }
+      case "Trainee": {
+        history.push("/trainee/home");
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
   const onLogin = (data) => {
+    console.log(data);
     userAuthenticate(data)
       .then((respond) => {
         if (respond.data.success) {
@@ -23,13 +42,14 @@ const LoginComponent = () => {
             uid: respond.data.data.uid,
             fullname: respond.data.data.fullname,
             email: respond.data.data.email,
+            role: respond.data.data.role,
             token: respond.data.token,
             isAuthenticated: respond.data.success,
           };
           const authAction = loginAction(authData);
           authDispatch(authAction);
           console.log("Redux Store: ", store);
-          history.push("/admin/dashboad");
+          redirect(authData.role);
         }
       })
       .catch((error) => console.error(error.message));
@@ -37,33 +57,31 @@ const LoginComponent = () => {
 
   return (
     <div className="login-container">
-      <form onSubmit={handleSubmit(onLogin)} className="login-form">
+      <Form className="login-form" onFinish={onLogin}>
         <h1 className="title-box">Sign In</h1>
         <label className="login-label">Username</label>
-        <div className="input-icons">
-          <FontAwesomeIcon icon={faUser} className={`field-icon icon`} />
-          <input
+        <Form.Item name="email">
+          <Input
             type="email"
+            prefix={<UserOutlined className="icon" />}
             className="field"
             placeholder="Type your email"
-            {...register("email")}
           />
-        </div>
+        </Form.Item>
         <label className="login-label">Password</label>
-        <div className="input-icons">
-          <FontAwesomeIcon icon={faLock} className={`field-icon icon`} />
-          <input
+        <Form.Item name="password">
+          <Input
             type="password"
+            prefix={<LockOutlined className="icon" />}
             className="field"
             placeholder="Type your password"
-            {...register("password")}
           />
-        </div>
+        </Form.Item>
         <button type="submit" className="button-login">
           Login
         </button>
         <p className="copyright-text">Tech Otakus save the Assignment</p>
-      </form>
+      </Form>
     </div>
   );
 };

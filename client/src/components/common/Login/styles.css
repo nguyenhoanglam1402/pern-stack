@@ -16,12 +16,13 @@
 }
 
 .field {
-  padding: 10px 0px;
+  padding: 10px;
   border: none;
   border-bottom: 2px solid rgb(182, 182, 182);
   font-size: 16px;
   width: 100%;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .login-label {
@@ -38,17 +39,7 @@
   border-radius: 50px;
   color: white;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background: #acb6e5; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #86fde8,
-    #acb6e5
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #86fde8,
-    #acb6e5
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #000000; /* fallback for old browsers */
 }
 
 .title-box {
@@ -72,8 +63,7 @@
 }
 
 .icon {
-  padding: 10px;
-  margin-bottom: 10px;
+  font-size: 18px;
 }
 
 .copyright-text {

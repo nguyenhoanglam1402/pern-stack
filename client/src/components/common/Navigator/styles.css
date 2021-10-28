@@ -1,0 +1,87 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: black;
+  padding: 0px 10%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  height: 90px;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 70%;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-item {
+  padding: 10px 10px;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.navbar-item:hover {
+  background-color: rgb(58, 58, 58);
+}
+
+.user-avatar {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.username {
+  text-align: right;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  height: fit-content;
+}
+
+.user-block div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.nav-avatar {
+  padding: 10px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  background-color: black !important;
+  color: white !important;
+  margin-left: 20px !important;
+  border-radius: 50% !important;
+  border: 2px solid white !important;
+  outline: none !important;
+  font-size: 20px;
+}
+
+.logo-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
