@@ -25,7 +25,7 @@ const accessLogStream = rfs.createStream("access.log", {
   path: path.join(__dirname, "log"),
 });
 app.use(
-  isProduction ? morgan("combined", { stream: accessLogStream }) : morgan("dev")
+  isProduction ? morgan("combined", { stream: accessLogStream }) : morgan("dev", { stream: accessLogStream })
 );
 app.use(cors());
 app.use(express.json());
