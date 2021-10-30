@@ -3,6 +3,7 @@ const Account = database.db.Account;
 const Trainee = database.db.Trainee;
 const Trainer = database.db.Trainer;
 const Role = database.db.Role;
+
 const deleteAccountService = async (uid) => {
   await Account.destroy({
     where: {
@@ -83,7 +84,6 @@ const getAcountService = async (uid) => {
   }
   return result;
 };
-
 const getTrainerIdService = async (emailTrainer) => {
   const result = await Account.findOne({
     attributes: ["id"],
@@ -126,6 +126,7 @@ const getPasswordService = async (id) => {
   });
   return result;
 };
+
 const changePasswordService = async (id, newPassword) => {
   const result = await Account.update(
     {

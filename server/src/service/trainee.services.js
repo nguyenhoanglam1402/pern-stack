@@ -50,13 +50,7 @@ const updateTraineeInforService = async (oldData, newData) => {
   return result;
 };
 
-const deleteTraineeService = async (idTrainee) => {
-  await Account.destroy({
-    where: {
-      id: idTrainee
-    },
-  });
-};
+
 
 
 
@@ -64,5 +58,4 @@ module.exports = {
   createTraineeService,
   searchTraineeService,
   updateTraineeInforService,
-  deleteTraineeService
 };
