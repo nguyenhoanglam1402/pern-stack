@@ -30,3 +30,33 @@ export const assignTrainerClass = async (requestData) => {
   );
   return respond.data.data;
 };
+
+export const fetchAllTrainee = async () => {
+  const respond = await axios.get(
+    "http://localhost:5001/api/v1/staff/trainee/view"
+  );
+  return respond.data.data;
+};
+
+export const searchTraineeAPI = async (requestData) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/trainee/search`,
+    { params: { name: requestData.name, age: requestData.age } }
+  );
+  return respond.data.data.Accounts;
+};
+
+export const deleteTraineeAPI = async (id) => {
+  const respond = await axios.delete(
+    `http://localhost:5001/api/v1/staff/trainee/delete/${id}`
+  );
+  return respond.data;
+};
+
+export const createTraineeAPI = async (requestData) => {
+  const respond = await axios.post(
+    `http://localhost:5001/api/v1/staff/trainee/create`,
+    {}
+  );
+  return respond.data;
+};
