@@ -13,6 +13,6 @@ const {
 apiRoute.use("/auth", loginApi);
 apiRoute.use("/admin", authToken, authRole("Admin"),adminApi);
 apiRoute.use("/trainee", authToken, authRole("Trainee"), traineeApi);
-apiRoute.use("/staff", staffApi);
+apiRoute.use("/staff", authToken, authRole("Staff"),staffApi);
 apiRoute.use("/trainer", authToken, authRole("Trainer"), trainerApi);
 module.exports = apiRoute;

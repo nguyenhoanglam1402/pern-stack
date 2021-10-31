@@ -68,7 +68,7 @@ router.get("/trainer/view", getAllTrainer);
 //Route for trainee management.
 router.get("/trainee/view", getAllTrainee);
 router.get("/trainee/search", searchTraineeController);
-router.put("/trainee/update", updateTraineeInforController);
+router.put("/trainee/update/:id", updateTraineeInforController);
 router.delete("/trainee/delete/:id", deleteTraineeController);
 router.patch("/trainee/password/:id", changePasswordTrainee);
 router.post("/trainee/register", registerTraineeController);

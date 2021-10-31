@@ -15,7 +15,6 @@ const updateTrainerInforService = async (idTrainer, newData) => {
     {
       fullname: newData.fullname,
       age: newData.age,
-      email: newData.email,
     },
     {
       where: {

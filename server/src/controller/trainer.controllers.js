@@ -4,11 +4,11 @@ const {
 } = require("../service/classes.services");
 const {
   getAcountService,
-  getAccountsByRoleService
+  getAccountsByRoleService,
+  getRoleByIdService
 } = require("../service/account.services");
 const { findRoleServices } = require("../service/roles.services");
 const {updateTrainerInforService} = require("../service/trainer.services");
-const {checkExistAccountService}= require("../service/auth.services");
 
 
 const getTrainerCourses = async (req, res) => {
@@ -72,6 +72,14 @@ const getTrainerProfile = async (req, res) => {
     });
   } else {
     try {
+      const checkRole = await getRoleByIdService(idTrainer);
+      if(checkRole.Role.name!=="Trainer")
+      {
+        return res.status(400).json({
+          success: false,
+          message: "You don't have permission to find this role",
+        });
+      }
       const result = await getAcountService(idTrainer);
       return res.status(200).json({
         success: true,
@@ -111,16 +119,16 @@ const updateTrainerProfile = async (req, res) => {
     });
   }
   try {
-    const checkEmailExisted = await checkExistAccountService(req.body.email);
-    if (checkEmailExisted) {
-      return res.status(400).json({
-        success: false,
-        message: "Email is used by somebody",
-      });
-    }
+    const checkRole = await getRoleByIdService(idTrainer);
+      if(checkRole.Role.name!=="Trainer")
+      {
+        return res.status(400).json({
+          success: false,
+          message: "You don't have permission to update this role",
+        });
+      }
     const newData = {
       fullname: req.body.fullname,
-      email: req.body.email,
       age: req.body.age,
       specialty: req.body.specialty
     }
