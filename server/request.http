@@ -165,7 +165,8 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:5001/api/v1/staff/classes
+GET http://localhost:5001/api/v1/staff/trainee/view
 
 ###
 PUT http://localhost:5001/api/v1/staff/classes/trainer/assign/da25fa19467b04b06927973e7abeb673/GCD0806
+

@@ -1,4 +1,5 @@
 import HomePage from "pages/Home";
+import TraineePage from "pages/Trainee";
 import TrainerComponent from "pages/Trainer";
 import React from "react";
 import { Route } from "react-router";
@@ -13,7 +14,7 @@ const StaffContainer = () => {
       <Route path="/admin/home" component={HomePage} />
       <Route path="/admin/course" component={HomePage} />
       <Route path="/admin/trainer" component={TrainerComponent} />
-      <Route path="/admin/trainee" component={HomePage} />
+      <Route path="/admin/trainee" component={TraineePage} />
       <Footer />
     </div>
   );

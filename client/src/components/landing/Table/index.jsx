@@ -1,12 +1,12 @@
 import React from "react";
 import { Table } from "antd";
 
-const CustomizeTable = ({ title, dataSourse, columns }) => {
+const CustomizeTable = ({ title, dataSource, columns }) => {
   return (
     <div>
       <h1>{title}</h1>
       <Table
-        dataSource={dataSourse}
+        dataSource={dataSource}
         columns={columns}
         loading={false}
         bordered={true}

@@ -1,4 +1,3 @@
-const { assignTrainerClassService } = require("../service/classes.services");
 const {
   getAllFriendsService,
   assignTraineeService,
@@ -20,26 +19,6 @@ const getFriendTraineeController = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal server error",
-      errorMessage: error.message,
-    });
-  }
-};
-
-const assignTrainerClassController = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { className } = req.body;
-    console.log("Server recieved: ", id, " and className: ", className);
-    const result = await assignTrainerClassService(id, className);
-    return res.status(200).json({
-      success: true,
-      message: "Resquest OK!",
-      data: result,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Internal Server Error",
       errorMessage: error.message,
     });
   }
@@ -120,7 +99,6 @@ const getCoursesOfTrainee = async (req, res) => {
 };
 module.exports = {
   getFriendTraineeController,
-  assignTrainerClassController,
   assignTraineeClassController,
   kickTraineeController,
   getCoursesOfTrainee,
