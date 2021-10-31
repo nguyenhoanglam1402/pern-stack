@@ -30,7 +30,8 @@ const loginController = async (req, res) => {
 
     const token = jsonWebToken.sign(
       { uid: user.id, role: user.Role.name },
-      process.env.SECRET_TOKEN_KEY,{expiresIn : '7200s'}
+      process.env.SECRET_TOKEN_KEY,
+      { expiresIn: "7200s" }
     );
     return res.status(200).json({
       success: true,
@@ -53,11 +54,10 @@ const loginController = async (req, res) => {
   }
 };
 
-const registryController = async (req, res) => {
+const registerTraineeController = async (req, res) => {
   let uid = "";
   try {
     const { email, password, fullname, role, age } = req.body;
-    console.log(age);
     const existAccount = await checkExistAccountService(email);
     if (existAccount) {
       return res.status(400).json({
@@ -65,39 +65,28 @@ const registryController = async (req, res) => {
         message: "Email is used by somebody",
       });
     }
-    const hashPassword = await argon.hash(password);
-    const roleID = await findRoleServices(role);
-    uid = await registryAccountService(
-      email,
-      hashPassword,
-      fullname,
-      roleID,
-      age
-    );
-
-    switch (role) {
-      case "Trainer": {
-        const { specialty } = req.body;
-        await createTrainerService(uid, specialty);
-        break;
-      }
-      case "Trainee": {
-        const { year, education } = req.body;
-        await createTraineeService(uid, year, education);
-        break;
-      }
-      default: {
-        break;
-      }
+    if (role !== "Trainee") {
+      return res.status(400).json({
+        success: false,
+        message: "You don't have permission to create this role",
+      });
+    } else {
+      const hashPassword = await argon.hash(password);
+      const roleID = await findRoleServices(role);
+      uid = await registryAccountService(
+        email,
+        hashPassword,
+        fullname,
+        roleID,
+        age
+      );
+      const { year, education } = req.body;
+      await createTraineeService(uid, year, education);
+      return res.status(200).json({
+        success: true,
+        message: "Register successfully!",
+      });
     }
-    return res.status(200).json({
-      success: true,
-      message: "Register successfully!",
-      data: {
-        hashPassword: hashPassword,
-        roleID: roleID,
-      },
-    });
   } catch (error) {
     if (uid !== null) {
       await deleteAccountService(uid);
@@ -110,4 +99,58 @@ const registryController = async (req, res) => {
   }
 };
 
-module.exports = { loginController, registryController };
+const registerSystemStaffController = async (req,res) => {
+  let uid = "";
+  try {
+    const { email, password, fullname, role, age } = req.body;
+    const existAccount = await checkExistAccountService(email);
+    if (existAccount) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is used by somebody",
+      });
+    }
+    if (role === "Trainee") {
+      return res.status(400).json({
+        success: false,
+        message: "You don't have permission to create this role",
+      });
+    } else {
+      const hashPassword = await argon.hash(password);
+      const roleID = await findRoleServices(role);
+      uid = await registryAccountService(
+        email,
+        hashPassword,
+        fullname,
+        roleID,
+        age
+      );
+      switch (role) {
+        case "Trainer":{
+          const { specialty } = req.body;
+          await createTrainerService(uid, specialty);
+          break;
+        }
+        case "Staff"||"Admin": {
+          break;
+        }      
+        default:
+          break;
+      }
+      return res.status(200).json({
+        success: true,
+        message: "Register successfully!",
+      });
+    }
+  } catch (error) {
+    if (uid !== null) {
+      await deleteAccountService(uid);
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      errorMessage: error.message,
+    });
+  }
+} 
+module.exports = { loginController, registerTraineeController,registerSystemStaffController };

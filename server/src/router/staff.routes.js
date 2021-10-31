@@ -14,7 +14,7 @@ const {
   deleteCategory,
 } = require("../controller/categories.controller.js");
 
-const { registryController } = require("../controller/auth.controller.js");
+const { registerTraineeController } = require("../controller/auth.controller.js");
 
 const {
   createClassController,
@@ -52,9 +52,6 @@ router.post("/categories/create", createNewCategory);
 router.put("/categories/update/:id", updateCategory);
 router.delete("/categories/delete/:name", deleteCategory);
 
-//Route for account
-router.post("/auth/register", registryController);
-
 //Route for class
 router.get("/classes", getAllClassesController);
 router.post("/classes/create", createClassController);
@@ -64,12 +61,15 @@ router.put("/classes/update", updateClassController);
 router.delete("/classes/delete/:id", deleteClassConotroller);
 router.delete("/classes/trainee/delete", kickTraineeController);
 router.get("/classes/:courseName", getDetailClassesOfCourse);
+
 //Route for trainer
 router.get("/trainer/view", getAllTrainer);
-//Route for student management.
+
+//Route for trainee management.
 router.get("/trainee/view", getAllTrainee);
 router.get("/trainee/search", searchTraineeController);
 router.put("/trainee/update", updateTraineeInforController);
 router.delete("/trainee/delete/:id", deleteTraineeController);
 router.patch("/trainee/password/:id", changePasswordTrainee);
+router.post("/trainee/register", registerTraineeController);
 module.exports = router;
