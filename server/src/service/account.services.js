@@ -11,38 +11,58 @@ const deleteAccountService = async (uid) => {
     },
   });
 };
-const getAccountsByRoleService = async (role,roleID) => {
-  if(role === "Trainer"){
+
+const getEmailByIDService = async (id) => {
+  const result = Account.findOne({
+    attributes: ["email"],
+    where: {
+      id: id,
+    },
+  });
+  return result;
+};
+
+const getAccountsByRoleService = async (role, roleID) => {
+  if (role === "Trainer") {
     const result = await Account.findAll({
-      attributes: ["id","fullname","email","age"],
+      attributes: ["id", "fullname", "email", "age"],
       where: {
-        rolesID: roleID
+        rolesID: roleID,
       },
       include: [
         {
           model: Trainer,
-          attributes: ["specialty"]
-        }
-      ]
+          attributes: ["specialty"],
+        },
+      ],
     });
     return result;
   }
-  if(role === "Trainee"){
+  if (role === "Trainee") {
     const result = await Account.findAll({
-      attributes: ["id","fullname","email","age"],
+      attributes: ["id", "fullname", "email", "age"],
       where: {
-        rolesID: roleID
+        rolesID: roleID,
       },
       include: [
         {
           model: Trainee,
-          attributes: ["education","year"]
-        }
-      ]
+          attributes: ["education", "year"],
+        },
+      ],
+    });
+  }
+  if (role === "Staff") {
+    const result = await Account.findAll({
+      attributes: ["id", "fullname", "email", "age"],
+      where: {
+        rolesID: roleID,
+      },
     });
     return result;
   }
-}
+};
+
 const getAcountService = async (uid) => {
   let result = {};
   const basicInformation = await Account.findOne({
@@ -140,6 +160,37 @@ const changePasswordService = async (id, newPassword) => {
   );
   return result;
 };
+
+const getAccountStaffService = async (id) => {
+  const result = await Account.findOne({
+    attributes: ["id", "email", "fullname", "age"],
+    where: {
+      id: id,
+    },
+    include: [
+      {
+        model: Role,
+        attributes: ["name"],
+      },
+    ],
+  });
+  return result;
+};
+
+const updateAccountStaffService = async (id, newData) => {
+  const result = await Account.update(
+    {
+      fullname: newData.fullname,
+      age: newData.age,
+    },
+    {
+      where: {
+        id: id,
+      },
+    }
+  );
+  return result;
+};
 module.exports = {
   deleteAccountService,
   getAcountService,
@@ -147,5 +198,8 @@ module.exports = {
   getPasswordService,
   changePasswordService,
   getRoleByIdService,
-  getAccountsByRoleService
+  getAccountsByRoleService,
+  getEmailByIDService,
+  getAccountStaffService,
+  updateAccountStaffService,
 };

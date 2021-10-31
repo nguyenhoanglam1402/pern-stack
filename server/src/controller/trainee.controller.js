@@ -35,14 +35,29 @@ const searchTraineeController = async (req, res) => {
 };
 
 const updateTraineeInforController = async (req, res) => {
+  const idTrainee = req.params.id;
+  if(!idTrainee){
+    return res.status(400).json({
+      success: false,
+      message: "The id trainer cannot empty",
+    });
+  }
   try {
-    const { oldData, newData } = req.body;
-    const result = await updateTraineeInforService(oldData, newData);
-    if (result === 0)
-      return res.status(404).json({
-        success: false,
-        message: "Nothing Updated",
-      });
+    const checkRole = await getRoleByIdService(idTrainee);
+      if(checkRole.Role.name!=="Trainee")
+      {
+        return res.status(400).json({
+          success: false,
+          message: "You don't have permission to update this role",
+        });
+      }
+    const newData = {
+      fullname: req.body.fullname,
+      age: req.body.age,
+      education: req.body.education,
+      year: req.body.year
+    }
+    const result = await updateTraineeInforService(idTrainee,newData);
     return res.status(200).json({
       success: true,
       message: "Fetch successfully",
@@ -50,8 +65,8 @@ const updateTraineeInforController = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      success: false,
-      message: "Internal Server Error!",
+      error: error.message,
+      message: "Internal server error",
     });
   }
 };
@@ -59,6 +74,13 @@ const updateTraineeInforController = async (req, res) => {
 const deleteTraineeController = async (req, res) => {
   try {
     const idTrainee = req.params.id;
+    const checkingRole = await getRoleByIdService(idTrainee);
+    if (checkingRole.Role.name !== "Trainee") {
+      return res.status(400).json({
+        success: false,
+        message: "You don't have permission to delete this role! User must be trainee",
+      });
+    }
     await deleteAccountService(idTrainee);
     return res.status(200).json({
       success: true,

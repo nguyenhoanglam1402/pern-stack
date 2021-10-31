@@ -54,6 +54,9 @@ const loginController = async (req, res) => {
   }
 };
 
+// const logOutController = async (req,res) => {
+
+// }
 const registerTraineeController = async (req, res) => {
   let uid = "";
   try {

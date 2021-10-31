@@ -33,20 +33,28 @@ const searchTraineeService = async (name, age) => {
   return result;
 };
 
-const updateTraineeInforService = async (oldData, newData) => {
-  const result = await Account.update(
+const updateTraineeInforService = async (id, newData) => {
+  let result = {};
+  const account = await Account.update(
     {
       fullname: newData.fullname,
       age: newData.age,
-      email: newData.email,
     },
     {
       where: {
-        fullname: oldData.fullname,
-        age: oldData.age,
+        id:id
       },
     }
   );
+  const eduYear = await Trainee.update({
+    education: newData.education,
+    year: newData.year
+  },{
+    where: {
+      id: id
+    }
+  });
+  result = {account: account, eduyear: eduYear}
   return result;
 };
 
