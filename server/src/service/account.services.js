@@ -11,6 +11,16 @@ const deleteAccountService = async (uid) => {
     },
   });
 };
+
+const getEmailByIDService = async(id) => {
+  const result = Account.findOne({
+    attributes: ["email"],
+    where:{
+      id: id
+    }
+  });
+  return result;
+}
 const getAccountsByRoleService = async (role,roleID) => {
   if(role === "Trainer"){
     const result = await Account.findAll({
@@ -147,5 +157,6 @@ module.exports = {
   getPasswordService,
   changePasswordService,
   getRoleByIdService,
-  getAccountsByRoleService
+  getAccountsByRoleService,
+  getEmailByIDService
 };

@@ -59,6 +59,13 @@ const updateTraineeInforController = async (req, res) => {
 const deleteTraineeController = async (req, res) => {
   try {
     const idTrainee = req.params.id;
+    const checkingRole = await getRoleByIdService(idTrainee);
+    if (checkingRole.Role.name !== "Trainee") {
+      return res.status(400).json({
+        success: false,
+        message: "You don't have permission to delete this role! User must be trainee",
+      });
+    }
     await deleteAccountService(idTrainee);
     return res.status(200).json({
       success: true,
