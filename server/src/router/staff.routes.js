@@ -14,7 +14,9 @@ const {
   deleteCategory,
 } = require("../controller/categories.controller.js");
 
-const { registerTraineeController } = require("../controller/auth.controller.js");
+const {
+  registerTraineeController,
+} = require("../controller/auth.controller.js");
 
 const {
   createClassController,

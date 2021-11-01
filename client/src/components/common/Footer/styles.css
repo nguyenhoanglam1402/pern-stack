@@ -1,6 +1,7 @@
 footer {
-  background-color: black;
+  background-color: #1890ff;
   height: 150px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .footer-logo {

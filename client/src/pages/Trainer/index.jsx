@@ -77,7 +77,7 @@ const TrainerComponent = () => {
     <div className="container">
       <CustomizeTable
         title="Trainer List"
-        dataSourse={data}
+        dataSource={data}
         columns={columns}
       />
       <TrainerAssignDialog

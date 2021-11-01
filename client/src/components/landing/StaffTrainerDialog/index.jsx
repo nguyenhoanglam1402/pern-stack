@@ -25,6 +25,10 @@ const TrainerAssignDialog = (props) => {
         <div className="dialog-panel">
           <Form className="dialog">
             <h2>Trainer Assign</h2>
+            <p className="alert-line">
+              Note: The old Trainer will be replaced by the new trainer if the
+              class already exists a trainer
+            </p>
             <Form.Item>
               <Select
                 defaultValue="GCD0805"
@@ -38,9 +42,9 @@ const TrainerAssignDialog = (props) => {
               </Select>
             </Form.Item>
             <h3>Review Information</h3>
+            <p>Trainer ID: {props.trainerInfor.id}</p>
             <p>Trainer: {props.trainerInfor.fullname}</p>
             <p>Email: {props.trainerInfor.email}</p>
-            <p>Trainer ID: {props.trainerInfor.id}</p>
             <p>Assign to: {choice}</p>
 
             <Space size="middle">

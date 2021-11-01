@@ -30,3 +30,62 @@ export const assignTrainerClass = async (requestData) => {
   );
   return respond.data.data;
 };
+
+export const fetchAllTrainee = async () => {
+  const respond = await axios.get(
+    "http://localhost:5001/api/v1/staff/trainee/view"
+  );
+  return respond.data.data;
+};
+
+export const searchTraineeAPI = async (requestData) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/trainee/search`,
+    { params: { name: requestData.name, age: requestData.age } }
+  );
+  return respond.data.data.Accounts;
+};
+
+export const deleteTraineeAPI = async (id) => {
+  const respond = await axios.delete(
+    `http://localhost:5001/api/v1/staff/trainee/delete/${id}`
+  );
+  return respond.data;
+};
+
+export const createTraineeAPI = async (requestData) => {
+  const respond = await axios.post(
+    `http://localhost:5001/api/v1/staff/trainee/register`,
+    {
+      email: requestData.email,
+      password: requestData.password,
+      fullname: requestData.fullname,
+      role: requestData.role,
+      age: requestData.age,
+      education: requestData.education,
+      year: requestData.year,
+    }
+  );
+  return respond.data;
+};
+
+export const assignTraineeClass = async (requestData) => {
+  const respond = await axios.post(
+    "http://localhost:5001/api/v1/staff/classes/trainee",
+    {
+      emailTrainee: requestData.traineeEmail,
+      className: requestData.className,
+    }
+  );
+  return respond.data;
+};
+
+export const changePasswordTrainee = async (requestData) => {
+  const respond = await axios.patch(
+    `http://localhost:5001/api/v1/staff/trainee/password/${requestData.id}`,
+    {
+      newPassword: requestData.newPassword,
+    }
+  );
+  return respond.data.data;
+};
