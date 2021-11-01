@@ -1,20 +1,34 @@
+import { UserOutlined } from "@ant-design/icons";
 import { Button, Space, Form, Input } from "antd";
 import {
   deleteTraineeAPI,
   fetchAllTrainee,
   searchTraineeAPI,
 } from "api/index.test";
+import StaffAssignTraineeDialog from "components/landing/StaffAssignTraineeDialog";
+import TraineeChangePasswordDialog from "components/landing/StaffChangePasswordDialog";
+import StaffTraineeDialog from "components/landing/StaffTraineeDialog";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
 
 const TraineePage = () => {
   const [traineeData, setTraineeData] = useState([]);
   const [refreshData, setRefresh] = useState(0);
+  const [isPopUp, setPopUp] = useState(false);
+  const [isAssignTraineePopUp, setAssignTraineePopUp] = useState(false);
+  const [choice, setChoice] = useState([]);
+  const [isChangePasswordPopUp, setChangePasswordPopUp] = useState(false);
   const columns = [
     {
       title: "Fullname",
       dataIndex: "fullname",
       key: "fullname",
+      render: (content) => (
+        <Space size="middle">
+          <UserOutlined style={{ fontSize: "20px" }} />
+          {content}
+        </Space>
+      ),
     },
     {
       title: "Age",
@@ -37,8 +51,14 @@ const TraineePage = () => {
       render: (record) => (
         <Space size="middle" key={record.key}>
           <Button type="primary">Update</Button>
+          <Button type="primary" onClick={(e) => onAssignClick(record)}>
+            Assign
+          </Button>
           <Button type="primary" onClick={(e) => deleteTrainee(record.id)}>
             Delete
+          </Button>
+          <Button type="primary" onClick={(e) => onPasswordChangeClick(record)}>
+            Change Password
           </Button>
         </Space>
       ),
@@ -48,6 +68,7 @@ const TraineePage = () => {
   useEffect(() => {
     fetchAllTrainee()
       .then((respond) => {
+        console.log("Respond: ", respond);
         const data = respond.map((item, index) => ({
           ...item,
           key: index,
@@ -59,6 +80,7 @@ const TraineePage = () => {
       .catch((error) => console.error(error.message));
   }, [refreshData]);
 
+  console.log(refreshData);
   const searchTrainee = async (value) => {
     searchTraineeAPI(value)
       .then((respond) => {
@@ -75,8 +97,22 @@ const TraineePage = () => {
 
   const deleteTrainee = async (id) => {
     deleteTraineeAPI(id)
-      .then((respond) => console.log(respond))
+      .then((respond) => {
+        setRefresh((oldState) => oldState + 1);
+        console.log(respond);
+      })
       .catch((error) => console.error(error.message));
+  };
+
+  const onAssignClick = (record) => {
+    setChoice(record);
+    setAssignTraineePopUp(true);
+  };
+
+  const onPasswordChangeClick = (record) => {
+    console.log("UID: ", record.id);
+    setChoice(record);
+    setChangePasswordPopUp(true);
   };
   console.log(traineeData);
   return (
@@ -105,10 +141,7 @@ const TraineePage = () => {
           >
             Refresh
           </Button>
-          <Button
-            type="primary"
-            onClick={(e) => setRefresh((oldState) => oldState + 1)}
-          >
+          <Button type="primary" onClick={(e) => setPopUp(true)}>
             Add new
           </Button>
         </Space>
@@ -117,6 +150,17 @@ const TraineePage = () => {
         title="Trainee List"
         dataSource={traineeData}
         columns={columns}
+      />
+      <StaffTraineeDialog trigger={isPopUp} setTrigger={setPopUp} />
+      <StaffAssignTraineeDialog
+        data={choice}
+        trigger={isAssignTraineePopUp}
+        setTrigger={setAssignTraineePopUp}
+      />
+      <TraineeChangePasswordDialog
+        trigger={isChangePasswordPopUp}
+        setTrigger={setChangePasswordPopUp}
+        id={choice.id}
       />
     </div>
   );

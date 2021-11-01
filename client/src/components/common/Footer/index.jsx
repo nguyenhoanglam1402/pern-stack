@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "assets/icons/fpt-logo.png";
+import logo from "assets/icons/fpt_logo.png";
 import "./styles.css";
 
 const Footer = () => {

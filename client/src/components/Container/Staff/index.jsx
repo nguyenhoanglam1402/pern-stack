@@ -1,3 +1,4 @@
+import CoursePage from "pages/Course";
 import HomePage from "pages/Home";
 import TraineePage from "pages/Trainee";
 import TrainerComponent from "pages/Trainer";
@@ -11,10 +12,10 @@ const StaffContainer = () => {
   return (
     <div className="staff-container">
       <Navigator />
-      <Route path="/admin/home" component={HomePage} />
-      <Route path="/admin/course" component={HomePage} />
-      <Route path="/admin/trainer" component={TrainerComponent} />
-      <Route path="/admin/trainee" component={TraineePage} />
+      <Route path="/staff/home" component={HomePage} />
+      <Route path="/staff/course" component={CoursePage} />
+      <Route path="/staff/trainer" component={TrainerComponent} />
+      <Route path="/staff/trainee" component={TraineePage} />
       <Footer />
     </div>
   );

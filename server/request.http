@@ -40,17 +40,17 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5001/api/v1/staff/auth/register
+POST http://localhost:5001/api/v1/staff/trainee/register
 Content-Type: application/json
 
 {
-  "email": "nguyenhoanglam.emily@gmail.com",
-  "password": "dontbesad",
-  "fullname": "Nguyen Hoang Lam",
+  "email": "nguyetminhthibui@gmail.com",
+  "password": "25102001",
+  "fullname": "Bui Thi Minh Nguyet",
   "age": 21,
-  "role": "Trainee",
-  "year": "1/1/2023",
-  "education": "Bachelor"
+  "year": "11-21-2021",
+  "education": "Bachelor",
+  "role": "Trainee"
 }
 
 ###

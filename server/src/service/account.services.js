@@ -51,6 +51,7 @@ const getAccountsByRoleService = async (role, roleID) => {
         },
       ],
     });
+    return result;
   }
   if (role === "Staff") {
     const result = await Account.findAll({
