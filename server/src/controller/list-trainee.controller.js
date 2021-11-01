@@ -7,21 +7,40 @@ const {
 } = require("../service/list-trainee.services");
 
 const getFriendTraineeController = async (req, res) => {
-  try {
-    const courseName = req.params.courseName;
-    console.log("Course name", courseName);
-    const result = await getAllFriendsService(courseName);
-    return res.status(200).json({
-      success: true,
-      message: "Fetch friend successfully!",
-      data: result,
-    });
-  } catch (error) {
-    return res.status(500).json({
+  const id = req.params.id;
+  if (!id) {
+    return res.status(400).json({
       success: false,
-      message: "Internal server error",
-      errorMessage: error.message,
+      message: "The id trainee cannot empty",
     });
+  } else {
+    try {
+      const courseName = req.params.courseName;
+      let arraycourse = [];
+      const checkExistInCourse = await getCoursesOfTraineeService(id);
+      checkExistInCourse.forEach((data)=>{
+        console.log(data.Class.Course.name);
+        arraycourse.push(data.Class.Course.name);
+      });
+      if(!arraycourse.includes(courseName)){
+        return res.status(400).json({
+          success: false,
+          message: "The user has not already assigned to this course",
+        }); 
+      }
+      const result = await getAllFriendsService(courseName);
+      return res.status(200).json({
+        success: true,
+        message: "Fetch friend successfully!",
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        errorMessage: error.message,
+      });
+    }
   }
 };
 
@@ -112,7 +131,7 @@ const getCoursesOfTrainee = async (req, res) => {
     } catch (error) {
       console.log(error);
       return res.status(500).json({
-        error: error,
+        error: error.message,
         message: "Internal server error",
       });
     }

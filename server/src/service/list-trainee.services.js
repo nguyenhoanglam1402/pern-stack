@@ -9,8 +9,6 @@ const Class = database.db.Class;
 const { Op } = require("sequelize");
 
 const getAllFriendsService = async (courseName) => {
-  console.log(courseName);
-
   const result = await Course.findAll({
     where: {
       name: courseName,
