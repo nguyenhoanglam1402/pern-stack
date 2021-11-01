@@ -31,7 +31,6 @@ const createClassService = async (courseName, name, trainerId) => {
   if (courseID === null) {
     return courseID;
   }
-  console.log(courseID.id);
   const result = await Class.create({
     courseID: courseID.id,
     trainerID: trainerId,
