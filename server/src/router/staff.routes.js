@@ -59,7 +59,7 @@ router.post("/classes/trainee", assignTraineeClassController);
 router.put("/classes/trainer/assign/:id", assignTrainerClassController);
 router.put("/classes/update", updateClassController);
 router.delete("/classes/delete/:id", deleteClassConotroller);
-router.delete("/classes/trainee/delete", kickTraineeController);
+router.delete("/classes/trainee/delete/:id", kickTraineeController);
 router.get("/classes/:courseName", getDetailClassesOfCourse);
 
 //Route for trainer
