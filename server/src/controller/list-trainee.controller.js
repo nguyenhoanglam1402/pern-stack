@@ -92,7 +92,7 @@ const kickTraineeController = async (req, res) => {
     const { className } = req.body;
     const result = await kickTraineeServices(idTrainee, className);
     console.log(result);
-    if(result===0){
+    if (result === 0) {
       return res.status(404).json({
         success: false,
         message: "Cannot find this trainee in class",
