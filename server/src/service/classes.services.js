@@ -160,7 +160,7 @@ const findClassesByCourseService = async (courseId) => {
             include: [
               {
                 model: Account,
-                attributes: ["fullname"],
+                attributes: ["fullname","id"],
               },
             ],
           },

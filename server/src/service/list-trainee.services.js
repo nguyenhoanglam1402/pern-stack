@@ -9,8 +9,6 @@ const Class = database.db.Class;
 const { Op } = require("sequelize");
 
 const getAllFriendsService = async (courseName) => {
-  console.log(courseName);
-
   const result = await Course.findAll({
     where: {
       name: courseName,
@@ -74,25 +72,18 @@ const assignTraineeService = async (emailTrainee, className) => {
   }
 };
 
-const kickTraineeServices = async (name, age, className) => {
-  const traineeResult = await Account.findOne({
-    where: {
-      fullname: name,
-      age: age,
-      rolesID: 2,
-    },
-  });
+const kickTraineeServices = async (id, className) => {
   const classResult = await Class.findOne({
     where: {
       name: className,
     },
   });
-  console.log("Trainee: ", traineeResult);
-  await ListTraineeClass.destroy({
+  const result = await ListTraineeClass.destroy({
     where: {
-      [Op.and]: [{traineeID: traineeResult.id},{classID: classResult.id,}]
+      [Op.and]: [{traineeID: id},{classID: classResult.id,}]
     },
   });
+  return result;
 };
 
 const getCoursesOfTraineeService = async (idTrainee) => {
