@@ -55,8 +55,37 @@ export const deleteTraineeAPI = async (id) => {
 
 export const createTraineeAPI = async (requestData) => {
   const respond = await axios.post(
-    `http://localhost:5001/api/v1/staff/trainee/create`,
-    {}
+    `http://localhost:5001/api/v1/staff/trainee/register`,
+    {
+      email: requestData.email,
+      password: requestData.password,
+      fullname: requestData.fullname,
+      role: requestData.role,
+      age: requestData.age,
+      education: requestData.education,
+      year: requestData.year,
+    }
   );
   return respond.data;
+};
+
+export const assignTraineeClass = async (requestData) => {
+  const respond = await axios.post(
+    "http://localhost:5001/api/v1/staff/classes/trainee",
+    {
+      emailTrainee: requestData.traineeEmail,
+      className: requestData.className,
+    }
+  );
+  return respond.data;
+};
+
+export const changePasswordTrainee = async (requestData) => {
+  const respond = await axios.patch(
+    `http://localhost:5001/api/v1/staff/trainee/password/${requestData.id}`,
+    {
+      newPassword: requestData.newPassword,
+    }
+  );
+  return respond.data.data;
 };

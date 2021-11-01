@@ -7,7 +7,7 @@ const {
   changePasswordService,
   getRoleByIdService,
   getAccountsByRoleService,
-  deleteAccountService
+  deleteAccountService,
 } = require("../service/account.services");
 const argon = require("argon2");
 const { findRoleServices } = require("../service/roles.services");
@@ -36,7 +36,7 @@ const searchTraineeController = async (req, res) => {
 
 const updateTraineeInforController = async (req, res) => {
   const idTrainee = req.params.id;
-  if(!idTrainee){
+  if (!idTrainee) {
     return res.status(400).json({
       success: false,
       message: "The id trainer cannot empty",
@@ -44,20 +44,19 @@ const updateTraineeInforController = async (req, res) => {
   }
   try {
     const checkRole = await getRoleByIdService(idTrainee);
-      if(checkRole.Role.name!=="Trainee")
-      {
-        return res.status(400).json({
-          success: false,
-          message: "You don't have permission to update this role",
-        });
-      }
+    if (checkRole.Role.name !== "Trainee") {
+      return res.status(400).json({
+        success: false,
+        message: "You don't have permission to update this role",
+      });
+    }
     const newData = {
       fullname: req.body.fullname,
       age: req.body.age,
       education: req.body.education,
-      year: req.body.year
-    }
-    const result = await updateTraineeInforService(idTrainee,newData);
+      year: req.body.year,
+    };
+    const result = await updateTraineeInforService(idTrainee, newData);
     return res.status(200).json({
       success: true,
       message: "Fetch successfully",
@@ -78,7 +77,8 @@ const deleteTraineeController = async (req, res) => {
     if (checkingRole.Role.name !== "Trainee") {
       return res.status(400).json({
         success: false,
-        message: "You don't have permission to delete this role! User must be trainee",
+        message:
+          "You don't have permission to delete this role! User must be trainee",
       });
     }
     await deleteAccountService(idTrainee);
@@ -152,6 +152,7 @@ const getAllTrainee = async (req, res) => {
   try {
     const roleID = await findRoleServices("Trainee");
     const result = await getAccountsByRoleService("Trainee", roleID);
+    console.log(result);
     return res.status(200).json({
       success: true,
       data: result,

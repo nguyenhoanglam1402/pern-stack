@@ -46,7 +46,7 @@ const loginController = async (req, res) => {
       token: token,
     });
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       success: false,
       message: "Internal server error",
       error: error.message,
@@ -102,7 +102,7 @@ const registerTraineeController = async (req, res) => {
   }
 };
 
-const registerSystemStaffController = async (req,res) => {
+const registerSystemStaffController = async (req, res) => {
   let uid = "";
   try {
     const { email, password, fullname, role, age } = req.body;
@@ -129,14 +129,14 @@ const registerSystemStaffController = async (req,res) => {
         age
       );
       switch (role) {
-        case "Trainer":{
+        case "Trainer": {
           const { specialty } = req.body;
           await createTrainerService(uid, specialty);
           break;
         }
-        case "Staff"||"Admin": {
+        case "Staff" || "Admin": {
           break;
-        }      
+        }
         default:
           break;
       }
@@ -155,5 +155,9 @@ const registerSystemStaffController = async (req,res) => {
       errorMessage: error.message,
     });
   }
-} 
-module.exports = { loginController, registerTraineeController,registerSystemStaffController };
+};
+module.exports = {
+  loginController,
+  registerTraineeController,
+  registerSystemStaffController,
+};

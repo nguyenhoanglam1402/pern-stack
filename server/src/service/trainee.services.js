@@ -2,15 +2,15 @@ const database = require("../../database/models/index");
 const Trainee = database.db.Trainee;
 const Account = database.db.Account;
 const Role = database.db.Role;
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
 const createTraineeService = async (uid, year, education) => {
+  console.log("Trainee", uid);
   await Trainee.create({
     id: uid,
     year: year,
     education: education,
   });
-
 };
 const searchTraineeService = async (name, age) => {
   const result = await Role.findOne({
@@ -21,7 +21,7 @@ const searchTraineeService = async (name, age) => {
     include: {
       model: Account,
       where: {
-        [Op.and]: [{fullname: name},{age: age}]
+        [Op.and]: [{ fullname: name }, { age: age }],
       },
       attributes: [["id", "uid"], "fullname", "email", "age"],
       include: {
@@ -42,25 +42,24 @@ const updateTraineeInforService = async (id, newData) => {
     },
     {
       where: {
-        id:id
+        id: id,
       },
     }
   );
-  const eduYear = await Trainee.update({
-    education: newData.education,
-    year: newData.year
-  },{
-    where: {
-      id: id
+  const eduYear = await Trainee.update(
+    {
+      education: newData.education,
+      year: newData.year,
+    },
+    {
+      where: {
+        id: id,
+      },
     }
-  });
-  result = {account: account, eduyear: eduYear}
+  );
+  result = { account: account, eduyear: eduYear };
   return result;
 };
-
-
-
-
 
 module.exports = {
   createTraineeService,
