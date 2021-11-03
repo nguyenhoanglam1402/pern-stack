@@ -19,7 +19,7 @@ function App() {
             <ProtectRoute
               path="/staff"
               component={StaffContainer}
-              role="Trainer"
+              role="Staff"
             />
           </Switch>
         </Router>

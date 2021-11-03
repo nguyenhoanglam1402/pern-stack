@@ -1,7 +1,7 @@
-import CoursePage from "pages/Course";
+import CoursePage from "pages/Staff/Course";
 import HomePage from "pages/Home";
-import TraineePage from "pages/Trainee";
-import TrainerComponent from "pages/Trainer";
+import TraineePage from "pages/Staff/Trainee";
+import TrainerComponent from "pages/Staff/Trainer";
 import React from "react";
 import { Route } from "react-router";
 import Footer from "../../common/Footer";
