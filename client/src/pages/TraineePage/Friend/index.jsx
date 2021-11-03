@@ -9,25 +9,24 @@ import { Button, Space } from "antd";
 const FriendView = () => {
   const store = useSelector((store) => store.authReducer);
   const [data, setData] = useState([]);
-  const [isRefresh, setRefresh] = useState(0);
   const [isOpen, setOpen] = useState(false);
   const courseColumns = [
     {
       title: "Course Name",
-      dataIndex: "Course",
-      key: "Course",
+      dataIndex: "course",
+      key: "course",
     },
     {
       title: "Description",
-      dataIndex: "Desciption",
-      key: "Desciption",
+      dataIndex: "desciption",
+      key: "desciption",
     },
     {
       title: "Actions",
       key: "actions",
       render: (record) => (
         <Space size="middle">
-          <Button type="primary">Search friends</Button>
+          <Button type="primary">Classmate</Button>
         </Space>
       ),
     },
@@ -36,16 +35,17 @@ const FriendView = () => {
     viewCourseOfTrainee(store)
       .then((respond) => {
         const dataSource = respond.map((item, index) => ({
-          Course: item.Class.Course.name,
-          Desciption: item.Class.Course.description,
+          course: item.Class.Course.name,
+          desciption: item.Class.Course.description,
         }));
         setData(dataSource);
       })
       .catch((error) => console.error(error.message));
-  }, [isRefresh]);
+  }, []);
+
   const onSearchFriends = (store, courseName) => {
-    viewFriends(store, courseName)
-      .then()
+    viewFriends(store.uid, courseName)
+      .then((data) => {})
       .catch((error) => console.error(error));
   };
 

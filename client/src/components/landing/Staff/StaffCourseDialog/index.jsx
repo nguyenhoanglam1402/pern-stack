@@ -1,9 +1,5 @@
 import { Button, Form, Input, Space, Select } from "antd";
-import {
-  createNewCourse,
-  deleteCourse,
-  fetchAllCategories,
-} from "api/index.test";
+import { createNewCourse, fetchAllCategories } from "api/index.test";
 import React, { useEffect, useState } from "react";
 import "./styles.css";
 

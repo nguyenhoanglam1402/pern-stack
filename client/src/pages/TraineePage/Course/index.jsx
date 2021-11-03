@@ -6,37 +6,36 @@ import { useSelector } from "react-redux";
 const CourseView = () => {
   const store = useSelector((store) => store.authReducer);
   const [data, setData] = useState([]);
-  const [isRefresh, setRefresh] = useState(0);
   const classesColumns = [
     {
       title: "Class Name",
-      dataIndex: "Class",
-      key: "Class",
+      dataIndex: "class",
+      key: "class",
     },
     {
       title: "Course Name",
-      dataIndex: "Course",
-      key: "Course",
+      dataIndex: "course",
+      key: "course",
     },
     {
       title: "Description",
-      dataIndex: "Desciption",
-      key: "Desciption",
+      dataIndex: "desciption",
+      key: "desciption",
     },
   ];
   useEffect(() => {
-    viewCourseOfTrainee(store)
+    viewCourseOfTrainee(store.uid)
       .then((respond) => {
         console.log(respond[1].Class);
         const dataSource = respond.map((item, index) => ({
-          Class: item.Class.name,
-          Course: item.Class.Course.name,
-          Desciption: item.Class.Course.description,
+          class: item.Class.name,
+          course: item.Class.Course.name,
+          desciption: item.Class.Course.description,
         }));
         setData(dataSource);
       })
       .catch((error) => console.error(error.message));
-  }, [isRefresh]);
+  }, []);
   return (
     <div className="container">
       <CustomizeTable
