@@ -4,13 +4,13 @@ const Category = database.db.CourseCategory;
 
 const getAllCoursesService = async () => {
   let allCourses = await Course.findAll({
-    attributes: ['name', 'description', 'id'],
+    attributes: ["name", "description", "id"],
     include: [
       {
         model: Category,
-        attributes: ['name']
-      }
-    ]
+        attributes: ["name"],
+      },
+    ],
   });
   return allCourses;
 };
@@ -41,14 +41,15 @@ const getACourseByNameService = async (nameToFind) => {
     where: {
       name: nameToFind,
     },
-    attributes: ['name','description','id'],
-    include:[
+    attributes: ["name", "description", "id"],
+    include: [
       {
         model: Category,
-        attributes: ['name'],
-      }
-    ]
+        attributes: ["name"],
+      },
+    ],
   });
+  console.log("Course: ", selectedCourse);
   return selectedCourse;
 };
 
@@ -95,5 +96,5 @@ module.exports = {
   getACourseByNameService,
   updateCourseService,
   deleteCourseService,
-  findCourseIDService
+  findCourseIDService,
 };
