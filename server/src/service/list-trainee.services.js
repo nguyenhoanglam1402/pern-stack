@@ -95,7 +95,7 @@ const getCoursesOfTraineeService = async (idTrainee) => {
     include: [
       {
         model: Class,
-        attributes: ["courseID"],
+        attributes: ["courseID","name"],
         include: [
           {
             model: Course,
