@@ -152,7 +152,6 @@ const getAllTrainee = async (req, res) => {
   try {
     const roleID = await findRoleServices("Trainee");
     const result = await getAccountsByRoleService("Trainee", roleID);
-    console.log(result);
     return res.status(200).json({
       success: true,
       data: result,
