@@ -27,6 +27,10 @@ const LoginComponent = () => {
         history.push("/trainee/home");
         break;
       }
+      case "Staff": {
+        history.push("/staff/home");
+        break;
+      }
       default: {
         break;
       }
@@ -50,6 +54,7 @@ const LoginComponent = () => {
           authDispatch(authAction);
           console.log("Redux Store: ", store);
           redirect(authData.role);
+          localStorage.setItem("token", authData.token);
         }
       })
       .catch((error) => console.error(error.message));

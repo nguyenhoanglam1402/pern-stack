@@ -1,4 +1,6 @@
 import axios from "axios";
+import GetToken from "./header";
+import GetHeader from "./header";
 
 export const userAuthenticate = async (data) => {
   const respond = await axios.post("http://localhost:5001/api/v1/auth/login", {
@@ -91,13 +93,22 @@ export const changePasswordTrainee = async (requestData) => {
 };
 
 export const fetchAllCourse = async () => {
-  const respond = await axios.get("http://localhost:5001/api/v1/staff/courses");
+  const respond = await axios.get(
+    "http://localhost:5001/api/v1/staff/courses",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  console.log(respond.data.message);
   return respond.data.data;
 };
 
 export const fetchAllCategories = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/categories"
+    "http://localhost:5001/api/v1/staff/categories",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data;
 };
@@ -124,6 +135,19 @@ export const deleteCourse = async (id) => {
 export const searchCourse = async (name) => {
   const respond = await axios.get(
     `http://localhost:5001/api/v1/staff/courses/${name}`
+  );
+  return respond.data.data;
+};
+
+export const updateCourse = async (requestData) => {
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/staff/courses/update/${requestData.id}`,
+    {
+      name: requestData.name,
+      description: requestData.description,
+      categoryName: requestData.categoryName,
+    },
+    GetHeader
   );
   return respond.data.data;
 };

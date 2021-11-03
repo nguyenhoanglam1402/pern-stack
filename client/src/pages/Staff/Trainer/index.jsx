@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Space, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { fetchTrainerList } from "api/index.test";
-import TrainerAssignDialog from "components/landing/StaffTrainerDialog";
+import TrainerAssignDialog from "components/landing/Staff/StaffTrainerDialog";
 
 const TrainerComponent = () => {
   const [data, setData] = useState([]);
