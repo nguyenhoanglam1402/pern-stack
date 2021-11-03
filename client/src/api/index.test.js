@@ -1,22 +1,38 @@
 import axios from "axios";
+import GetToken from "./header";
+import GetHeader from "./header";
 
 export const userAuthenticate = async (data) => {
-  const respond = await axios.post("http://localhost:5001/api/v1/auth/login", {
-    email: data.email,
-    password: data.password,
-  });
+  const respond = await axios.post(
+    "http://localhost:5001/api/v1/auth/login",
+    {
+      email: data.email,
+      password: data.password,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
   return respond;
 };
 
 export const fetchTrainerList = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/trainer/view"
+    "http://localhost:5001/api/v1/staff/trainer/view",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data;
 };
 
 export const fetchAllClasses = async () => {
-  const respond = await axios.get("http://localhost:5001/api/v1/staff/classes");
+  const respond = await axios.get(
+    "http://localhost:5001/api/v1/staff/classes",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
   return respond.data.data;
 };
 
@@ -26,6 +42,9 @@ export const assignTrainerClass = async (requestData) => {
     `http://localhost:5001/api/v1/staff/classes/trainer/assign/${requestData.trainerID}`,
     {
       className: requestData.className,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
   return respond.data.data;
@@ -33,7 +52,10 @@ export const assignTrainerClass = async (requestData) => {
 
 export const fetchAllTrainee = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/trainee/view"
+    "http://localhost:5001/api/v1/staff/trainee/view",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data;
 };
@@ -41,14 +63,20 @@ export const fetchAllTrainee = async () => {
 export const searchTraineeAPI = async (requestData) => {
   const respond = await axios.get(
     `http://localhost:5001/api/v1/staff/trainee/search`,
-    { params: { name: requestData.name, age: requestData.age } }
+    { params: { name: requestData.name, age: requestData.age } },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data.Accounts;
 };
 
 export const deleteTraineeAPI = async (id) => {
   const respond = await axios.delete(
-    `http://localhost:5001/api/v1/staff/trainee/delete/${id}`
+    `http://localhost:5001/api/v1/staff/trainee/delete/${id}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data;
 };
@@ -64,6 +92,9 @@ export const createTraineeAPI = async (requestData) => {
       age: requestData.age,
       education: requestData.education,
       year: requestData.year,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
   return respond.data;
@@ -75,6 +106,9 @@ export const assignTraineeClass = async (requestData) => {
     {
       emailTrainee: requestData.traineeEmail,
       className: requestData.className,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
   return respond.data;
@@ -85,19 +119,31 @@ export const changePasswordTrainee = async (requestData) => {
     `http://localhost:5001/api/v1/staff/trainee/password/${requestData.id}`,
     {
       newPassword: requestData.newPassword,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
   return respond.data.data;
 };
 
 export const fetchAllCourse = async () => {
-  const respond = await axios.get("http://localhost:5001/api/v1/staff/courses");
+  const respond = await axios.get(
+    "http://localhost:5001/api/v1/staff/courses",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  console.log(respond.data.message);
   return respond.data.data;
 };
 
 export const fetchAllCategories = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/categories"
+    "http://localhost:5001/api/v1/staff/categories",
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data;
 };
@@ -109,6 +155,9 @@ export const createNewCourse = async (requestData) => {
       name: requestData.name,
       description: requestData.description,
       categoryName: requestData.categoryName,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
   return respond.data.data;
@@ -116,14 +165,48 @@ export const createNewCourse = async (requestData) => {
 
 export const deleteCourse = async (id) => {
   const respond = await axios.delete(
-    `http://localhost:5001/api/v1/staff/courses/delete/${id}`
+    `http://localhost:5001/api/v1/staff/courses/delete/${id}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data;
 };
 
 export const searchCourse = async (name) => {
   const respond = await axios.get(
-    `http://localhost:5001/api/v1/staff/courses/${name}`
+    `http://localhost:5001/api/v1/staff/courses/${name}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};
+
+export const updateCourse = async (requestData) => {
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/staff/courses/update/${requestData.id}`,
+    {
+      name: requestData.name,
+      description: requestData.description,
+      categoryName: requestData.categoryName,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};
+
+export const updateCourse = async (requestData) => {
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/staff/courses/update/${requestData.id}`,
+    {
+      name: requestData.name,
+      description: requestData.description,
+      categoryName: requestData.categoryName,
+    },
+    GetHeader
   );
   return respond.data.data;
 };

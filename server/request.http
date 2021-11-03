@@ -1,6 +1,19 @@
 GET http://localhost:5001/api/v1/staff/courses
 
 ###
+
+POST http://localhost:5001/api/v1/admin/accounts/register
+Content-Type: application/json
+
+{
+  "email": "lamnhgcd191296@fpt.edu.vn",
+  "password": "123456789",
+  "fullname": "Nguyen Lam",
+  "role": "Staff",
+  "age": 21
+}
+
+###
 POST  http://localhost:5001/api/v1/auth/login
 Content-Type: application/json
 

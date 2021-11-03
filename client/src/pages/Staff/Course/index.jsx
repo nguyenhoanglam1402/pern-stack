@@ -1,14 +1,14 @@
 import { Button, Space, Form, Input } from "antd";
-import StaffAssignTraineeDialog from "components/landing/StaffAssignTraineeDialog";
-import AddCourseDialog from "components/landing/StaffCourseDialog";
-import StaffUpdateCourseDialog from "components/landing/StaffUpdateCourseDialog";
+import AddCourseDialog from "components/landing/Staff/StaffCourseDialog";
+import StaffUpdateCourseDialog from "components/landing/Staff/StaffUpdateCourseDialog";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   deleteCourse,
   fetchAllCourse,
   searchCourse,
-} from "../../api/index.test";
+} from "../../../api/index.test";
 
 const CoursePage = () => {
   const [data, setData] = useState([]);
@@ -16,6 +16,7 @@ const CoursePage = () => {
   const [isUpdateCoursePopUp, setUpdateCoursePopUp] = useState(false);
   const [isRefresh, setRefresh] = useState(0);
   const [isSearch, setSearchState] = useState(false);
+  const [choiceCourse, setChoice] = useState();
   const courseColumns = [
     {
       title: "Course Name",
@@ -38,7 +39,9 @@ const CoursePage = () => {
       render: (record) => (
         <Space size="middle">
           <Button type="primary">Classes</Button>
-          <Button type="primary">Update</Button>
+          <Button type="primary" onClick={(e) => onUpdateCourse(record)}>
+            Update
+          </Button>
           <Button type="primary" onClick={(e) => onDeleteCourse(record.id)}>
             Delete
           </Button>
@@ -60,6 +63,11 @@ const CoursePage = () => {
       })
       .catch((error) => console.error(error.message));
   }, [isRefresh]);
+
+  const onUpdateCourse = (record) => {
+    setUpdateCoursePopUp(true);
+    setChoice(record.id);
+  };
 
   const onDeleteCourse = (id) => {
     deleteCourse(id)
@@ -114,8 +122,9 @@ const CoursePage = () => {
         setRefresh={setRefresh}
       />
       <StaffUpdateCourseDialog
-        trigger={true}
+        trigger={isUpdateCoursePopUp}
         setTrigger={setUpdateCoursePopUp}
+        id={choiceCourse}
       />
     </div>
   );

@@ -5,9 +5,9 @@ import {
   fetchAllTrainee,
   searchTraineeAPI,
 } from "api/index.test";
-import StaffAssignTraineeDialog from "components/landing/StaffAssignTraineeDialog";
-import TraineeChangePasswordDialog from "components/landing/StaffChangePasswordDialog";
-import StaffTraineeDialog from "components/landing/StaffTraineeDialog";
+import StaffAssignTraineeDialog from "components/landing/Staff/StaffAssignTraineeDialog";
+import TraineeChangePasswordDialog from "components/landing/Staff/StaffChangePasswordDialog";
+import StaffTraineeDialog from "components/landing/Staff/StaffTraineeDialog";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
 
