@@ -4,7 +4,7 @@ const Category = database.db.CourseCategory;
 
 const getAllCoursesService = async () => {
   let allCourses = await Course.findAll({
-    attributes: ['name', 'description'],
+    attributes: ['name', 'description', 'id'],
     include: [
       {
         model: Category,
@@ -41,7 +41,7 @@ const getACourseByNameService = async (nameToFind) => {
     where: {
       name: nameToFind,
     },
-    attributes: ['name','description'],
+    attributes: ['name','description','id'],
     include:[
       {
         model: Category,
