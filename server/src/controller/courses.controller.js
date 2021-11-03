@@ -40,8 +40,7 @@ const getACourseByName = async (req, res) => {
       return res.status(500).json({
         success: false,
         message: "Something went wrong",
-        error: error,
-        data: {},
+        error: error.message,
       });
     }
   }
@@ -73,7 +72,7 @@ const createNewCourse = async (req, res) => {
     } catch (error) {
       res.status(400).send({
         success: false,
-        msg: error,
+        msg: error.message,
       });
     }
   }
