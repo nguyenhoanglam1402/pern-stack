@@ -31,6 +31,7 @@ const getACourseByName = async (req, res) => {
   } else {
     try {
       const result = await getACourseByNameService(req.params.name);
+      console.log(result);
       return res.status(200).json({
         success: true,
         data: result,
@@ -71,9 +72,9 @@ const createNewCourse = async (req, res) => {
         data: result,
       });
     } catch (error) {
-      res.status(400).send({
+      res.status(500).send({
         success: false,
-        msg: error,
+        msg: error.message,
       });
     }
   }
@@ -119,7 +120,7 @@ const deleteCourse = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Internal Server Error!",
-      error: error.message
+      error: error.message,
     });
   }
 };
@@ -129,5 +130,5 @@ module.exports = {
   createNewCourse,
   getACourseByName,
   updateCourse,
-  deleteCourse
+  deleteCourse,
 };

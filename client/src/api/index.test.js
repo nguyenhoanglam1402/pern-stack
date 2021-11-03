@@ -89,3 +89,34 @@ export const changePasswordTrainee = async (requestData) => {
   );
   return respond.data.data;
 };
+
+export const fetchAllCourse = async () => {
+  const respond = await axios.get("http://localhost:5001/api/v1/staff/courses");
+  return respond.data.data;
+};
+
+export const fetchAllCategories = async () => {
+  const respond = await axios.get(
+    "http://localhost:5001/api/v1/staff/categories"
+  );
+  return respond.data.data;
+};
+
+export const createNewCourse = async (requestData) => {
+  const respond = await axios.post(
+    "http://localhost:5001/api/v1/staff/courses/create",
+    {
+      name: requestData.name,
+      description: requestData.description,
+      categoryName: requestData.categoryName,
+    }
+  );
+  return respond.data.data;
+};
+
+export const deleteCourse = async (id) => {
+  const respond = await axios.delete(
+    `http://localhost:5001/api/v1/staff/courses/delete/${id}`
+  );
+  return respond.data.data;
+};
