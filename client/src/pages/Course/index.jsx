@@ -1,5 +1,7 @@
 import { Button, Space, Form, Input } from "antd";
+import StaffAssignTraineeDialog from "components/landing/StaffAssignTraineeDialog";
 import AddCourseDialog from "components/landing/StaffCourseDialog";
+import StaffUpdateCourseDialog from "components/landing/StaffUpdateCourseDialog";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
 import {
@@ -11,6 +13,7 @@ import {
 const CoursePage = () => {
   const [data, setData] = useState([]);
   const [isCourseAddPopUp, setCoursePopUp] = useState(false);
+  const [isUpdateCoursePopUp, setUpdateCoursePopUp] = useState(false);
   const [isRefresh, setRefresh] = useState(0);
   const [isSearch, setSearchState] = useState(false);
   const courseColumns = [
@@ -109,6 +112,10 @@ const CoursePage = () => {
         trigger={isCourseAddPopUp}
         setTrigger={setCoursePopUp}
         setRefresh={setRefresh}
+      />
+      <StaffUpdateCourseDialog
+        trigger={true}
+        setTrigger={setUpdateCoursePopUp}
       />
     </div>
   );
