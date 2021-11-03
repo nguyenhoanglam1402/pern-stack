@@ -49,6 +49,7 @@ const getACourseByNameService = async (nameToFind) => {
       },
     ],
   });
+  console.log("Course: ", selectedCourse);
   return selectedCourse;
 };
 
