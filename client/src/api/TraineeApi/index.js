@@ -23,3 +23,15 @@ export const viewFriends = async (uid, courseName) => {
   );
   return respond.data.data;
 };
+
+export const viewProfile = async (data) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/trainee/profile/${data.uid}`,
+    {
+      headers: {
+        Authorization: "Bearer " + data.token,
+      },
+    }
+  );
+  return respond.data.data;
+}
