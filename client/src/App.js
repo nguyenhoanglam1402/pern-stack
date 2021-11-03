@@ -7,7 +7,9 @@ import ProtectRoute from "router";
 
 const AuthPage = React.lazy(() => import("./pages/Auth"));
 const StaffContainer = React.lazy(() => import("components/Container/Staff"));
-
+const TraineeContainer = React.lazy(() =>
+  import("components/Container/Trainee")
+);
 function App() {
   return (
     <div className="App">
@@ -15,11 +17,16 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={AuthPage} />
-            <ProtectRoute path="/admin" component={Container} role="Trainer" />
+            <ProtectRoute path="/admin" component={Container} role="Admin" />
             <ProtectRoute
               path="/staff"
               component={StaffContainer}
-              role="Trainer"
+              role="Staff"
+            />
+            <ProtectRoute
+              path="/trainee"
+              component={TraineeContainer}
+              role="Trainee"
             />
           </Switch>
         </Router>
