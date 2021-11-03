@@ -5,7 +5,7 @@ import "./styles.css";
 import NavLink from "./nav-link";
 import imageLogo from "assets/icons/fpt_logo.png";
 
-const Navigator = () => {
+const NavigatorStaff = () => {
   const store = useSelector((store) => store.authReducer);
   return (
     <nav className="navbar">
@@ -30,4 +30,4 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export default NavigatorStaff;

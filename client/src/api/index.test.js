@@ -120,3 +120,10 @@ export const deleteCourse = async (id) => {
   );
   return respond.data.data;
 };
+
+export const searchCourse = async (name) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/courses/${name}`
+  );
+  return respond.data.data;
+};

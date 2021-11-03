@@ -21,6 +21,7 @@ const AddCourseDialog = (props) => {
       .then((respond) => {
         props.setTrigger(false);
         console.log(respond);
+        props.setRefresh((preState) => preState + 1);
       })
       .catch((error) => console.error(error.message));
   };
