@@ -14,7 +14,8 @@ const Navigator = () => {
           <img className="logo" src={imageLogo} alt="" />
         </div>
         <NavLink to="../trainee/home" content="Home" />
-        <NavLink to="../trainee/courses" content="Courses" />
+        <NavLink to="../trainee/classes" content="Classes" />
+        <NavLink to="../trainee/friends" content="Friends" />
         <NavLink to="../trainee/profile" content="Profile" />
       </ul>
       <div className="user-avatar">

@@ -15,10 +15,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={AuthPage} />
-            <ProtectRoute
-              path="/admin"
-              role="Admin"
-            />
+            <ProtectRoute path="/admin" role="Admin" />
             <ProtectRoute
               path="/staff"
               component={StaffContainer}

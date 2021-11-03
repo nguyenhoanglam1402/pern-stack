@@ -1,5 +1,6 @@
 import React from "react";
-import CoursePage from "pages/Course";
+import ClassPage from "pages/TraineePage/Course"
+import CoursePage from "pages/TraineePage/Friend";
 import HomePage from "pages/Home";
 import { Route } from "react-router";
 import Footer from "../../common/Footer";
@@ -10,7 +11,8 @@ const TraineeContainer = () => {
     <div className="trainee-container">
       <Navigator />
       <Route path="/trainee/home" component={HomePage} />
-      <Route path="/trainee/courses" component={CoursePage} />
+      <Route path="/trainee/classes" component={ClassPage} />
+      <Route path="/trainee/friends" component={CoursePage} />
       <Route path="/trainee/profile" component={HomePage} />
       <Footer/>
     </div>
