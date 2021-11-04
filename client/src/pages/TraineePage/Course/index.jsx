@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 const CourseView = () => {
   const store = useSelector((store) => store.authReducer);
   const [data, setData] = useState([]);
+
   const classesColumns = [
     {
       title: "Class Name",
@@ -34,7 +35,7 @@ const CourseView = () => {
         setData(dataSource);
       })
       .catch((error) => console.error(error.message));
-  }, []);
+  }, [store.uid]);
   return (
     <div className="container">
       <CustomizeTable

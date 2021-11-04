@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import CustomizeTable from "components/landing/Table";
-import {
-  viewCourseOfTrainee,
-  viewFriends,
-} from "../../../api/TraineeApi/index";
+import { viewCourseOfTrainee } from "../../../api/TraineeApi/index";
 import { useSelector } from "react-redux";
 import { Button, Space } from "antd";
+import TraineeFriendDialog from "components/landing/Trainee/TraineeFriendDialog";
 const FriendView = () => {
   const store = useSelector((store) => store.authReducer);
   const [data, setData] = useState([]);
-  const [isOpen, setOpen] = useState(false);
+  const [course, setCourseChoice] = useState("");
+  const [isFriendPopUp, setFriendPopUp] = useState(false);
   const courseColumns = [
     {
       title: "Course Name",
@@ -29,11 +28,11 @@ const FriendView = () => {
           <Button
             type="primary"
             onClick={(e) => {
-              console.log(record);
+              console.log(record.course);
               onShowFriends(record.course);
             }}
           >
-            Classmate
+            Course mate
           </Button>
         </Space>
       ),
@@ -49,12 +48,11 @@ const FriendView = () => {
         setData(dataSource);
       })
       .catch((error) => console.error(error.message));
-  }, []);
+  }, [store.uid]);
 
   const onShowFriends = (courseName) => {
-    viewFriends(store.uid, courseName)
-      .then((data) => {})
-      .catch((error) => console.error(error));
+    setCourseChoice(courseName);
+    setFriendPopUp(true);
   };
 
   return (
@@ -63,6 +61,12 @@ const FriendView = () => {
         title="Course List"
         dataSource={data}
         columns={courseColumns}
+      />
+      <TraineeFriendDialog
+        trigger={isFriendPopUp}
+        setTrigger={setFriendPopUp}
+        courseName={course}
+        uid={store.uid}
       />
     </div>
   );

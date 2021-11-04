@@ -195,3 +195,13 @@ export const updateCourse = async (requestData) => {
   );
   return respond.data.data;
 };
+
+export const fetchClassByCourse = async (courseName) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/classes/${courseName}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};
