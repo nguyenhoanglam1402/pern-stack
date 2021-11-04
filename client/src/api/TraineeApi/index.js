@@ -29,9 +29,9 @@ export const viewProfile = async (data) => {
     `http://localhost:5001/api/v1/trainee/profile/${data.uid}`,
     {
       headers: {
-        Authorization: "Bearer " + data.token,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }
   );
   return respond.data.data;
-}
+};
