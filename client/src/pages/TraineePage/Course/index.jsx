@@ -19,18 +19,17 @@ const CourseView = () => {
     },
     {
       title: "Description",
-      dataIndex: "desciption",
-      key: "desciption",
+      dataIndex: "description",
+      key: "description",
     },
   ];
   useEffect(() => {
     viewCourseOfTrainee(store.uid)
       .then((respond) => {
-        console.log(respond[1].Class);
         const dataSource = respond.map((item, index) => ({
           class: item.Class.name,
           course: item.Class.Course.name,
-          desciption: item.Class.Course.description,
+          description: item.Class.Course.description,
         }));
         setData(dataSource);
       })

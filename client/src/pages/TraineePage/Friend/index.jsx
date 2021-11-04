@@ -18,32 +18,40 @@ const FriendView = () => {
     },
     {
       title: "Description",
-      dataIndex: "desciption",
-      key: "desciption",
+      dataIndex: "description",
+      key: "description",
     },
     {
       title: "Actions",
       key: "actions",
       render: (record) => (
         <Space size="middle">
-          <Button type="primary">Classmate</Button>
+          <Button
+            type="primary"
+            onClick={(e) => {
+              console.log(record);
+              onShowFriends(record.course);
+            }}
+          >
+            Classmate
+          </Button>
         </Space>
       ),
     },
   ];
   useEffect(() => {
-    viewCourseOfTrainee(store)
+    viewCourseOfTrainee(store.uid)
       .then((respond) => {
         const dataSource = respond.map((item, index) => ({
           course: item.Class.Course.name,
-          desciption: item.Class.Course.description,
+          description: item.Class.Course.description,
         }));
         setData(dataSource);
       })
       .catch((error) => console.error(error.message));
   }, []);
 
-  const onSearchFriends = (store, courseName) => {
+  const onShowFriends = (courseName) => {
     viewFriends(store.uid, courseName)
       .then((data) => {})
       .catch((error) => console.error(error));
