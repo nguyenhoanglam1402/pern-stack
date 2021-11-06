@@ -54,7 +54,11 @@ const TraineePage = () => {
           <Button type="primary" onClick={(e) => onAssignClick(record)}>
             Assign
           </Button>
-          <Button type="primary" onClick={(e) => deleteTrainee(record.id)}>
+          <Button
+            type="primary"
+            onClick={(e) => deleteTrainee(record.id)}
+            danger={true}
+          >
             Delete
           </Button>
           <Button type="primary" onClick={(e) => onPasswordChangeClick(record)}>

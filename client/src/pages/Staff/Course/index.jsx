@@ -3,7 +3,7 @@ import AddCourseDialog from "components/landing/Staff/StaffCourseDialog";
 import StaffUpdateCourseDialog from "components/landing/Staff/StaffUpdateCourseDialog";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router";
 import {
   deleteCourse,
   fetchAllCourse,
@@ -17,6 +17,7 @@ const CoursePage = () => {
   const [isRefresh, setRefresh] = useState(0);
   const [isSearch, setSearchState] = useState(false);
   const [choiceCourse, setChoice] = useState();
+  const history = useHistory();
   const courseColumns = [
     {
       title: "Course Name",
@@ -37,12 +38,26 @@ const CoursePage = () => {
       title: "Actions",
       key: "actions",
       render: (record) => (
-        <Space size="middle">
-          <Button type="primary">Classes</Button>
+        <Space size="middle" key={record.id}>
+          <Button
+            type="primary"
+            onClick={(e) => {
+              console.log(record);
+              history.push({
+                pathname: `/staff/course/classes/${record.name}`,
+              });
+            }}
+          >
+            Classes
+          </Button>
           <Button type="primary" onClick={(e) => onUpdateCourse(record)}>
             Update
           </Button>
-          <Button type="primary" onClick={(e) => onDeleteCourse(record.id)}>
+          <Button
+            type="primary"
+            onClick={(e) => onDeleteCourse(record.id)}
+            danger={true}
+          >
             Delete
           </Button>
         </Space>

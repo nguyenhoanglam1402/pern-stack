@@ -21,7 +21,7 @@ export const viewFriends = async (uid, courseName) => {
       },
     }
   );
-  return respond.data.data;
+  return respond.data.data[0].Classes;
 };
 
 export const viewProfile = async (data) => {

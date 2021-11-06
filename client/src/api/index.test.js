@@ -1,6 +1,4 @@
 import axios from "axios";
-import GetToken from "./header";
-import GetHeader from "./header";
 
 export const userAuthenticate = async (data) => {
   const respond = await axios.post(
@@ -198,15 +196,12 @@ export const updateCourse = async (requestData) => {
   return respond.data.data;
 };
 
-export const updateCourse = async (requestData) => {
-  const respond = await axios.put(
-    `http://localhost:5001/api/v1/staff/courses/update/${requestData.id}`,
+export const fetchClassByCourse = async (courseName) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/classes/${courseName}`,
     {
-      name: requestData.name,
-      description: requestData.description,
-      categoryName: requestData.categoryName,
-    },
-    GetHeader
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
   );
   return respond.data.data;
 };
