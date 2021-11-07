@@ -228,7 +228,23 @@ export const deleteClass = async (requestData) => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
-  return respond;
+  return respond.data.data;
+};
+
+export const updateTraineeProfile = async (requestData) => {
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/staff/trainee/update/${requestData.id}`,
+    {
+      fullname: requestData.fullname,
+      education: requestData.education,
+      age: requestData.age,
+      year: requestData.year,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
 };
 
 export const getTraineeInClass = async (requestData)=>{
