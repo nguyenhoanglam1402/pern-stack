@@ -5,10 +5,9 @@ import {
   fetchClassByCourse,
   fetchTrainerList,
 } from "api/index.test";
-import { data } from "autoprefixer";
 import CustomizeTable from "components/landing/Table";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const ClassPage = (_) => {
   const [dataSource, setDataSource] = useState([]);
@@ -16,7 +15,7 @@ const ClassPage = (_) => {
   const [refresh, setRefresh] = useState(0);
   const [onForm, setOnForm] = useState(false);
   const [trainers, setTrainer] = useState([]);
-  const [isSuccess, setSuccess] = useState(false);
+  const history = useHistory();
   useEffect(() => {
     fetchClassByCourse(courseName)
       .then((data) => {
@@ -52,12 +51,33 @@ const ClassPage = (_) => {
       title: "Action",
       key: "action",
       render: (record) => (
-        <Button type="primary" danger={true} onClick={(e) => onDelete(record)}>
-          Delete
-        </Button>
+        <Space size="middle">
+          <Button type="primary" onClick={(e) => onDetail(record)}>
+            Detail
+          </Button>
+          <Button
+            type="primary"
+            danger={true}
+            onClick={(e) => onDelete(record)}
+          >
+            Delete
+          </Button>
+        </Space>
       ),
     },
   ];
+
+  const onDetail = (record) => {
+    const requestData = {
+      ...record,
+      trainerID: record.Trainer.Account.id,
+    };
+    console.log(requestData);
+    history.push({
+      pathname: `/staff/course/classes/detail/${record.ClassName}`,
+      state: requestData,
+    });
+  };
 
   const onAddClass = () => {
     setOnForm(true);
@@ -76,11 +96,9 @@ const ClassPage = (_) => {
     const data = { ...value, courseName: courseName };
     createNewClass(data)
       .then((data) => {
-        setSuccess(true);
         setRefresh((preState) => preState + 1);
       })
       .catch((error) => {
-        setSuccess(false);
         alert("Class name is already existed");
       });
     console.log(data);

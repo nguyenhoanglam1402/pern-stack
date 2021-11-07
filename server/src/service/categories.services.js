@@ -35,9 +35,9 @@ const createNewCategoryService = async (body) => {
 
 const updateCategoryService = async (id, data) => {
   const checkCategoryExisted = await Category.findOne({
-    where: { name: data.name },
+    where: { id: id },
   });
-  if(checkCategoryExisted!==null){
+  if (checkCategoryExisted !== null) {
     let dataUpdated = await Category.update(
       {
         name: data.name,
@@ -50,21 +50,19 @@ const updateCategoryService = async (id, data) => {
       }
     );
     return dataUpdated;
-  }
-  else{
+  } else {
     return false;
   }
-  
 };
 
 const deleteCategoryService = async (name) => {
   const checkCategoryExisted = await Category.findOne({
     where: { name: name },
   });
-  console.log("Here",checkCategoryExisted);
+  console.log("Here", checkCategoryExisted);
   if (checkCategoryExisted === null) {
     return false;
-  }else {
+  } else {
     let deleted = await Category.destroy({
       where: {
         name: name,
