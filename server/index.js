@@ -11,7 +11,7 @@ dotenv.config();
 ConnectDatabase();
 
 const port = process.env.PORT || 5001;
-const isProduction = process.env.NODE_ENV === "production";
+// const isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
 app.use(helmet());
