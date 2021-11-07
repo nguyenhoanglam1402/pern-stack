@@ -111,7 +111,7 @@ const getListTraineesInClassService = async (idTrainer, className) => {
             include: [
               {
                 model: Account,
-                attributes: ["fullname"],
+                attributes: ["fullname", "id"],
               },
             ],
           },

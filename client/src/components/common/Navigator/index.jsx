@@ -15,7 +15,7 @@ const Navigator = () => {
         </div>
         <NavLink to="/staff/home" content="Home" />
         <NavLink to="/staff/course" content="Courses" />
-        <NavLink to="/staff/course" content="Categories" />
+        <NavLink to="/staff/category" content="Categories" />
         <NavLink to="/staff/trainee" content="Trainees" />
         <NavLink to="/staff/trainer" content="Trainers" />
       </ul>

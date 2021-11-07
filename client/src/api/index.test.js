@@ -228,18 +228,80 @@ export const deleteClass = async (requestData) => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
-  return respond;
+  return respond.data.data;
 };
 
-export const getTraineeInClass = async (requestData)=>{
-  const respond = await axios.get(
-    `http://localhost:5001/api/v1/staff/courses/${requestData.idTrainer}/classes/trainees`,
+export const updateTraineeProfile = async (requestData) => {
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/staff/trainee/update/${requestData.id}`,
     {
-      classname: requestData.className,
+      fullname: requestData.fullname,
+      education: requestData.education,
+      age: requestData.age,
+      year: requestData.year,
     },
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
   );
-  return respond;
-}
+  return respond.data.data;
+};
+
+export const getTraineeInClass = async (requestData) => {
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/courses/${requestData.trainerID}/classes/trainees?classname=${requestData.className}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data.ListTraineeClasses;
+};
+
+export const updateCategoryName = async (requestData) => {
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/staff/categories/update/${requestData.id}`,
+    {
+      name: requestData.name,
+      description: requestData.description,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};
+
+export const deleteCategory = async (requestData) => {
+  const respond = await axios.delete(
+    `http://localhost:5001/api/v1/staff/categories/delete/${requestData}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  console.log(respond);
+  return respond.data.data;
+};
+
+export const addCategory = async (requestData) => {
+  const respond = await axios.post(
+    `http://localhost:5001/api/v1/staff/categories/create`,
+    {
+      name: requestData.name,
+      description: requestData.description,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};
+
+export const kickTraineeClass = async (requestData) => {
+  const respond = await axios.delete(
+    `http://localhost:5001/api/v1/staff/classes/${requestData.classID}/trainee/delete/${requestData.id}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};

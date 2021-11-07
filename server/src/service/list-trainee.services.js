@@ -40,28 +40,29 @@ const assignTraineeService = async (emailTrainee, className) => {
   const traineeID = await Account.findOne({
     attributes: ["id"],
     where: {
-      email: emailTrainee
+      email: emailTrainee,
     },
-    include: [{
-      model: Role,
-      attributes: ["name"]
-    }],
-  })
-  if(traineeID === null){
+    include: [
+      {
+        model: Role,
+        attributes: ["name"],
+      },
+    ],
+  });
+  if (traineeID === null) {
     return null;
-  }
-  else{
-    if(traineeID.dataValues.Role.name !== "Trainee"){
+  } else {
+    if (traineeID.dataValues.Role.name !== "Trainee") {
       return false;
     }
     const classID = await findClassIDServices(className);
     const checkexist = await ListTraineeClass.findOne({
-      attributes: ["classID","traineeID"],
+      attributes: ["classID", "traineeID"],
       where: {
         [Op.and]: [{ traineeID: traineeID.id }, { classID: classID }],
-      }
-    })
-    if(checkexist !== null){
+      },
+    });
+    if (checkexist !== null) {
       return "existed";
     }
     const result = await ListTraineeClass.create({
@@ -72,15 +73,10 @@ const assignTraineeService = async (emailTrainee, className) => {
   }
 };
 
-const kickTraineeServices = async (id, className) => {
-  const classResult = await Class.findOne({
-    where: {
-      name: className,
-    },
-  });
+const kickTraineeServices = async (id, classID) => {
   const result = await ListTraineeClass.destroy({
     where: {
-      [Op.and]: [{traineeID: id},{classID: classResult.id,}]
+      [Op.and]: [{ traineeID: id }, { classID: classID }],
     },
   });
   return result;
@@ -95,7 +91,7 @@ const getCoursesOfTraineeService = async (idTrainee) => {
     include: [
       {
         model: Class,
-        attributes: ["courseID","name"],
+        attributes: ["courseID", "name"],
         include: [
           {
             model: Course,

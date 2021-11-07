@@ -9,6 +9,7 @@ import StaffAssignTraineeDialog from "components/landing/Staff/StaffAssignTraine
 import TraineeChangePasswordDialog from "components/landing/Staff/StaffChangePasswordDialog";
 import StaffTraineeDialog from "components/landing/Staff/StaffTraineeDialog";
 import CustomizeTable from "components/landing/Table";
+import { useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 const TraineePage = () => {
@@ -18,6 +19,7 @@ const TraineePage = () => {
   const [isAssignTraineePopUp, setAssignTraineePopUp] = useState(false);
   const [choice, setChoice] = useState([]);
   const [isChangePasswordPopUp, setChangePasswordPopUp] = useState(false);
+  const history = useHistory();
   const columns = [
     {
       title: "Fullname",
@@ -50,7 +52,9 @@ const TraineePage = () => {
       key: "action",
       render: (record) => (
         <Space size="middle" key={record.key}>
-          <Button type="primary">Update</Button>
+          <Button type="primary" onClick={(e) => onUpdate(record)}>
+            Update
+          </Button>
           <Button type="primary" onClick={(e) => onAssignClick(record)}>
             Assign
           </Button>
@@ -97,6 +101,13 @@ const TraineePage = () => {
         setTraineeData(dataTable);
       })
       .catch((error) => console.error(error.message));
+  };
+
+  const onUpdate = async (record) => {
+    history.push({
+      pathname: `/staff/trainee/update/${record.id}`,
+      state: record,
+    });
   };
 
   const deleteTrainee = async (id) => {
