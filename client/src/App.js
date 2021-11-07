@@ -8,6 +8,10 @@ const StaffContainer = React.lazy(() => import("components/Container/Staff"));
 const TraineeContainer = React.lazy(() =>
   import("components/Container/Trainee")
 );
+const AdminContainer = React.lazy(() => import("components/Container/Admin"));
+const TrainerContainer = React.lazy(() => import("components/Container/Trainer"));
+
+
 function App() {
   return (
     <div className="App">
@@ -15,7 +19,11 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={AuthPage} />
-            <ProtectRoute path="/admin" role="Admin" />
+            <ProtectRoute
+              path="/admin"
+              component={AdminContainer}
+              role="Admin"
+            />
             <ProtectRoute
               path="/staff"
               component={StaffContainer}
@@ -25,6 +33,11 @@ function App() {
               path="/trainee"
               component={TraineeContainer}
               role="Trainee"
+            />
+            <ProtectRoute
+              path="/trainer"
+              component={TrainerContainer}
+              role="Trainer"
             />
           </Switch>
         </Router>
