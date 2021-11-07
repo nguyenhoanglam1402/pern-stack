@@ -37,7 +37,10 @@ const {
   changePasswordTrainee,
   getAllTrainee,
 } = require("../controller/trainee.controller.js");
-const { getAllTrainer } = require("../controller/trainer.controllers");
+const {
+  getAllTrainer,
+  getListTraineesInClass,
+} = require("../controller/trainer.controllers");
 const router = express.Router();
 
 //Route for course
@@ -63,7 +66,7 @@ router.put("/classes/update", updateClassController);
 router.delete("/classes/delete/:id", deleteClassConotroller);
 router.delete("/classes/trainee/delete/:id", kickTraineeController);
 router.get("/classes/:courseName", getDetailClassesOfCourse);
-
+router.get("/courses/:id/classes/trainees", getListTraineesInClass);
 //Route for trainer
 router.get("/trainer/view", getAllTrainer);
 
