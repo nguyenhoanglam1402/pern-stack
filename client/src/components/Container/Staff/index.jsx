@@ -7,6 +7,7 @@ import { Route } from "react-router";
 import Navigator from "../../common/Navigator";
 import "./styles.css";
 import ClassPage from "pages/Staff/Class";
+import UpdateTrainee from "pages/Staff/UpdateTrainee";
 
 const StaffContainer = () => {
   return (
@@ -15,8 +16,9 @@ const StaffContainer = () => {
       <Route path="/staff/home" component={HomePage} />
       <Route path="/staff/course" exact component={CoursePage} />
       <Route path="/staff/course/classes/:courseName" component={ClassPage} />
-      <Route path="/staff/trainer" component={TrainerComponent} />
-      <Route path="/staff/trainee" component={TraineePage} />
+      <Route path="/staff/trainer" exact component={TrainerComponent} />
+      <Route path="/staff/trainee" exact component={TraineePage} />
+      <Route path="/staff/trainee/update/:id" component={UpdateTrainee} />
     </div>
   );
 };
