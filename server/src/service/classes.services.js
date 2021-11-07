@@ -40,13 +40,10 @@ const createClassService = async (courseName, name, trainerId) => {
   return result;
 };
 
-const deleteClassService = async (className, trainerID, courseName) => {
-  const courseID = await findCourseIDService(courseName);
+const deleteClassService = async (id) => {
   const result = await Class.destroy({
     where: {
-      trainerID: trainerID,
-      name: className,
-      courseID: courseID,
+      id: id,
     },
   });
   return result;
@@ -159,7 +156,7 @@ const findClassesByCourseService = async (courseId) => {
             include: [
               {
                 model: Account,
-                attributes: ["fullname","id"],
+                attributes: ["fullname", "id"],
               },
             ],
           },

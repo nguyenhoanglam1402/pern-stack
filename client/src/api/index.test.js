@@ -205,3 +205,28 @@ export const fetchClassByCourse = async (courseName) => {
   );
   return respond.data.data;
 };
+
+export const createNewClass = async (requestData) => {
+  const respond = await axios.post(
+    `http://localhost:5001/api/v1/staff/classes/create`,
+    {
+      courseName: requestData.courseName,
+      trainerID: requestData.trainerID,
+      name: requestData.name,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond.data.data;
+};
+
+export const deleteClass = async (requestData) => {
+  const respond = await axios.delete(
+    `http://localhost:5001/api/v1/staff/classes/delete/${requestData}`,
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond;
+};

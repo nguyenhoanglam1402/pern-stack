@@ -49,8 +49,8 @@ const createClassController = async (req, res) => {
 
 const deleteClassConotroller = async (req, res) => {
   try {
-    const { courseName, trainerID, name } = req.body;
-    const result = await deleteClassService(name, trainerID, courseName);
+    const { id } = req.params;
+    const result = await deleteClassService(id);
     if (result === 0) {
       return res.status(404).json({
         success: false,

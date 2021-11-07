@@ -3,7 +3,7 @@ import AddCourseDialog from "components/landing/Staff/StaffCourseDialog";
 import StaffUpdateCourseDialog from "components/landing/Staff/StaffUpdateCourseDialog";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import {
   deleteCourse,
   fetchAllCourse,
