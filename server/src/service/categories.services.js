@@ -35,7 +35,7 @@ const createNewCategoryService = async (body) => {
 
 const updateCategoryService = async (id, data) => {
   const checkCategoryExisted = await Category.findOne({
-    where: { name: data.name },
+    where: { id: id },
   });
   if(checkCategoryExisted!==null){
     let dataUpdated = await Category.update(
