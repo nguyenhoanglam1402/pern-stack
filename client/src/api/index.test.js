@@ -230,3 +230,16 @@ export const deleteClass = async (requestData) => {
   );
   return respond;
 };
+
+export const getTraineeInClass = async (requestData)=>{
+  const respond = await axios.get(
+    `http://localhost:5001/api/v1/staff/courses/${requestData.idTrainer}/classes/trainees`,
+    {
+      classname: requestData.className,
+    },
+    {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }
+  );
+  return respond;
+}

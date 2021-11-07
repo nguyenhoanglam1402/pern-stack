@@ -37,7 +37,6 @@ const getTrainerCourses = async (req, res) => {
 
 const getListTraineesInClass = async (req, res) => {
   const idTrainer = req.params.id;
-  console.log(req.query.classname);
   if (!idTrainer) {
     return res.status(400).json({
       success: false,
@@ -47,7 +46,7 @@ const getListTraineesInClass = async (req, res) => {
     try {
       const result = await getListTraineesInClassService(
         idTrainer,
-        req.query.classname
+        req.body.classname
       );
       return res.status(200).json({
         success: true,
