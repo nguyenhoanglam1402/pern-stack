@@ -88,8 +88,8 @@ const kickTraineeController = async (req, res) => {
         message: "The id trainee cannot empty",
       });
     }
-    const { className } = req.body;
-    const result = await kickTraineeServices(idTrainee, className);
+    const classID = req.params.classID;
+    const result = await kickTraineeServices(idTrainee, classID);
     console.log(result);
     if (result === 0) {
       return res.status(404).json({

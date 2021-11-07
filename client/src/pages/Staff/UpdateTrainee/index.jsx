@@ -1,7 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { updateTraineeProfile } from "api/index.test";
 import React from "react";
-import { Redirect, useHistory, useLocation, useParams } from "react-router";
+import { useHistory, useLocation, useParams } from "react-router";
 
 const UpdateTrainee = () => {
   const location = useLocation();
