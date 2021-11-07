@@ -46,7 +46,6 @@ const getFriendTraineeController = async (req, res) => {
 const assignTraineeClassController = async (req, res) => {
   try {
     const { className, emailTrainee } = req.body;
-    console.log("Infor ", className);
     const result = await assignTraineeService(emailTrainee, className);
     if (result === null) {
       return res.status(400).json({
