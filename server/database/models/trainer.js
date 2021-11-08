@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
       });
       Trainer.hasOne(models.Class,{
-        foreignKey: "trainerID",
+        foreignKey: "trainerID"
       })
     }
   }
