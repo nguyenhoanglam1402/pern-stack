@@ -4,7 +4,7 @@ const {
   deleteAccountService,
   getAccountStaffService,
   updateAccountStaffService,
-  getAccountsByRoleService
+  getAccountsByRoleService,
 } = require("../service/account.services");
 const argon = require("argon2");
 const { findRoleServices } = require("../service/roles.services");
@@ -46,6 +46,7 @@ const deleteSystemStaff = async (req, res) => {
   try {
     const id = req.params.id;
     const checkingRole = await getRoleByIdService(id);
+
     if (
       checkingRole.Role.name === "Trainee" ||
       checkingRole.Role.name === "Admin"
@@ -80,15 +81,14 @@ const getProfileStaffById = async (req, res) => {
   } else {
     try {
       const checkRole = await getRoleByIdService(id);
-      if(checkRole.Role.name!=="Staff")
-      {
+      if (checkRole.Role.name !== "Staff") {
         return res.status(400).json({
           success: false,
           message: "You don't have permission to find this role",
         });
       }
       const result = await getAccountStaffService(id);
-      if(!result){
+      if (!result) {
         return res.status(404).json({
           success: false,
           message: "Cannot find this staff",
@@ -107,28 +107,27 @@ const getProfileStaffById = async (req, res) => {
   }
 };
 
-const updateStaff = async (req,res) => {
+const updateStaff = async (req, res) => {
   const id = req.params.id;
-  if(!id){
+  if (!id) {
     return res.status(400).json({
       success: false,
-      message: "The id staff cannot empty",
+      message: "The id trainer cannot empty",
     });
-  }else{
+  } else {
     const checkRole = await getRoleByIdService(id);
-      if(checkRole.Role.name!=="Staff")
-      {
-        return res.status(400).json({
-          success: false,
-          message: "You don't have permission to update this role",
-        });
-      }
+    if (checkRole.Role.name !== "Staff") {
+      return res.status(400).json({
+        success: false,
+        message: "You don't have permission to update this role",
+      });
+    }
     const newData = {
       fullname: req.body.fullname,
-      age: req.body.age
-    }
+      age: req.body.age,
+    };
     try {
-      const result = await updateAccountStaffService(id,newData);
+      const result = await updateAccountStaffService(id, newData);
       return res.status(200).json({
         success: true,
         data: result,
@@ -140,12 +139,12 @@ const updateStaff = async (req,res) => {
       });
     }
   }
-}
+};
 
-const getAllStaff = async (req,res) => {
+const getAllStaff = async (req, res) => {
   try {
     const roleID = await findRoleServices("Staff");
-    const result = await getAccountsByRoleService("Staff",roleID);
+    const result = await getAccountsByRoleService("Staff", roleID);
     return res.status(200).json({
       success: true,
       data: result,
@@ -156,11 +155,11 @@ const getAllStaff = async (req,res) => {
       message: "Internal server error",
     });
   }
-}
+};
 module.exports = {
   changePasswordSystemStaffController,
   deleteSystemStaff,
   getProfileStaffById,
   updateStaff,
-  getAllStaff
+  getAllStaff,
 };

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import CustomizeTable from "components/landing/Table";
 import { viewCourseOfTrainee } from "../../../api/TraineeApi/index";
 import { useSelector } from "react-redux";
+import { Button, Space } from "antd";
 
 const CourseView = () => {
   const store = useSelector((store) => store.authReducer);
   const [data, setData] = useState([]);
+  const [onView, setOnView] = useState(false);
 
   const classesColumns = [
     {
@@ -23,6 +25,15 @@ const CourseView = () => {
       dataIndex: "description",
       key: "description",
     },
+    {
+      title: "Action",
+      key: "action",
+      render: (record) => (
+        <Button type="primary" onClick={(e) => onViewClick(record)}>
+          View
+        </Button>
+      ),
+    },
   ];
   useEffect(() => {
     viewCourseOfTrainee(store.uid)
@@ -36,6 +47,11 @@ const CourseView = () => {
       })
       .catch((error) => console.error(error.message));
   }, [store.uid]);
+
+  const onViewClick = (record) => {
+    setOnView(true);
+  };
+
   return (
     <div className="container">
       <CustomizeTable
