@@ -121,7 +121,33 @@ const getListTraineesInClassService = async (idTrainer, className) => {
   });
   return result;
 };
-
+const getListTraineesByNameInClassService = async (className) => {
+  const result = await Class.findOne({
+    attributes: ["name"],
+    where: {
+       name: className,
+    },
+    include: [
+      {
+        model: ListTrainee,
+        attributes: ["classID"],
+        include: [
+          {
+            model: Trainee,
+            attributes: ["education", "year"],
+            include: [
+              {
+                model: Account,
+                attributes: ["fullname", "id"],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+  return result;
+};
 const findClassesByCourseService = async (courseId) => {
   const result = await Class.findAll({
     attributes: [
@@ -176,4 +202,5 @@ module.exports = {
   getTrainerCoursesService,
   getListTraineesInClassService,
   findClassesByCourseService,
+  getListTraineesByNameInClassService
 };

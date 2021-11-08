@@ -112,10 +112,10 @@ const updateStaff = async (req,res) => {
   if(!id){
     return res.status(400).json({
       success: false,
-      message: "The id trainer cannot empty",
+      message: "The id staff cannot empty",
     });
   }else{
-    const checkRole = await getRoleByIdService(idTrainer);
+    const checkRole = await getRoleByIdService(id);
       if(checkRole.Role.name!=="Staff")
       {
         return res.status(400).json({

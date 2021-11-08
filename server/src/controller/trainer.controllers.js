@@ -1,6 +1,7 @@
 const {
   getTrainerCoursesService,
   getListTraineesInClassService,
+  getListTraineesByNameInClassService
 } = require("../service/classes.services");
 const {
   getAcountService,
@@ -58,6 +59,23 @@ const getListTraineesInClass = async (req, res) => {
         message: "Internal server error",
       });
     }
+  }
+};
+const getListTraineesInClassByName = async (req, res) => {
+  try {
+    const result = await getListTraineesByNameInClassService(
+      req.params.className
+    );
+    return res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      error: error,
+      message: "Internal server error",
+    });
   }
 };
 
@@ -147,4 +165,5 @@ module.exports = {
   getTrainerProfile,
   getAllTrainer,
   updateTrainerProfile,
+  getListTraineesInClassByName
 };
