@@ -9,6 +9,7 @@ export const registerStaffAndTrainer = async (requestData) => {
       fullname: requestData.fullname,
       role: requestData.role,
       age: requestData.age,
+      specialty: requestData.specialty,
     },
     {
       headers: {
@@ -71,7 +72,7 @@ export const getTrainerProfile = async (requestData) => {
 };
 
 export const updateTrainerProfile = async (requestData) => {
-  const respond = await axios.patch(
+  const respond = await axios.put(
     `http://localhost:5001/api/v1/admin/trainer/edit/${requestData.id}`,
     {
       fullname: requestData.fullname,
@@ -100,17 +101,17 @@ export const getStaffProfile = async (requestData) => {
 };
 
 export const updateStaffProfile = async (requestData) => {
-    const respond = await axios.patch(
-      `http://localhost:5001/api/v1/admin/staff/edit/${requestData.id}`,
-      {
-        fullname: requestData.fullname,
-        age: requestData.age,
+  const respond = await axios.put(
+    `http://localhost:5001/api/v1/admin/staff/edit/${requestData.id.id}`,
+    {
+      fullname: requestData.fullname,
+      age: requestData.age,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
-    return respond;
-  };
+    }
+  );
+  return respond;
+};

@@ -14,10 +14,7 @@ export const getAllTrainerCourses = async (data) => {
 
 export const getTraineeInClass = async (data) => {
   const respond = await axios.get(
-    `http://localhost:5001/api/v1/trainer/courses/${data.uid}/classes/trainees`,
-    {
-      classname: requestData.className,
-    },
+    `http://localhost:5001/api/v1/trainer/courses/${data.uid}/classes/${data.className}/trainees`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

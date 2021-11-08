@@ -13,8 +13,8 @@ const Navigator = () => {
         <div className="logo-block">
           <img className="logo" src={imageLogo} alt="" />
         </div>
-        <NavLink to="../admin/trainer" content="Trainer" />
-        <NavLink to="../admin/staff" content="Staff" />
+        <NavLink to="/admin/trainer" content="Trainer" />
+        <NavLink to="/admin/staff" content="Staff" />
       </ul>
       <div className="user-avatar">
         <div className="user-block">
