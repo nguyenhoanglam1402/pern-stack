@@ -112,8 +112,9 @@ const updateStaff = async (req, res) => {
   if (!id) {
     return res.status(400).json({
       success: false,
-      message: "The id trainer cannot empty",
+      message: "The id staff cannot empty",
     });
+<<<<<<< HEAD
   } else {
     const checkRole = await getRoleByIdService(id);
     if (checkRole.Role.name !== "Staff") {
@@ -122,6 +123,17 @@ const updateStaff = async (req, res) => {
         message: "You don't have permission to update this role",
       });
     }
+=======
+  }else{
+    const checkRole = await getRoleByIdService(id);
+      if(checkRole.Role.name!=="Staff")
+      {
+        return res.status(400).json({
+          success: false,
+          message: "You don't have permission to update this role",
+        });
+      }
+>>>>>>> master
     const newData = {
       fullname: req.body.fullname,
       age: req.body.age,
