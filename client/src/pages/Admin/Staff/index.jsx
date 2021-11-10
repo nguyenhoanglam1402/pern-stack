@@ -1,16 +1,22 @@
 import { Button, Input, Space } from "antd";
-import { getAllStaff, registerStaffAndTrainer } from "api/AdminApi";
+import {
+  deleteSystemStaff,
+  getAllStaff,
+  registerStaffAndTrainer,
+} from "api/AdminApi";
 import StaffChangePasswordDialog from "components/landing/Admin/StaffChangePasswordDialog";
 import CustomizeTable from "components/landing/Table";
 import { Form } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { data } from "autoprefixer";
 
 const StaffManagePage = () => {
   const [staffs, setStaffs] = useState([]);
   const [trigger, setTrigger] = useState(false);
   const [choiceID, setChoiceID] = useState("");
   const [onForm, setOnForm] = useState(false);
+  const [refresh, setFresh] = useState(0);
   const history = useHistory();
   const columns = [
     {
@@ -41,7 +47,11 @@ const StaffManagePage = () => {
           >
             Change Password
           </Button>
-          <Button type="primary" danger={true}>
+          <Button
+            type="primary"
+            danger={true}
+            onClick={(e) => onDelete(record)}
+          >
             Delete
           </Button>
         </Space>
@@ -53,7 +63,7 @@ const StaffManagePage = () => {
     getAllStaff()
       .then((data) => setStaffs(data))
       .catch((error) => console.error(error.message));
-  }, []);
+  }, [refresh]);
 
   console.log(staffs);
 
@@ -70,8 +80,19 @@ const StaffManagePage = () => {
       role: "Staff",
     };
     registerStaffAndTrainer(requestData)
-      .then((data) => alert("Register successfully!"))
+      .then((data) => {
+        alert("Register successfully!");
+        setFresh((preState) => preState + 1);
+      })
       .catch((error) => alert("Cannot register this account"));
+  };
+
+  const onDelete = (record) => {
+    console.log(record);
+    deleteSystemStaff(record.id).then((data) => {
+      alert("Delete successfully");
+      setFresh((preState) => preState + 1);
+    });
   };
 
   return (
