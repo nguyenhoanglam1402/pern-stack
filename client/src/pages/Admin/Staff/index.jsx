@@ -9,7 +9,6 @@ import CustomizeTable from "components/landing/Table";
 import { Form } from "antd";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { data } from "autoprefixer";
 
 const StaffManagePage = () => {
   const [staffs, setStaffs] = useState([]);

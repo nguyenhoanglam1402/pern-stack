@@ -53,7 +53,7 @@ const CategoryPage = () => {
       .catch((error) => {
         alert(`Error: ${error.message}`);
       });
-  }, [refresh]);
+  }, [refresh, categories]);
 
   const onDelete = (name) => {
     if (window.confirm(`Are you sure to remove ${name}?`)) {

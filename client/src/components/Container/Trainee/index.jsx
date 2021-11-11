@@ -1,6 +1,5 @@
 import React from "react";
 import ClassPage from "pages/TraineePage/Course";
-import CoursePage from "pages/TraineePage/Friend";
 import HomePage from "pages/Home";
 import { Route } from "react-router";
 import Footer from "../../common/Footer";
