@@ -48,12 +48,11 @@ const CategoryPage = () => {
     fetchAllCategories()
       .then((respond) => {
         setCategories(respond);
-        console.log(categories);
       })
       .catch((error) => {
         alert(`Error: ${error.message}`);
       });
-  }, [refresh, categories]);
+  }, [refresh]);
 
   const onDelete = (name) => {
     if (window.confirm(`Are you sure to remove ${name}?`)) {
