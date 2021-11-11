@@ -2,11 +2,10 @@ import { Button, Space } from "antd";
 import { getTraineeInClass, kickTraineeClass } from "api/index.test";
 import CustomizeTable from "components/landing/Table";
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation, useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 
 const ClassDetail = () => {
   const location = useLocation();
-  const history = useHistory();
   const className = useParams();
   const { trainerID } = location.state;
   const [trainees, setTrainee] = useState([]);
@@ -28,7 +27,7 @@ const ClassDetail = () => {
       setTrainee(traineeList);
       console.log(traineeList);
     });
-  }, [refresh]);
+  }, [refresh, className.name, trainerID]);
   console.log(trainees);
   const onKick = (record) => {
     kickTraineeClass(record).then((data) => {

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const userAuthenticate = async (data) => {
   const respond = await axios.post(
-    "http://localhost:5001/api/v1/auth/login",
+    "https://fpt-app-dev.herokuapp.com/api/v1/auth/login",
     {
       email: data.email,
       password: data.password,
@@ -16,7 +16,7 @@ export const userAuthenticate = async (data) => {
 
 export const fetchTrainerList = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/trainer/view",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/trainer/view",
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -26,7 +26,7 @@ export const fetchTrainerList = async () => {
 
 export const fetchAllClasses = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/classes",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/classes",
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -37,7 +37,7 @@ export const fetchAllClasses = async () => {
 export const assignTrainerClass = async (requestData) => {
   console.log("API Test: ", requestData.trainerID);
   const respond = await axios.put(
-    `http://localhost:5001/api/v1/staff/classes/trainer/assign/${requestData.trainerID}`,
+    `https://fpt-app-dev.herokuapp.com/v1/staff/classes/trainer/assign/${requestData.trainerID}`,
     {
       className: requestData.className,
     },
@@ -50,7 +50,7 @@ export const assignTrainerClass = async (requestData) => {
 
 export const fetchAllTrainee = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/trainee/view",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/trainee/view",
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -60,7 +60,7 @@ export const fetchAllTrainee = async () => {
 
 export const searchTraineeAPI = async (requestData) => {
   const respond = await axios.get(
-    `http://localhost:5001/api/v1/staff/trainee/search`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/trainee/search`,
     { params: { name: requestData.name, age: requestData.age } },
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -71,7 +71,7 @@ export const searchTraineeAPI = async (requestData) => {
 
 export const deleteTraineeAPI = async (id) => {
   const respond = await axios.delete(
-    `http://localhost:5001/api/v1/staff/trainee/delete/${id}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/trainee/delete/${id}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -81,7 +81,7 @@ export const deleteTraineeAPI = async (id) => {
 
 export const createTraineeAPI = async (requestData) => {
   const respond = await axios.post(
-    `http://localhost:5001/api/v1/staff/trainee/register`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/trainee/register`,
     {
       email: requestData.email,
       password: requestData.password,
@@ -100,7 +100,7 @@ export const createTraineeAPI = async (requestData) => {
 
 export const assignTraineeClass = async (requestData) => {
   const respond = await axios.post(
-    "http://localhost:5001/api/v1/staff/classes/trainee",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/classes/trainee",
     {
       emailTrainee: requestData.traineeEmail,
       className: requestData.className,
@@ -114,7 +114,7 @@ export const assignTraineeClass = async (requestData) => {
 
 export const changePasswordTrainee = async (requestData) => {
   const respond = await axios.patch(
-    `http://localhost:5001/api/v1/staff/trainee/password/${requestData.id}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/trainee/password/${requestData.id}`,
     {
       newPassword: requestData.newPassword,
     },
@@ -127,7 +127,7 @@ export const changePasswordTrainee = async (requestData) => {
 
 export const fetchAllCourse = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/courses",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/courses",
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -138,7 +138,7 @@ export const fetchAllCourse = async () => {
 
 export const fetchAllCategories = async () => {
   const respond = await axios.get(
-    "http://localhost:5001/api/v1/staff/categories",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/categories",
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -148,7 +148,7 @@ export const fetchAllCategories = async () => {
 
 export const createNewCourse = async (requestData) => {
   const respond = await axios.post(
-    "http://localhost:5001/api/v1/staff/courses/create",
+    "https://fpt-app-dev.herokuapp.com/api/v1/staff/courses/create",
     {
       name: requestData.name,
       description: requestData.description,
@@ -163,7 +163,7 @@ export const createNewCourse = async (requestData) => {
 
 export const deleteCourse = async (id) => {
   const respond = await axios.delete(
-    `http://localhost:5001/api/v1/staff/courses/delete/${id}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/courses/delete/${id}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -173,7 +173,7 @@ export const deleteCourse = async (id) => {
 
 export const searchCourse = async (name) => {
   const respond = await axios.get(
-    `http://localhost:5001/api/v1/staff/courses/${name}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/courses/${name}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -183,7 +183,7 @@ export const searchCourse = async (name) => {
 
 export const updateCourse = async (requestData) => {
   const respond = await axios.put(
-    `http://localhost:5001/api/v1/staff/courses/update/${requestData.id}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/courses/update/${requestData.id}`,
     {
       name: requestData.name,
       description: requestData.description,
@@ -198,7 +198,7 @@ export const updateCourse = async (requestData) => {
 
 export const fetchClassByCourse = async (courseName) => {
   const respond = await axios.get(
-    `http://localhost:5001/api/v1/staff/classes/${courseName}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/classes/${courseName}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -208,7 +208,7 @@ export const fetchClassByCourse = async (courseName) => {
 
 export const createNewClass = async (requestData) => {
   const respond = await axios.post(
-    `http://localhost:5001/api/v1/staff/classes/create`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/classes/create`,
     {
       courseName: requestData.courseName,
       trainerID: requestData.trainerID,
@@ -223,7 +223,7 @@ export const createNewClass = async (requestData) => {
 
 export const deleteClass = async (requestData) => {
   const respond = await axios.delete(
-    `http://localhost:5001/api/v1/staff/classes/delete/${requestData}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/classes/delete/${requestData}`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }
@@ -233,7 +233,7 @@ export const deleteClass = async (requestData) => {
 
 export const updateTraineeProfile = async (requestData) => {
   const respond = await axios.put(
-    `http://localhost:5001/api/v1/staff/trainee/update/${requestData.id}`,
+    `https://fpt-app-dev.herokuapp.com/api/v1/staff/trainee/update/${requestData.id}`,
     {
       fullname: requestData.fullname,
       education: requestData.education,

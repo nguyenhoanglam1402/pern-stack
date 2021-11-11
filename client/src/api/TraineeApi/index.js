@@ -12,9 +12,9 @@ export const viewCourseOfTrainee = async (uid) => {
   return respond.data.data;
 };
 
-export const viewFriends = async (uid, courseName) => {
+export const viewFriends = async (uid, className) => {
   const respond = await axios.get(
-    `http://localhost:5001/api/v1/trainee/courses/${uid}/friends/${courseName}`,
+    `http://localhost:5001/api/v1/trainee/courses/${uid}/friends/${className}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,

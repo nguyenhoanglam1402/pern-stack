@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import CustomizeTable from "components/landing/Table";
 import { viewCourseOfTrainee } from "../../../api/TraineeApi/index";
 import { useSelector } from "react-redux";
-import { Button, Space } from "antd";
+import { Button } from "antd";
+import { useHistory } from "react-router";
 
 const CourseView = () => {
   const store = useSelector((store) => store.authReducer);
   const [data, setData] = useState([]);
-  const [onView, setOnView] = useState(false);
-
+  const history = useHistory();
   const classesColumns = [
     {
       title: "Class Name",
@@ -49,7 +49,14 @@ const CourseView = () => {
   }, [store.uid]);
 
   const onViewClick = (record) => {
-    setOnView(true);
+    const data = {
+      uid: store.id,
+      classeName: record.className,
+    };
+    console.log(data);
+    history.push({
+      pathname: `/trainee/courses/${data.uid}/friends/${data.className}`,
+    });
   };
 
   return (
